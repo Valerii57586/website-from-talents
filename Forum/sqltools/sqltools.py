@@ -29,14 +29,14 @@ def exists_in_table(table_name: str, condition: tuple, dbname: str) -> bool:
 
 
 def get_column_value_by_name(table_name: str, column_to_get: str,
-                             condition: tuple, dbname: str) -> None:
+                             condition: tuple, dbname: str):
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
     cursor.execute(f"SELECT {column_to_get} FROM {table_name} "
                    f"WHERE {condition[0]} = ?", (condition[1],))
-    result = cursor.fetchone()
-    if result:
-        return result[0]
+    result = cursor.fetchall()
+    if len(result) != 0:
+        return result
     else:
         return None
 

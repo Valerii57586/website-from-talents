@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main</title>
+</head>
+<body>
+    <a href="{{ url_for('register') }}" class="fixed-button">Sign up</a>
+    <a href="{{ url_for('login') }}" class="fixed-button">Sign in</a>
+    <a href="{{ url_for('create_post') }}" class="fixed-button">Create post</a>
+    <div class="row">
+        {% if posts %}
+            {% for post in posts %}
+                <div class="col-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ post[1] }}</h5>
+                            <p class="card-text">{{ post[4][:300] }}...</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+</body>
+</html>
