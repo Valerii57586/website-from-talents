@@ -11,7 +11,6 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 app.secret_key = "msk"
 count = 0
 
-
 @app.route("/", methods=["GET", "POST"])
 def main():
     search_query = ""
