@@ -1,11 +1,8 @@
 from flask import Flask, render_template, redirect, request, url_for, session
 from sqltools import sqltools as sq
 from werkzeug.middleware.proxy_fix import ProxyFix
-from redis import Redis
-import time
 
 
-redis = Redis()
 app = Flask(__name__)
 sq.create_table(dbname="users.db", table_name="data", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("username", "TEXT"), ("password", "TEXT"), ("email", "TEXT")])
 sq.create_table(dbname="users.db", table_name="posts", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("title", "TEXT"), ("content", "TEXT"), ("category", "TEXT")])
