@@ -8,6 +8,8 @@
 </head>
 <body>
     <h2>{{ post[1] }}</h2>
-
+    <p>{{ post[3] }}</p>
+    <p>{{ post[2] }}</p>
+    <a href="{{ url_for('delete', id=post[0]) }}">Delete</a>
 </body>
 </html>

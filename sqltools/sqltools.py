@@ -50,3 +50,10 @@ def update_column_value(table_name: str, column_to_update: str,
                    f'WHERE {condition[0]} = ?',
                    (new_value, condition[1]))
     connection.commit()
+
+
+def delete_record(table_name: str, condition: tuple, dbname: str):
+    connection = sqlite3.connect(dbname)
+    cursor = connection.cursor()
+    cursor.execute(f'DELETE FROM {table_name} WHERE {condition[0]} = ?', (condition[1],))
+    connection.commit()

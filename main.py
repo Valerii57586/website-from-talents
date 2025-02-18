@@ -12,6 +12,18 @@ app.secret_key = "msk"
 count = 0
 
 
+@app.route("/delete/<int:id>")
+def delete(id):
+    email = session.get("email")
+    try:
+        valid_email = sq.get_column_value_by_name("posts", "email", ("email", email), "users.db")[0][0]
+        if email == valid_email or email != "":
+            sq.delete_record("posts", ("id", id), "users.db")
+    except:
+        pass
+    return redirect(url_for("main"))
+
+
 @app.route('/post/<int:id>')
 def post(id):
     post = sq.get_column_value_by_name('posts', 'id, title, content, category', ('id', id), 'users.db')[0]
