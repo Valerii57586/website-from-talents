@@ -16,9 +16,6 @@ async def read_root(request: Request):
         {"request": request, "title": "Главная"}
     )
 
-@app.post("/submit")
-
-
 @app.get("/about", response_class=HTMLResponse)
 async def read_about(request: Request):
     return templates.TemplateResponse(
