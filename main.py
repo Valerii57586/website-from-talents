@@ -12,6 +12,12 @@ app.secret_key = "msk"
 count = 0
 
 
+@app.route('/post/<int:id>')
+def post(id):
+    post = sq.get_column_value_by_name('posts', 'id, title, content, category', ('id', id), 'users.db')[0]
+    return render_template('post.html', post=post)
+
+
 @app.route("/", methods=["GET", "POST"])
 def main():
     search_query = ""
@@ -60,7 +66,7 @@ def login():
     return render_template("login.html")
 
 
-@app.route("/post", methods=["GET", "POST"])
+@app.route("/create_post", methods=["GET", "POST"])
 def create_post():
     email = session.get("email")
     if email is None:
@@ -76,7 +82,7 @@ def create_post():
             return redirect(url_for("main"))
         except:
             return redirect(url_for("create_post"))
-    return render_template("post.html")
+    return render_template("create_post.html")
 
 
 @app.route("/logout")
