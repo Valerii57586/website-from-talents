@@ -1,73 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <title>{{ title }}</title>
 </head>
 <body>
-    <div>
-        {% if username != "" %}
-            <h3>{{ username }}</h3>
-        {% else %}
-            <h3>Guest</h3>
-        {% endif %}
-    </div>
-    <div>
-        <h1>Current online: <span id="user-count">{{ active_users }}</span></h1>
-    </div>
-    <form method="POST">
-        <input type="text" placeholder="Enter post name" name="search-query">
-        <button type="submit">Search</button>
-        <label for="category-select">Select category</label>
-        <select name="category-select" id="category-select"  onchange="this.form.submit()">
-            <option value="all">Сategories</option>
-            <option value="all">All</option>
-            <option value="rest">Rest</option>
-            <option value="science">Science</option>
-            <option value="games">Games</option>
-            <option value="trips">Trips</option>
-            <option value="food">Food</option>
-        </select>
+    <h1 class="header">Привет от FastAPI!</h1>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/about">О нас</a>
+    </nav>
+    <form method="post" action="/submit">
+        <input type="text" name="username" placeholder="Имя">
+        <button type="submit">Отправить</button>
     </form>
-    <a href="{{ url_for('register') }}" class="fixed-button">Sign up</a>
-    <a href="{{ url_for('login') }}" class="fixed-button">Sign in</a>
-    <a href="{{ url_for('create_post') }}" class="fixed-button">Create post</a>
-    <a href="{{ url_for('logout') }}" class="fixed-button">Logout</a>
-    <div class="row">
-        {% if posts %}
-            {% for post in posts %}
-                {% if search_query.lower() in post[1].lower() %}
-                    {% if category != "all": %}
-                        {% if category == post[2] %}
-                            <div class="col-6 mb-4">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="row">
-                                            <h3 class="card-title">{{ post[1] }}</h3>
-                                            <p class="card-category">#{{ post[5] }}</p>
-                                        </div>
-                                        <p class="card-text">{{ post[4][:300] }}...</p>
-                                    </div>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% else %}
-                        <div class="col-6 mb-4">
-                            <div class="card">
-                                <div class="card-body">
-                                    <div class="row">
-                                        <h3 class="card-title">{{ post[1] }}</h3>
-                                        <p class="card-category">#{{ post[5] }}</p>
-                                    </div>
-                                    <p class="card-text">{{ post[4][:300] }}...</p>
-                                </div>
-                            </div>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        {% endif %}
-    </div>
 </body>
 </html>
