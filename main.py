@@ -7,17 +7,38 @@ app = Flask(__name__)
 sq.create_table(dbname="users.db", table_name="data", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("username", "TEXT"), ("password", "TEXT"), ("email", "TEXT")])
 sq.create_table(dbname="users.db", table_name="posts", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("title", "TEXT"), ("content", "TEXT"), ("category", "TEXT")])
 
+
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 app.secret_key = "msk"
-count = 0
+
+
+@app.route("/edit/<int:id>", methods=["GET", "POST"])
+def edit(id):
+    email = session.get("email")
+    try:
+        valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "users.db")[0][0]
+        post = sq.get_column_value_by_name('posts', 'id, title, content, category', ('id', id), 'users.db')[0]
+        if request.method == "POST":
+            if email == valid_email:
+                title = request.form["title"]
+                content = request.form["content"]
+                category = request.form["category"]
+                sq.update_column_value("posts", "title", title, ("id", id), "users.db")
+                sq.update_column_value("posts", "content", content, ("id", id), "users.db")
+                sq.update_column_value("posts", "category", category, ("id", id), "users.db")
+                return redirect(url_for("main"))
+            return redirect(url_for("main"))
+    except:
+        pass
+    return render_template("edit.html", post=post)
 
 
 @app.route("/delete/<int:id>")
 def delete(id):
     email = session.get("email")
     try:
-        valid_email = sq.get_column_value_by_name("posts", "email", ("email", email), "users.db")[0][0]
-        if email == valid_email or email != "":
+        valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "users.db")[0][0]
+        if email == valid_email:
             sq.delete_record("posts", ("id", id), "users.db")
     except:
         pass
