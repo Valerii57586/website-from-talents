@@ -38,12 +38,15 @@ body {
     color: #000;
     margin-bottom: 10px;
     font-weight: 600;
+    position: relative; top: 10px; left: 14px; right: 40px
+
 }
 
 .header p {
     font-size: 14px;
     color: #666;
     margin-bottom: 20px;
+    position: relative; top: 10px; left: 14px; right: 40px
 }
 
 .form-group {

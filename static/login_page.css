@@ -25,6 +25,7 @@ body {
     font-size: 24px;
     color: #000;
     margin-bottom: 20px; /* Отступ снизу заголовка */
+    position: relative; top: 10px; left: 14px; right: 40px
 }
 
 .form-group {
