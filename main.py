@@ -4,12 +4,22 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 
 
 app = Flask(__name__)
+app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
+app.secret_key = "msk"
+
+
 sq.create_table(dbname="users.db", table_name="data", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("username", "TEXT"), ("password", "TEXT"), ("email", "TEXT")])
 sq.create_table(dbname="users.db", table_name="posts", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("title", "TEXT"), ("content", "TEXT"), ("category", "TEXT")])
 
 
-app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
-app.secret_key = "msk"
+active_users = set()
+
+
+@app.route('/profile')
+def profile():
+    email = session.get("email")
+    username = sq.get_column_value_by_name("data", "username", ("email", email), "users.db")[0][0]
+    return render_template("profile.html", username=username)
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
@@ -57,6 +67,7 @@ def main():
     category = 'all'
     email = session.get("email")
     username = ""
+    current_online = len(active_users)
     posts = sq.get_column_value_by_name(table_name="posts", column_to_get="id, title, category, email, content, category", condition=(1, 1), dbname="users.db")
     try:
         username = sq.get_column_value_by_name("data", "username", ("email", email), "users.db")[0][0]
@@ -65,8 +76,8 @@ def main():
     if request.method == "POST":
         search_query = request.form["search-query"]
         category = request.form["category-select"]
-        return render_template("index.html", posts=posts, email=email, search_query=search_query, category=category, username=username)
-    return render_template("index.html", posts=posts, email=email, search_query=search_query, category=category, username=username)
+        return render_template("index.html", posts=posts, email=email, search_query=search_query, category=category, username=username, current_online=current_online)
+    return render_template("index.html", posts=posts, email=email, search_query=search_query, category=category, username=username, current_online=current_online)
 
 
 @app.route("/reg", methods=["GET", "POST"])
@@ -90,9 +101,9 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-        print(password, sq.get_column_value_by_name(table_name="data", column_to_get="password", condition=("email", email), dbname="users.db"))
         if sq.get_column_value_by_name(table_name="data", column_to_get="password", condition=("email", email), dbname="users.db")[0][0] == password:
             session['email'] = email
+            active_users.add(request.remote_addr)
             return redirect(url_for("main"))
         else:
             return redirect(url_for("register"))
@@ -120,6 +131,7 @@ def create_post():
 
 @app.route("/logout")
 def logout():
+    active_users.discard(request.remote_addr)
     session.clear()
     return redirect(url_for("main"))
 
