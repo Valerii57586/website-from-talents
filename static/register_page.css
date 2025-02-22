@@ -1,0 +1,147 @@
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Градиентный фон */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 320px;
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.header h1 {
+    font-size: 28px;
+    color: #000;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.header p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    background-color: #f8f9fa;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #8a9b68; /* Зеленый цвет при фокусе */
+    box-shadow: 0 0 8px rgba(138, 155, 104, 0.2);
+    outline: none;
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.actions a, .actions button {
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions .login-button {
+    background-color: #e9ecef;
+    color: #000;
+}
+
+.actions .login-button:hover {
+    background-color: #ddd;
+    transform: translateY(-2px);
+}
+
+.actions .create-id {
+    background: linear-gradient(135deg, #931f1d, #931f1d); /* Градиент для кнопки */
+    color: #000;
+    font-weight: 600;
+}
+
+.actions .create-id:hover {
+    background: linear-gradient(135deg, #931f1d, #931f1d); /* Инвертированный градиент */
+    transform: translateY(-2px);
+}
+
+/* Декоративные элементы */
+.decorative-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background: rgba(182, 193, 151, 0.1); /* Светло-зеленый полупрозрачный круг */
+    border-radius: 50%;
+    top: -50px;
+    left: -50px;
+    z-index: -1;
+    animation: float 6s infinite ease-in-out;
+}
+
+.decorative-circle-2 {
+    position: absolute;
+    width: 150px;
+    height: 150px;
+    background: rgba(147, 123, 99, 0.1); /* Коричневый полупрозрачный круг */
+    border-radius: 50%;
+    bottom: -50px;
+    right: -50px;
+    z-index: -1;
+    animation: float 8s infinite ease-in-out;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
