@@ -2,25 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>Document</title>
 </head>
 <body>
-    <form method="post">
-        <div class="form-group">
-            <label>Title</label>
-            <input type="text" class="form-control" name="title" required>
-        </div>
-        <label for="category-select">Category</label>
-        <select name="category" id="category-select">
-            <option value="rest">Rest</option>
-            <option value="science">Science</option>
-            <option value="games">Games</option>
-            <option value="trips">Trips</option>
-            <option value="food">Food</option>
-        </select>
-        <button type="submit" class="btn btn-primary">Publish</button>
-        <textarea type="text" class="form-control" name="content" rows="10" required></textarea>
-    </form>
+    <div class="post-card">
+        <h2 class="post-title">{{ post[1] }}</h2>
+        <a href="{{ url_for('delete', id=post[0]) }}">Delete</a>
+        <a href="{{ url_for('edit', id=post[0]) }}">Edit</a>
+        <p class="post-category">#{{ post[3] }}</p>
+        <p class="post-content">{{ post[2] }}</p>
+    </div>
 </body>
 </html>
