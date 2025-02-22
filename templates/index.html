@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Main</title>
-    <link rel="stylesheet" href="custom.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
 </head>
 <body>
     <header>
@@ -19,7 +19,6 @@
             <h1>Current online: <span id="user-count">{{ active_users }}</span></h1>
         </div>
     </header>
-
     <main>
         <form method="POST" class="search-form">
             <input type="text" placeholder="Enter post name" name="search-query" class="search-input">
