@@ -3,13 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='register_page.css') }}">
+    <title>Knyazev ID - Регистрация</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login_page.css') }}">
 </head>
 <body>
     <form method="post">
-        <dev class="container-reg">
-            <h1>Login</h1>
+        <div class="container">
+            <div class="header">
+                <h1>Knyazev ID</h1>
+            </div>
+            <div class="login-options">
+                <button type="button" class="email">Email</button>
+                <button type="button" class="phone">Phone number</button>
+            </div>
             <div class="form-group">
                 <label>Email</label>
                 <input type="email" class="form-control" name="email" required>
@@ -18,9 +24,11 @@
                 <label>Password</label>
                 <input type="password" class="form-control" name="password" required>
             </div>
-            <a href="{{ url_for('register') }}" class="fixed-button">Sign up</a>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-        </dev>
+            <div class="actions">
+                <a href="{{ url_for('login') }}" class="login-button">Sign in</a>
+                <a href="{{ url_for('register') }}" class="create-id">Sign up</a>
+            </div>
+        </div>
     </form>
 </body>
 </html>

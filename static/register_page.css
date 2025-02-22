@@ -1,29 +1,24 @@
-/* Основные стили для body */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #b6c197, #d5ddbc); /* Градиентный фон */
-    color: #333;
-    margin: 0;
-    padding: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef); /* Градиентный фон */
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
     overflow: hidden;
 }
 
-/* Контейнер для формы */
-.registration-container {
-    background: rgba(255, 255, 255, 0.9); /* Полупрозрачный белый фон */
-    padding: 40px;
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    width: 350px;
+.container {
+    background-color: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+    width: 320px;
     text-align: center;
-    animation: fadeIn 1s ease-in-out;
+    animation: fadeIn 0.5s ease-in-out;
 }
 
-/* Анимация появления */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -35,82 +30,94 @@ body {
     }
 }
 
-/* Заголовок формы */
-.registration-container h2 {
-    color: #931f1d; /* Темно-красный цвет */
-    margin-bottom: 20px;
-    font-size: 24px;
+.header h1 {
+    font-size: 28px;
+    color: #000;
+    margin-bottom: 10px;
     font-weight: 600;
 }
 
-/* Стили для полей ввода */
-.registration-container input[type="text"],
-.registration-container input[type="email"],
-.registration-container input[type="password"] {
+.header p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+.form-group input {
     width: 100%;
     padding: 12px;
-    margin: 10px 0;
-    border: 2px solid #937b63; /* Коричневый цвет границы */
+    border: 1px solid #ddd;
     border-radius: 8px;
-    background-color: rgba(255, 255, 255, 0.8);
-    color: #333;
     font-size: 14px;
+    background-color: #f8f9fa;
     transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-.registration-container input[type="text"]:focus,
-.registration-container input[type="email"]:focus,
-.registration-container input[type="password"]:focus {
+.form-group input:focus {
     border-color: #8a9b68; /* Зеленый цвет при фокусе */
-    box-shadow: 0 0 8px rgba(138, 155, 104, 0.6);
+    box-shadow: 0 0 8px rgba(138, 155, 104, 0.2);
     outline: none;
 }
 
-/* Стили для кнопки */
-.registration-container button {
-    width: 100%;
-    padding: 12px;
-    background: linear-gradient(135deg, #8a9b68, #937b63); /* Градиентная кнопка */
-    border: none;
-    border-radius: 8px;
-    color: white;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background 0.3s ease, transform 0.2s ease;
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
 }
 
-.registration-container button:hover {
-    background: linear-gradient(135deg, #937b63, #8a9b68); /* Инвертированный градиент */
+.actions a, .actions button {
+    padding: 12px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.actions .login-button {
+    background-color: #e9ecef;
+    color: #000;
+}
+
+.actions .login-button:hover {
+    background-color: #ddd;
     transform: translateY(-2px);
 }
 
-.registration-container button:active {
-    transform: translateY(0);
+.actions .create-id {
+    background: linear-gradient(135deg, #931f1d, #931f1d); /* Градиент для кнопки */
+    color: #000;
+    font-weight: 600;
 }
 
-/* Стили для ссылок */
-.registration-container a {
-    color: #931f1d; /* Темно-красный цвет */
-    text-decoration: none;
-    display: block;
-    text-align: center;
-    margin-top: 15px;
-    font-size: 14px;
-    transition: color 0.3s ease;
+.actions .create-id:hover {
+    background: linear-gradient(135deg, #931f1d, #931f1d); /* Инвертированный градиент */
+    transform: translateY(-2px);
 }
 
-.registration-container a:hover {
-    color: #8a9b68; /* Зеленый цвет при наведении */
-    text-decoration: underline;
-}
-
-/* Дополнительные декоративные элементы */
+/* Декоративные элементы */
 .decorative-circle {
     position: absolute;
     width: 200px;
     height: 200px;
-    background: rgba(182, 193, 151, 0.3); /* Светло-зеленый полупрозрачный круг */
+    background: rgba(182, 193, 151, 0.1); /* Светло-зеленый полупрозрачный круг */
     border-radius: 50%;
     top: -50px;
     left: -50px;
@@ -122,7 +129,7 @@ body {
     position: absolute;
     width: 150px;
     height: 150px;
-    background: rgba(147, 123, 99, 0.3); /* Коричневый полупрозрачный круг */
+    background: rgba(147, 123, 99, 0.1); /* Коричневый полупрозрачный круг */
     border-radius: 50%;
     bottom: -50px;
     right: -50px;
