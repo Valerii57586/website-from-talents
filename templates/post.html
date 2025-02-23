@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
 </head>
@@ -13,6 +14,17 @@
         <a href="{{ url_for('edit', id=post[0]) }}">Edit</a>
         <p class="post-category">#{{ post[3] }}</p>
         <p class="post-content">{{ post[2] }}</p>
+        <p class="post-author">Author: {{ username }}</p>
+        <p class="post-date">Date: {{ post[6] }}</p>
+        <div class="reaction-buttons">
+            <button class="like-btn">
+                <i class="fas fa-thumbs-up"></i>
+                <span class="like-count">{{ post[4] }}</span>
+            </button>
+            <button class="dislike-btn">
+                <i class="fas fa-thumbs-down"></i>
+                <span class="dislike-count">{{ post[5] }}</span>
+            </button>
     </div>
 </body>
 </html>

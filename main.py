@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, request, url_for, session
 from sqltools import sqltools as sq
 from werkzeug.middleware.proxy_fix import ProxyFix
+import datetime
 
 
 app = Flask(__name__)
@@ -8,34 +9,57 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 app.secret_key = "msk"
 
 
-sq.create_table(dbname="users.db", table_name="data", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("username", "TEXT"), ("password", "TEXT"), ("email", "TEXT")])
-sq.create_table(dbname="users.db", table_name="posts", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("title", "TEXT"), ("content", "TEXT"), ("category", "TEXT")])
+sq.create_table(dbname="data.db", table_name="users", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("username", "TEXT"), ("password", "TEXT"), ("email", "TEXT"), ("name", "TEXT"), ("surname", "TEXT")])
+sq.create_table(dbname="data.db", table_name="posts", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("title", "TEXT"), ("content", "TEXT"), ("category", "TEXT"), ("likes", "INTEGER"), ("dislikes", "INTEGER"), ("date", "TEXT")])
+sq.create_table(dbname="data.db", table_name="comments", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("post_id", "INTEGER"), ("content", "TEXT")])
 
 
 active_users = set()
 
 
-@app.route('/profile')
-def profile():
+@app.route("/like/<int:id>")
+def like(id):
     email = session.get("email")
-    username = sq.get_column_value_by_name("data", "username", ("email", email), "users.db")[0][0]
-    return render_template("profile.html", username=username)
+    if email is None:
+        return redirect(url_for("register"))
+    likes = sq.get_column_value_by_name("posts", "likes", ("id", id), "data.db")[0][0]
+    likes += 1
+    sq.update_column_value_by_name("posts", "likes", likes, ("id", id), "data.db")
+    return redirect(url_for("post", id=id))
+
+
+@app.route("/profile/<username>")
+def profile(username):
+    name = sq.get_column_value_by_name("users", "name", ("username", username), "data.db")[0][0]
+    surname = sq.get_column_value_by_name("users", "surname", ("username", username), "data.db")[0][0]
+    return render_template("profile.html", username=username, name=name, surname=surname)
+
+
+@app.route('/myprofile')
+def my_profile():
+    email = session.get("email")
+    username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
+    name = sq.get_column_value_by_name("users", "name", ("email", email), "data.db")[0][0]
+    surname = sq.get_column_value_by_name("users", "surname", ("email", email), "data.db")[0][0]
+    return render_template("profile.html", username=username, name=name, surname=surname)
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
 def edit(id):
     email = session.get("email")
     try:
-        valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "users.db")[0][0]
-        post = sq.get_column_value_by_name('posts', 'id, title, content, category', ('id', id), 'users.db')[0]
+        valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "data.db")[0][0]
+        post = sq.get_column_value_by_name('posts', 'id, title, content, category', ('id', id), 'data.db')[0]
         if request.method == "POST":
             if email == valid_email:
+                date = datetime.datetime.now().strftime("%d-%m-%y %H:%M")
                 title = request.form["title"]
                 content = request.form["content"]
                 category = request.form["category"]
-                sq.update_column_value("posts", "title", title, ("id", id), "users.db")
-                sq.update_column_value("posts", "content", content, ("id", id), "users.db")
-                sq.update_column_value("posts", "category", category, ("id", id), "users.db")
+                sq.update_column_value("posts", "title", title, ("id", id), "data.db")
+                sq.update_column_value("posts", "content", content, ("id", id), "data.db")
+                sq.update_column_value("posts", "category", category, ("id", id), "data.db")
+                sq.update_column_value("posts", "date", date, ("id", id), "data.db")
                 return redirect(url_for("main"))
             return redirect(url_for("main"))
     except:
@@ -47,9 +71,9 @@ def edit(id):
 def delete(id):
     email = session.get("email")
     try:
-        valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "users.db")[0][0]
+        valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "data.db")[0][0]
         if email == valid_email:
-            sq.delete_record("posts", ("id", id), "users.db")
+            sq.delete_record("posts", ("id", id), "data.db")
     except:
         pass
     return redirect(url_for("main"))
@@ -57,8 +81,10 @@ def delete(id):
 
 @app.route('/post/<int:id>')
 def post(id):
-    post = sq.get_column_value_by_name('posts', 'id, title, content, category', ('id', id), 'users.db')[0]
-    return render_template('post.html', post=post)
+    post = sq.get_column_value_by_name('posts', 'id, title, content, category, likes, dislikes, date, email', ('id', id), 'data.db')[0]
+    username = sq.get_column_value_by_name("users", "username", ("email", post[7]), "data.db")[0][0]
+    comments = sq.get_column_value_by_name("comments", "id, content, email", ("post_id", id), "data.db")
+    return render_template('post.html', post=post, comments=comments, username=username)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -68,9 +94,9 @@ def main():
     email = session.get("email")
     username = ""
     current_online = len(active_users)
-    posts = sq.get_column_value_by_name(table_name="posts", column_to_get="id, title, category, email, content, category", condition=(1, 1), dbname="users.db")
+    posts = sq.get_column_value_by_name("posts", "id, title, category, email, content, category, likes, dislikes, date", (1, 1), "data.db")
     try:
-        username = sq.get_column_value_by_name("data", "username", ("email", email), "users.db")[0][0]
+        username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
     except:
         pass
     if request.method == "POST":
@@ -86,13 +112,15 @@ def register():
         username = request.form["username"]
         email = request.form["email"]
         password = request.form["password"]
-        if sq.exists_in_table(table_name="data", condition=("email", email), dbname="users.db"):
-            return redirect(url_for("login"))
+        name = request.form["name"]
+        surname = request.form["surname"]
+        if sq.exists_in_table(table_name="users", condition=("email", email), dbname="data.db") and sq.exists_in_table(table_name="users", condition=("username", username), dbname="data.db"):
+            return render_template("register.html", message="Accaunt with this username or email already exists")
         try:
-            sq.add_record(table_name="data", values={"username": username, "password": password, "email": email}, dbname="users.db")
-            return redirect(url_for("login"))
+            sq.add_record("users", {"username": username, "password": password, "email": email, "name": name, "surname": surname}, "data.db")
+            return render_template("register.html", message="Success")
         except:
-            return "Error"
+            return render_template("register.html", message="Something went wrong")
     return render_template("register.html")
 
 
@@ -101,12 +129,15 @@ def login():
     if request.method == "POST":
         email = request.form["email"]
         password = request.form["password"]
-        if sq.get_column_value_by_name(table_name="data", column_to_get="password", condition=("email", email), dbname="users.db")[0][0] == password:
-            session['email'] = email
-            active_users.add(request.remote_addr)
-            return redirect(url_for("main"))
-        else:
-            return redirect(url_for("register"))
+        try:
+            if sq.get_column_value_by_name(table_name="users", column_to_get="password", condition=("email", email), dbname="data.db")[0][0] == password:
+                session['email'] = email
+                active_users.add(request.remote_addr)
+                return redirect(url_for("main"))
+            else:
+                return render_template("login.html", message="Invalid email or password")
+        except:
+            return render_template("login.html", message="Invalid email or password")
     return render_template("login.html")
 
 
@@ -121,8 +152,9 @@ def create_post():
         title = request.form["title"]
         content = request.form["content"]
         category = request.form["category"]
+        date = datetime.datetime.now().strftime("%d-%m-%y %H:%M")
         try:
-            sq.add_record(table_name="posts", values={"email": email, "title": title, "content": content, "category": category}, dbname="users.db")
+            sq.add_record("posts", {"email": email, "title": title, "content": content, "category": category, "date": date}, "data.db")
             return redirect(url_for("main"))
         except:
             return redirect(url_for("create_post"))

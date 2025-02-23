@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Knyazev ID - Регистрация</title>
+    <title>Knyazev ID - Логин</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='login_page.css') }}">
 </head>
 <body>
@@ -21,9 +21,10 @@
                 <input type="password" class="form-control" name="password" required>
             </div>
             <div class="actions">
-                <a href="{{ url_for('login') }}" class="login-button">Sign in</a>
+                <button type="sumbit" class="login-button">Sign in</button>
                 <a href="{{ url_for('register') }}" class="create-id">Sign up</a>
             </div>
+            <label class="sumbit-message">{{ message }}</label>
         </div>
     </form>
 </body>
