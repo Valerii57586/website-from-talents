@@ -112,8 +112,11 @@ def register():
         username = request.form["username"]
         email = request.form["email"]
         password = request.form["password"]
+        confirm_password = request.form["confirm_password"]
         name = request.form["name"]
         surname = request.form["surname"]
+        if password != confirm_password:
+            return render_template("register.html", message="Passwords do not match")
         if sq.exists_in_table(table_name="users", condition=("email", email), dbname="data.db") and sq.exists_in_table(table_name="users", condition=("username", username), dbname="data.db"):
             return render_template("register.html", message="Accaunt with this username or email already exists")
         try:
