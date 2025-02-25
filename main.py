@@ -9,9 +9,34 @@ app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 app.secret_key = "msk"
 
 
-sq.create_table(dbname="data.db", table_name="users", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("username", "TEXT"), ("password", "TEXT"), ("email", "TEXT"), ("name", "TEXT"), ("surname", "TEXT"), ("profile_photo_url", "TEXT")])
-sq.create_table(dbname="data.db", table_name="posts", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("title", "TEXT"), ("content", "TEXT"), ("category", "TEXT"), ("likes", "INTEGER"), ("dislikes", "INTEGER"), ("date", "TEXT")])
-sq.create_table(dbname="data.db", table_name="comments", columns=[("id", "INTEGER PRIMARY KEY AUTOINCREMENT"), ("email", "TEXT"), ("post_id", "INTEGER"), ("content", "TEXT")])
+sq.create_table(dbname="data.db", table_name="users", columns=[
+    ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
+    ("username", "TEXT"),
+    ("password", "TEXT"),
+    ("email", "TEXT"),
+    ("name", "TEXT"),
+    ("surname", "TEXT"),
+    ("profile_photo_url", "TEXT")])
+
+sq.create_table(dbname="data.db", table_name="posts", columns=[
+    ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
+    ("email", "TEXT"),
+    ("title", "TEXT"),
+    ("content", "TEXT"),
+    ("category", "TEXT"),
+    ("likes", "INTEGER"),
+    ("dislikes", "INTEGER"),
+    ("date", "TEXT"),
+    ("latitude", "REAL"),
+    ("longitude", "REAL"),
+    ("files", "TEXT"),
+    ("images", "TEXT")])
+
+sq.create_table(dbname="data.db", table_name="comments", columns=[
+    ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
+    ("email", "TEXT"),
+    ("post_id", "INTEGER"),
+    ("content", "TEXT")])
 
 
 active_users = set()
