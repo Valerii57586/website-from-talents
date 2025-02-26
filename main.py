@@ -2,6 +2,10 @@ from flask import Flask, render_template, redirect, request, url_for, session
 from sqltools import sqltools as sq
 from werkzeug.middleware.proxy_fix import ProxyFix
 import datetime
+from redis import Redis
+
+
+redis_client = Redis(host='localhost', port=6379, db=0)
 
 
 app = Flask(__name__)
@@ -18,19 +22,18 @@ sq.create_table(dbname="data.db", table_name="users", columns=[
     ("surname", "TEXT"),
     ("profile_photo_url", "TEXT")])
 
+
 sq.create_table(dbname="data.db", table_name="posts", columns=[
     ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
     ("email", "TEXT"),
     ("title", "TEXT"),
     ("content", "TEXT"),
     ("category", "TEXT"),
-    ("likes", "INTEGER"),
-    ("dislikes", "INTEGER"),
     ("date", "TEXT"),
-    ("latitude", "REAL"),
-    ("longitude", "REAL"),
     ("files", "TEXT"),
-    ("images", "TEXT")])
+    ("images", "TEXT"),
+    ("author_username", "TEXT")])
+
 
 sq.create_table(dbname="data.db", table_name="comments", columns=[
     ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
@@ -40,17 +43,6 @@ sq.create_table(dbname="data.db", table_name="comments", columns=[
 
 
 active_users = set()
-
-
-@app.route("/like/<int:id>")
-def like(id):
-    email = session.get("email")
-    if email is None:
-        return redirect(url_for("register"))
-    likes = sq.get_column_value_by_name("posts", "likes", ("id", id), "data.db")[0][0]
-    likes += 1
-    sq.update_column_value_by_name("posts", "likes", likes, ("id", id), "data.db")
-    return redirect(url_for("post", id=id))
 
 
 @app.route("/profile/<username>")
@@ -106,10 +98,18 @@ def delete(id):
 
 @app.route('/post/<int:id>')
 def post(id):
-    post = sq.get_column_value_by_name('posts', 'id, title, content, category, likes, dislikes, date, email', ('id', id), 'data.db')[0]
-    username = sq.get_column_value_by_name("users", "username", ("email", post[7]), "data.db")[0][0]
+    views_key = ""
+    email = session.get("email")
+    if email:
+        views_key = f"post:{id}:views"
+        if not redis_client.sismember(views_key, email):
+            redis_client.sadd(views_key, email)
+            redis_client.incr(f"post:{id}:view_count")
+    view_count = int(redis_client.get(f"post:{id}:view_count") or 0)
+    post = sq.get_column_value_by_name('posts', 'id, title, content, category, date, author_username, email', ('id', id), 'data.db')[0]
+    username = post[5]
     comments = sq.get_column_value_by_name("comments", "id, content, email", ("post_id", id), "data.db")
-    return render_template('post.html', post=post, comments=comments, username=username)
+    return render_template('post.html', post=post, comments=comments, username=username, veiw_count=view_count)
 
 
 @app.route("/", methods=["GET", "POST"])
@@ -119,7 +119,7 @@ def main():
     email = session.get("email")
     username = ""
     current_online = len(active_users)
-    posts = sq.get_column_value_by_name("posts", "id, title, category, email, content, category, likes, dislikes, date", (1, 1), "data.db")
+    posts = sq.get_column_value_by_name("posts", "id, title, content, category, date, author_username, email", (1, 1), "data.db")
     try:
         username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
     except:
@@ -181,8 +181,9 @@ def create_post():
         content = request.form["content"]
         category = request.form["category"]
         date = datetime.datetime.now().strftime("%d-%m-%y %H:%M")
+        author_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
         try:
-            sq.add_record("posts", {"email": email, "title": title, "content": content, "category": category, "date": date}, "data.db")
+            sq.add_record("posts", {"email": email, "title": title, "content": content, "category": category, "date": date, "author_username": author_username}, "data.db")
             return redirect(url_for("main"))
         except:
             return redirect(url_for("create_post"))

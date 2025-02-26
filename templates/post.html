@@ -16,15 +16,9 @@
         <p class="post-content">{{ post[2] }}</p>
         <p class="post-author">Author: {{ username }}</p>
         <p class="post-date">Date: {{ post[6] }}</p>
-        <div class="reaction-buttons">
-            <button class="like-btn">
-                <i class="fas fa-thumbs-up"></i>
-                <span class="like-count">{{ post[4] }}</span>
-            </button>
-            <button class="dislike-btn">
-                <i class="fas fa-thumbs-down"></i>
-                <span class="dislike-count">{{ post[5] }}</span>
-            </button>
+        <div class="post-stats">
+            <span class="veiws"> {{ veiw_count }} veiws </span>
+        </div>
     </div>
 </body>
 </html>
