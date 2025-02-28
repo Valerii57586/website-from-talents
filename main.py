@@ -3,6 +3,7 @@ from sqltools import sqltools as sq
 from werkzeug.middleware.proxy_fix import ProxyFix
 import datetime
 from redis import Redis
+from markdown2 import markdown
 
 
 redis_client = Redis(host='localhost', port=6379, db=0)
@@ -37,7 +38,7 @@ sq.create_table(dbname="data.db", table_name="posts", columns=[
 
 sq.create_table(dbname="data.db", table_name="comments", columns=[
     ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
-    ("email", "TEXT"),
+    ("username", "TEXT"),
     ("post_id", "INTEGER"),
     ("content", "TEXT")])
 
@@ -96,19 +97,26 @@ def delete(id):
     return redirect(url_for("main"))
 
 
-@app.route('/post/<int:id>')
+@app.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     views_key = ""
     email = session.get("email")
+    view_count = int(redis_client.get(f"post:{id}:view_count") or 0)
+    post = sq.get_column_value_by_name('posts', 'id, title, content, category, date, author_username, email', ('id', id), 'data.db')[0]
+    post = list(post)
+    post[2] = markdown(post[2], extras=['fenced-code-blocks', 'code-friendly'])
+    username = post[5]
+    comments = sq.get_column_value_by_name("comments", "id, content, username", ("post_id", id), "data.db")
+    if request.method == "POST":
+        comment = request.form["comment"]
+        if comment:
+            sq.add_record("comments", {"username": username, "post_id": id, "content": comment}, "data.db")
+            return redirect(url_for("post", id=id))
     if email:
         views_key = f"post:{id}:views"
         if not redis_client.sismember(views_key, email):
             redis_client.sadd(views_key, email)
             redis_client.incr(f"post:{id}:view_count")
-    view_count = int(redis_client.get(f"post:{id}:view_count") or 0)
-    post = sq.get_column_value_by_name('posts', 'id, title, content, category, date, author_username, email', ('id', id), 'data.db')[0]
-    username = post[5]
-    comments = sq.get_column_value_by_name("comments", "id, content, email", ("post_id", id), "data.db")
     return render_template('post.html', post=post, comments=comments, username=username, veiw_count=view_count)
 
 
