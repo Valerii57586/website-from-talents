@@ -20,8 +20,33 @@
             <option value="trips">Trips</option>
             <option value="food">Food</option>
         </select>
-        <button type="submit" class="btn btn-primary">Publish</button>
-        <textarea type="text" class="form-control" name="content" rows="10" required></textarea>
+        <select name="code-theme" id="code-theme-select">
+            <option value="">Select theme for code</option>
+            <option value="atom-one-dark">Atom One Dark</option>
+            <option value="dracula">Dracula</option>
+            <option value="monokai">Monokai</option>
+            <option value="nord">Nord</option>
+            <option value="github-dark">GitHub Dark</option>
+            <option value="night-owl">Night Owl</option>
+            <option value="tokyo-night-dark">Tokyo Night</option>
+            <option value="onedark">One Dark</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="obsidian">Obsidian</option>
+            <option value="github-dark">GitHub Dark</option>
+            <option value="codepen-embed">Codepen Embed</option>
+            <option value="arduino-light">Arduino Light</option>
+            <option value="atom-one-light">Atom One Light</option>
+            <option value="ascetic">Ascetic</option>
+            <option value="brown-paper">Brown Paper</option>
+            <option value="docco">Docco</option>
+            <option value="idea">Idea</option>
+        </select>
+        <div class="form-group">
+            <label>Tags</label>
+            <input type="text" class="form-control" name="tags" placeholder="Enter tags splited with spaces" required>
+        </div>
+        <textarea type="text" class="form-control" name="content" required></textarea>
+        <button type="submit" class="action-button">Publish</button>
     </form>
 </body>
 </html>

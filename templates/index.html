@@ -9,7 +9,6 @@
 <body>
     <header>
         <div class="online-indicator">
-            <i class="fas fa-signal"></i>
             <span>{{ current_online }} Online</span>
         </div>
         <div class="user-info">
@@ -51,7 +50,10 @@
                             <div class="post-card">
                                 <h3 class="post-title">{{ post[1] }}</h3>
                                 <p class="post-category">#{{ post[3] }}</p>
-                                <p class="post-content">{{ post[2][:300] }}...</p>
+                                {% if post[8] %}
+                                    <p class="tags">Tags: {{ post[7] }}</p>
+                                {% endif %}
+                                <pre class="post-content">{{ post[2][:300]|safe }}</pre>
                                 <p class="post-author">By <a href="{{ url_for('profile', username=post[5]) }}"> {{ post[5] }} </a></p>
                                 <p class="date">{{ post[4] }}</p>
                                 <a href="{{ url_for('post', id=post[0]) }}" class="btn btn-primary">Read</a>
@@ -62,10 +64,11 @@
                             <div class="post-card">
                                 <h3 class="post-title">{{ post[1] }}</h3>
                                 <p class="post-category">#{{ post[3] }}</p>
-                                <p class="post-content">{{ post[2][:300] }}...</p>
+                                <pre class="post-content">{{ post[2][:200] }}</pre>
                                 <p class="post-author">By <a href="{{ url_for('profile', username=post[5]) }}"> {{ post[5] }} </a></p>
                                 <p class="date">{{ post[4] }}</p>
-                                <a href="{{ url_for('post', id=post[0]) }}" class="btn btn-primary">Read</a>
+                                </br>
+                                <a href="{{ url_for('post', id=post[0]) }}" class="action-button">Read</a>
                             </div>
                     {% endif %}
                 {% endfor %}
