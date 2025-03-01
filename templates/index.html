@@ -45,13 +45,13 @@
         <div class="posts-grid">
             {% if posts %}
                 {% for post in posts %}
-                    {% if search_query.lower() in post[1].lower() and post[3] != "all" %}
+                    {% if (search_query.lower() in post[1].lower() or search_query.lower() in post[2] or search_query.lower() in post[7]) and post[3] != "all" %}
                         {% if category == post[3] and search_query.lower() in post[1].lower() %}
                             <div class="post-card">
                                 <h3 class="post-title">{{ post[1] }}</h3>
                                 <p class="post-category">#{{ post[3] }}</p>
-                                {% if post[8] %}
-                                    <p class="tags">Tags: {{ post[7] }}</p>
+                                {% if post[7] %}
+                                    <p class="tags">{{ post[7] }}</p>
                                 {% endif %}
                                 <pre class="post-content">{{ post[2][:300]|safe }}</pre>
                                 <p class="post-author">By <a href="{{ url_for('profile', username=post[5]) }}"> {{ post[5] }} </a></p>
@@ -60,10 +60,13 @@
                             </div>
                         {% endif %}
                     {% endif %}
-                    {% if category == "all" and search_query.lower() in post[1].lower() %}
+                    {% if category == "all" and (search_query.lower() in post[1].lower() or search_query.lower() in post[2] or search_query.lower() in post[7]) %}
                             <div class="post-card">
                                 <h3 class="post-title">{{ post[1] }}</h3>
                                 <p class="post-category">#{{ post[3] }}</p>
+                                {% if post[7] %}
+                                    <p class="tags">{{ post[7] }}</p>
+                                {% endif %}
                                 <pre class="post-content">{{ post[2][:200] }}</pre>
                                 <p class="post-author">By <a href="{{ url_for('profile', username=post[5]) }}"> {{ post[5] }} </a></p>
                                 <p class="date">{{ post[4] }}</p>

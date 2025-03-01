@@ -45,8 +45,9 @@
             <label>Tags</label>
             <input type="text" class="form-control" name="tags" placeholder="Enter tags splited with spaces" required>
         </div>
-        <textarea type="text" class="form-control" name="content" required></textarea>
+        <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}"></textarea>
         <button type="submit" class="action-button">Publish</button>
     </form>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/markdown/markdown.min.js"></script>
 </body>
 </html>

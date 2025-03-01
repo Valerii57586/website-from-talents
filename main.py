@@ -91,7 +91,6 @@ def edit(id):
                 date = datetime.now().strftime("%d-%m-%y %H:%M")
                 title = request.form["title"]
                 content = request.form["content"]
-                content = markdown(content, extras=['fenced-code-blocks', 'code-friendly'])
                 category = request.form["category"]
                 code_theme = request.form["code-theme"]
                 tags = request.form["tags"]
@@ -130,6 +129,7 @@ def post(id):
     view_count = int(redis_client.get(f"post:{id}:view_count") or 0)
     post = sq.get_column_value_by_name('posts', 'id, title, content, category, date, author_username, email, code_theme, tags', ('id', id), 'data.db')[0]
     post = list(post)
+    post[2] = markdown(post[2], extras=['fenced-code-blocks', 'code-friendly'])
     username = post[5]
     comments = sq.get_column_value_by_name("comments", "id, content, username", ("post_id", id), "data.db")
     if request.method == "POST":
@@ -213,7 +213,6 @@ def create_post():
             return redirect(url_for("register"))
         title = request.form["title"]
         content = request.form["content"]
-        content = markdown(content, extras=['fenced-code-blocks', 'code-friendly'])
         category = request.form["category"]
         code_theme = request.form["code-theme"]
         date = datetime.now().strftime("%d-%m-%y %H:%M")

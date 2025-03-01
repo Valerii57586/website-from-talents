@@ -46,8 +46,8 @@
             <label>Tags</label>
             <input type="text" class="form-control" name="tags" required>
         </div>
-        <button type="submit" class="btn btn-primary">Publish</button>
-        <textarea type="text" class="form-control" name="content" rows="10" required>{{ post[2] }}</textarea>
+        <button type="submit" class="action-button">Publish</button>
+        <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}">{{ post[2] }}</textarea>
     </form>
 </body>
 </html>
