@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -78,5 +78,101 @@
             {% endif %}
         </div>
     </main>
+</body>
+</html> -->
+
+
+<!-- Ослан тебе нужно соединить HTML коды т.к то что я написал имеет лишь визуал и не перенаправляет на другие страницы по нажатию на кнопки, 
+ну либо я сам это сделаю после программирования, но в целом главная страница уже ноплохо выглядит,есть чувство,что что-то пока не так, но в целом я считаю неплохо 
+P.S! что за параша сверху страницы, понятия не имею :)-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Main list</title>
+    <<link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Иконки -->
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка сайта -->
+        <header class="header">
+            <!-- Логотип -->
+            <div class="site-logo">
+                <i class="fas fa-globe"></i> Scorpio
+            </div>
+            <!-- Отображение онлайна -->
+            <div class="online-status">
+                <i class="fas fa-users"></i> Online: 1,234 <!--(Ослан)-->
+            </div>
+            <!-- Кнопки регистрации и входа -->
+            <div class="auth-buttons">
+                <button>Sign in</button> <!--(добавить из кода Ослана)-->
+                <button>Sign up</button> <!--(добавить из кода Ослана)-->
+            </div>
+        </header>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Боковая панель -->
+            <div class="sidebar">
+                <button>
+                    <i class="fas fa-user"></i> Profile
+                </button>
+                <button>
+                    <i class="fas fa-plus"></i> Create post
+                </button>
+                <button>
+                    <i class="fas fa-comments"></i> Massenger
+                </button>
+            </div>
+
+            <!-- Лента постов -->
+            <div class="post-feed">
+                <!-- Пост 1 (Тест)-->
+                <div class="post" onclick="openPost()">
+                    <div class="post-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="post-content">
+                        <h3>Заголовок поста 1</h3>
+                        <p>Это пример текста поста..</p>
+                    </div>
+                </div>
+                <!-- Пост 2 (Тест)-->
+                <div class="post" onclick="openPost()">
+                    <div class="post-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="post-content">
+                        <h3>Заголовок поста 2</h3>
+                        <p>Это еще один пример текста поста.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Выбор категории (справа) (добавить из кода Ослана) --> 
+            <div class="category-sidebar">
+                <h4>Choose category</h4>
+                <select>
+                    <option value="all">Categories</option>
+                    <option value="all">All</option>
+                    <option value="rest">Rest</option>
+                    <option value="science">Science</option>
+                    <option value="games">Games</option>
+                    <option value="trips">Trips</option>
+                    <option value="food">Food</option>
+                </select>
+            </div>
+        </main>
+    <script>
+        // Функция для открытия поста
+        function openPost() {
+            alert("Post is open!"); // То что произойдет есть ты нажмешь на пост(Ослан)
+        }
+    </script>
 </body>
 </html>
