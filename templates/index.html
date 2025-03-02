@@ -82,9 +82,6 @@
 </html> -->
 
 
-<!-- Ослан тебе нужно соединить HTML коды т.к то что я написал имеет лишь визуал и не перенаправляет на другие страницы по нажатию на кнопки,
-ну либо я сам это сделаю после программирования, но в целом главная страница уже ноплохо выглядит,есть чувство,что что-то пока не так, но в целом я считаю неплохо
-P.S! что за параша сверху страницы, понятия не имею :)-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,7 +141,7 @@ P.S! что за параша сверху страницы, понятия не
                     {% for post in posts %}
                         {% if (search_query.lower() in post[1].lower() or search_query.lower() in post[2] or search_query.lower() in post[7]) %}
                             {% if category == "all" or category == post[3] %}
-                                <div class="post" data-id="{{ post[0] }}">
+                                <div class="post" data-id="{{ post[0] }}" onclick="location.href='{{ url_for('post', id=post[0]) }}'">
                                     <div class="post-icon">
                                         <i class="fas fa-user"></i>
                                     </div>
