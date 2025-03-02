@@ -1,15 +1,14 @@
-/* Основные стили для body */
+/* Основные стили */
 body {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #f5f5f5; 
-    color: #333; 
+    background-color: #f5f5f5; /* Светлый фон */
+    color: #333; /* Основной цвет текста */
     line-height: 1.6;
-    overflow: hidden; 
+    overflow: hidden; /* Отключаем прокрутку всей страницы */
 }
 
-/* Контейнер для всей страницы */
 .container {
     display: flex;
     flex-direction: column;
@@ -21,17 +20,16 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 30px;
-    background-color: #8b0000; 
-    color: #fff; 
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 0px 30px;
+    background-color: #8b0000; /* Темно-красный цвет для шапки */
+    color: #fff; /* Белый текст */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
 }
 
-/* Логотип сайта */
 .site-logo {
     font-size: 24px;
     font-weight: bold;
-    color: #fff; 
+    color: #fff; /* Белый текст */
     display: flex;
     align-items: center;
 }
@@ -41,10 +39,9 @@ body {
     font-size: 28px;
 }
 
-/* Отображение онлайна */
 .online-status {
     font-size: 16px;
-    color: #fff;
+    color: #fff; /* Белый текст */
     display: flex;
     align-items: center;
 }
@@ -54,83 +51,121 @@ body {
     font-size: 18px;
 }
 
-/* Кнопки регистрации и входа */
 .auth-buttons {
     display: flex;
-    gap: 15px;
+    gap: 10px;
 }
 
-.auth-buttons button {
-    padding: 10px 20px;
-    border: none;
+/* Кнопки авторизации */
+.auth-buttons .action-button {
+    padding: 6px 16px; /* Делаем кнопку компактнее */
+    background-color: #b22222; /* Красивый насыщенный красный */
+    border: none; /* Убираем стандартные границы */
+    border-radius: 6px; /* Закругляем углы */
+    color: white; /* Белый текст */
+    font-size: 14px; /* Немного уменьшаем размер шрифта */
+    font-weight: bold; /* Делаем текст жирнее */
+    cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
+    transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
+    text-decoration: none;
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+.auth-buttons .action-button:hover {
+    background-color: #8b0000; /* Темнее при наведении */
+    transform: scale(1.05); /* Немного увеличивается */
+    text-decoration: none;
+}
+
+.logout-button:active {
+    transform: scale(0.95); /* Немного уменьшается при нажатии */
+    text-decoration: none;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Добавляет расстояние между инпутом и кнопкой */
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 5px;
-    background: linear-gradient(135deg, #b22222, #8b0000);
-    color: #fff;
-    cursor: pointer;
     font-size: 14px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px; /* Можно изменить ширину */
 }
 
-.auth-buttons button:hover {
-    transform: translateY(-2px); 
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #8b0000;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap; /* Чтобы текст не переносился */
 }
 
-.auth-buttons button:active {
-    transform: translateY(0);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+.search-bar button:hover {
+    background-color: #b22222;
 }
+
 
 /* Основной контент */
 .main-content {
     display: flex;
     flex-grow: 1;
     padding: 20px;
-    background-color: #fff; 
-    max-width: 1200px; 
-    margin: 0 auto; 
-    width: 100%;
-    gap: 20px; 
-}
-/* Боковая панель (левая) */
-.sidebar {
-    width: 250px; 
-    padding: 20px;
     background-color: #fff;
-    border-right: 1px solid #e0e0e0; 
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    gap: 30px; /* Увеличено расстояние между элементами */
 }
 
-/* Кнопки в боковой панели */
-.sidebar button {
+/* Боковая панель */
+.sidebar {
+    width: 200px;
+    padding: 20px 10px;
+    background-color: #fff;
+    border-right: 1px solid #e0e0e0cc;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+}
+
+.sidebar-button {
     display: flex;
     align-items: center;
-    width: 100%;
-    padding: 12px;
+    width: 89%;
+    padding: 10px;
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
     background-color: #f5f5f5;
-    color: #8b0000; 
+    color: #8b0000;
     cursor: pointer;
     font-size: 14px;
-    text-align: left;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
 }
 
-.sidebar button:hover {
-    background-color: #ffebee; 
+.sidebar-button:hover {
+    background-color: #ffebee;
     transform: translateX(5px);
+    text-decoration: none;
 }
 
-.sidebar button i {
+.sidebar-button i {
     margin-right: 10px;
     font-size: 16px;
-    color: #8b0000; 
+    color: #8b0000;
 }
 
-/* Лента с постами */
+/* Лента постов */
 .post-feed {
     flex-grow: 1;
     padding: 20px;
@@ -138,33 +173,37 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: calc(100vh - 200px); 
+    max-height: calc(100vh - 200px);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Увеличено расстояние между постами */
 }
+
 /* Посты */
 .post {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
-    padding: 20px;
-    background-color: #f9f9f9; 
+    padding: 15px;
+    background-color: #f9f9f9;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 94%; /* Установлена ширина на 100% */
     cursor: pointer;
 }
 
 .post:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
-/* Иконка поста */
 .post-icon {
     width: 100%;
-    height: 150px;
+    height: 200px; /* Уменьшена высота иконки */
     margin-bottom: 15px;
     border-radius: 12px;
-    background-color: #8b0000; 
+    background-color: #8b0000;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -173,28 +212,47 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* Контент поста */
 .post-content {
-    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Уменьшено расстояние между элементами */
 }
 
-.post h3 {
+.post-title {
     margin-top: 0;
-    color: #8b0000; 
-    font-size: 20px;
-    margin-bottom: 10px;
+    color: #8b0000;
+    font-size: 16px; /* Увеличен размер заголовка */
+    margin-bottom: 5px;
+    font-weight: bold;
 }
 
-.post p {
+.post-category,
+.post-author,
+.date {
+    color: #8b0000;
+    font-size: 12px; /* Уменьшен размер текста */
+    margin-bottom: 5px;
+}
+
+.tags {
     color: #666;
-    line-height: 1.6;
-    font-size: 14px;
-    margin-bottom: 0;
+    font-size: 12px; /* Уменьшен размер текста */
+    margin-bottom: 5px;
+}
+
+/* Надпись "No posts found" */
+.no-posts {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-size: 16px;
 }
 
 /* Выбор категории (справа) */
 .category-sidebar {
-    width: 250px; 
+    width: 250px;
     padding: 20px;
     background-color: #fff;
     border-radius: 12px;
@@ -211,16 +269,26 @@ body {
 .category-sidebar select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #8b0000;
+    border: 1px solid #e0e0e0;
     border-radius: 8px;
     background-color: #fff;
     color: #8b0000;
-    font-size: 14px;
     cursor: pointer;
+    font-size: 14px;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .category-sidebar select:hover {
     background-color: #8b0000;
     color: #fff;
+}
+
+/* Футер */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #8b0000;
+    color: #fff;
+    font-size: 12px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
