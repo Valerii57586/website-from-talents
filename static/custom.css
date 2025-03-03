@@ -9,6 +9,11 @@ body {
     overflow: hidden; /* Отключаем прокрутку всей страницы */
 }
 
+
+a {
+    text-decoration: none;
+}
+
 .container {
     display: flex;
     flex-direction: column;
@@ -131,6 +136,7 @@ body {
 /* Боковая панель */
 .sidebar {
     width: 200px;
+    min-width: 200px;
     padding: 20px 10px;
     background-color: #fff;
     box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
@@ -227,9 +233,16 @@ body {
     font-weight: bold;
 }
 
+<<<<<<< HEAD
 .post-category,
 .post-author {
     text-decoration: none;
+=======
+.post-author {
+    color: #8b0000;
+    font-size: 14px;
+    margin-bottom: 5px;
+>>>>>>> beta
 }
 
 .date {

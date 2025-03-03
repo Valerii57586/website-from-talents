@@ -4,7 +4,6 @@ from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
 from redis import Redis
 from markdown2 import markdown
-from flask_socketio import SocketIO, disconnect
 
 
 redis_client = Redis(host='localhost', port=6379, db=0)
@@ -13,7 +12,6 @@ redis_client = Redis(host='localhost', port=6379, db=0)
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 app.secret_key = "msk"
-socketio = SocketIO(app)
 
 
 sq.create_table(dbname="data.db", table_name="users", columns=[
@@ -31,7 +29,6 @@ sq.create_table(dbname="data.db", table_name="posts", columns=[
     ("email", "TEXT"),
     ("title", "TEXT"),
     ("content", "TEXT"),
-    ("category", "TEXT"),
     ("date", "TEXT"),
     ("files", "TEXT"),
     ("images", "TEXT"),
@@ -48,20 +45,6 @@ sq.create_table(dbname="data.db", table_name="comments", columns=[
 
 
 active_users = set()
-
-
-@socketio.on('connect')
-def handle_connect():
-    session["connected"] = True
-
-
-@socketio.on('disconnect')
-def handle_disconnect():
-    active_users.discard(request.remote_addr)
-    session.clear()
-    current_online = len(active_users)
-    print(active_users, current_online)
-    disconnect()
 
 
 @app.route("/profile/<username>")
@@ -85,21 +68,18 @@ def edit(id):
     email = session.get("email")
     try:
         valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "data.db")[0][0]
-        post = sq.get_column_value_by_name('posts', 'id, title, content, category, code_theme', ('id', id), 'data.db')[0]
+        post = sq.get_column_value_by_name('posts', 'id, title, content, code_theme, tags', ('id', id), 'data.db')[0]
         if request.method == "POST":
             if email == valid_email:
                 date = datetime.now().strftime("%d-%m-%y %H:%M")
                 title = request.form["title"]
                 content = request.form["content"]
-                category = request.form["category"]
                 code_theme = request.form["code-theme"]
                 tags = request.form["tags"]
                 sq.update_column_value("posts", "title", title, ("id", id), "data.db")
                 sq.update_column_value("posts", "content", content, ("id", id), "data.db")
                 if tags != "":
                     sq.update_column_value("posts", "tags", tags, ("id", id), "data.db")
-                if category != "":
-                    sq.update_column_value("posts", "category", category, ("id", id), "data.db")
                 sq.update_column_value("posts", "date", date, ("id", id), "data.db")
                 if code_theme != "":
                     sq.update_column_value("posts", "code_theme", code_theme, ("id", id), "data.db")
@@ -127,7 +107,7 @@ def post(id):
     views_key = ""
     email = session.get("email")
     view_count = int(redis_client.get(f"post:{id}:view_count") or 0)
-    post = sq.get_column_value_by_name('posts', 'id, title, content, category, date, author_username, email, code_theme, tags', ('id', id), 'data.db')[0]
+    post = sq.get_column_value_by_name('posts', 'id, title, content, date, author_username, email, code_theme, tags', ('id', id), 'data.db')[0]
     post = list(post)
     post[2] = markdown(post[2], extras=['fenced-code-blocks', 'code-friendly'])
     username = post[5]
@@ -152,16 +132,15 @@ def main():
     email = session.get("email")
     username = ""
     current_online = len(active_users)
-    posts = sq.get_column_value_by_name("posts", "id, title, content, category, date, author_username, email, tags", (1, 1), "data.db")
+    posts = sq.get_column_value_by_name("posts", "id, title, content, date, author_username, email, tags", (1, 1), "data.db")
     try:
         username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
     except:
         pass
     if request.method == "POST":
         search_query = request.form["search-query"]
-        category = request.form["category-select"]
-        return render_template("index.html", posts=posts, email=email, search_query=search_query, category=category, username=username, current_online=current_online)
-    return render_template("index.html", posts=posts, email=email, search_query=search_query, category=category, username=username, current_online=current_online)
+        return render_template("index.html", posts=posts, email=email, search_query=search_query, username=username, current_online=current_online)
+    return render_template("index.html", posts=posts, email=email, search_query=search_query, username=username, current_online=current_online)
 
 
 @app.route("/reg", methods=["GET", "POST"])
@@ -213,13 +192,12 @@ def create_post():
             return redirect(url_for("register"))
         title = request.form["title"]
         content = request.form["content"]
-        category = request.form["category"]
         code_theme = request.form["code-theme"]
         date = datetime.now().strftime("%d-%m-%y %H:%M")
         author_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
         tags = request.form["tags"]
         try:
-            sq.add_record("posts", {"email": email, "title": title, "content": content, "category": category, "date": date, "author_username": author_username, "code_theme": code_theme, "tags":tags}, "data.db")
+            sq.add_record("posts", {"email": email, "title": title, "content": content, "date": date, "author_username": author_username, "code_theme": code_theme, "tags":tags}, "data.db")
             return redirect(url_for("main"))
         except:
             return redirect(url_for("create_post"))
