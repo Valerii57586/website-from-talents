@@ -84,16 +84,6 @@ textarea {
 }
 
 /* Стили для выпадающих списков */
-.category {
-    display: flex;
-    gap: 120px;
-    position: relative; top:15px; right: 95px
-}
-
-.category select {
-    flex: 1;
-
-}
 
 option:hover {
     background-color: #8b0000; /* Темно-красный цвет */
