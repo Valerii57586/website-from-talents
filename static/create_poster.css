@@ -1,0 +1,104 @@
+/* Основные стили для контейнера */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+    font-family: 'Arial', sans-serif;
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border: 2px solid #ff4444;
+}
+
+/* Стили для заголовка */
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #ff4444;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Стили для категорий */
+.category {
+    margin-bottom: 15px;
+}
+
+.category label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.category select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+/* Стили для тегов */
+.tags {
+    margin-bottom: 15px;
+}
+
+.tags label {
+    display: block;
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 5px;
+}
+
+.tags input {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #fff;
+}
+
+/* Стили для кнопки публикации */
+.publish-button {
+    text-align: center;
+    position: relative;
+}
+
+.publish-button button {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #ff4444;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    padding-left: 40px; /* Отступ для иконки */
+}
+
+.publish-button button:hover {
+    background-color: #cc0000;
+}
+
+/* Иконка для кнопки */
+.publish-button button::before {
+    content: '📄'; /* Иконка */
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+}

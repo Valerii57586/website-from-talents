@@ -21,34 +21,36 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
-    background-color: #8b0000; /* Темно-красный цвет для шапки */
-    color: #fff; /* Белый текст */
+    background-color: #ffffff80; /* Темно-красный цвет для шапки */
+    color: #b22222; /* Белый текст */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+    height: 40px;
 }
 
 .site-logo {
-    font-size: 24px;
+    font-size: 15px;
     font-weight: bold;
-    color: #fff; /* Белый текст */
+    color: #b22222; /* Белый текст */
     display: flex;
     align-items: center;
 }
 
 .site-logo i {
     margin-right: 10px;
-    font-size: 28px;
+    font-size: 17px;
 }
 
 .online-status {
     font-size: 16px;
-    color: #fff; /* Белый текст */
+    color: #b22222; /* Белый текст */
     display: flex;
     align-items: center;
+    position: relative; left: 50px;
 }
 
 .online-status i {
     margin-right: 8px;
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .auth-buttons {
@@ -63,7 +65,7 @@ body {
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
     color: white; /* Белый текст */
-    font-size: 14px; /* Немного уменьшаем размер шрифта */
+    font-size: 10px; /* Немного уменьшаем размер шрифта */
     font-weight: bold; /* Делаем текст жирнее */
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
@@ -131,8 +133,7 @@ body {
     width: 200px;
     padding: 20px 10px;
     background-color: #fff;
-    border-right: 1px solid #e0e0e0cc;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.05);
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
 }
 

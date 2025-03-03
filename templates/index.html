@@ -130,7 +130,7 @@
             <!-- Лента постов -->
             <div class="post-feed">
                 <div class="search-bar">
-                    <form method="GET" action="{{ url_for('main') }}" class="search-form">
+                    <form method="GET" action="{{ url_for('main') }}">
                         <input type="text" placeholder="Enter post name" name="search-query" class="search-input" value="{{ search_query }}">
                         <button type="submit" class="search-button">Search</button>
                     </form>
@@ -141,7 +141,7 @@
                     {% for post in posts %}
                         {% if (search_query.lower() in post[1].lower() or search_query.lower() in post[2] or search_query.lower() in post[7]) %}
                             {% if category == "all" or category == post[3] %}
-                                <div class="post" data-id="{{ post[0] }}" onclick="location.href='{{ url_for('post', id=post[0]) }}'">
+                                <div class="post" data-id="{{ post[0] }}">
                                     <div class="post-icon">
                                         <i class="fas fa-user"></i>
                                     </div>
