@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post</title>
+    <title>Create Post</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='create_poster.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <div class="container">
@@ -14,7 +15,7 @@
                 <input type="text" class="form-control" name="title" required>
             </div>
             <div class="category">
-                <label for="category-select">Category</label>
+                <div class=category-label><label for="category-select">Category</label></div>
                 <select name="category" id="category-select">
                     <option value="rest">Rest</option>
                     <option value="science">Science</option>
@@ -42,16 +43,17 @@
                     <option value="brown-paper">Brown Paper</option>
                     <option value="docco">Docco</option>
                     <option value="idea">Idea</option>
-            </select>
+                </select>
             </div>
             <div class="tags">
                 <label>Tags</label>
-                <input type="text" class="form-control" name="tags" placeholder="Enter tags splited with spaces" required>
+                <input type="text" class="form-control" name="tags" placeholder="Enter tags separated with spaces" required>
             </div>
-            <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}"></textarea>
-            <button type="submit" class="publish-button">Publish</button>
+            <div class="publish-window">
+                <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}"></textarea>
+                <button type="submit" class="publish-button">Publish</button>
+            </div>
         </form>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/mode/markdown/markdown.min.js"></script>
     </div>
-    </body>
-    </html>
+</body>
+</html>

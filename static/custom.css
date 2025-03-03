@@ -228,7 +228,10 @@ body {
 }
 
 .post-category,
-.post-author,
+.post-author {
+    text-decoration: none;
+}
+
 .date {
     color: #8b0000;
     font-size: 12px; /* Уменьшен размер текста */
