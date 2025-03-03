@@ -12,15 +12,6 @@
             <label>Title</label>
             <input type="text" class="form-control" name="title" value="{{ post[1] }}" required>
         </div>
-        <label for="category-select">Category</label>
-        <select name="category" id="category-select">
-            <option value="" selected>Select category</option>
-            <option value="rest">Rest</option>
-            <option value="science">Science</option>
-            <option value="games">Games</option>
-            <option value="trips">Trips</option>
-            <option value="food">Food</option>
-        </select>
         <select name="code-theme" id="code-theme-select">
             <option value="">Select theme for code</option>
             <option value="atom-one-dark">Atom One Dark</option>
@@ -44,7 +35,7 @@
         </select>
         <div class="form-group">
             <label>Tags</label>
-            <input type="text" class="form-control" name="tags" required>
+            <input type="text" class="form-control" name="tags" value="{{ post[4] }}" required>
         </div>
         <button type="submit" class="action-button">Publish</button>
         <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}">{{ post[2] }}</textarea>
