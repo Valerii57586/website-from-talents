@@ -6,9 +6,6 @@ from redis import Redis
 from markdown2 import markdown
 
 
-redis_client = Redis(host='localhost', port=6379, db=0)
-
-
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
 app.secret_key = "msk"
@@ -53,6 +50,12 @@ sq.create_table(dbname="data.db", table_name="replys", columns=[
 
 
 active_users = set()
+
+
+@app.route("/add_image")
+def add_image():
+
+    return render_template("add_image.html")
 
 
 @app.route("/add_reply/<int:comment_id>/<int:post_id>", methods=["GET", "POST"])
@@ -105,7 +108,7 @@ def edit(id):
                 sq.update_column_value("posts", "date", date, ("id", id), "data.db")
                 if code_theme != "":
                     sq.update_column_value("posts", "code_theme", code_theme, ("id", id), "data.db")
-                return redirect(url_for("main"))
+                return redirect(url_for("post", id=id))
             return redirect(url_for("main"))
     except:
         pass
@@ -127,8 +130,8 @@ def delete(id):
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     views_key = ""
+    view_count = 0
     email = session.get("email")
-    view_count = int(redis_client.get(f"post:{id}:view_count") or 0)
     post = sq.get_column_value_by_name('posts', 'id, title, content, date, author_username, email, code_theme, tags', ('id', id), 'data.db')[0]
     post = list(post)
     post[2] = markdown(post[2], extras=['fenced-code-blocks', 'code-friendly'])
@@ -141,11 +144,6 @@ def post(id):
             date = datetime.now().strftime("%d-%m-%y %H:%M")
             sq.add_record("comments", {"username": username, "post_id": id, "content": comment, "date": date}, "data.db")
             return redirect(url_for("post", id=id))
-    if email:
-        views_key = f"post:{id}:views"
-        if not redis_client.sismember(views_key, email):
-            redis_client.sadd(views_key, email)
-            redis_client.incr(f"post:{id}:view_count")
     return render_template('post.html', post=post, comments=comments, username=username, veiw_count=view_count, replies=replies)
 
 

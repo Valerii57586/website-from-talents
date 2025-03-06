@@ -16,21 +16,21 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
     margin: 20px auto;
-    max-width: 800px;
+    max-width: 1300px;
     width: 90%;
 }
 
 .post-title-opened {
     color: #8b0000;
-    font-size: 24px;
+    font-size:54px;
     margin-bottom: 20px;
     border-bottom: 2px solid #ffebee;
     padding-bottom: 10px;
 }
 
 .post-content-opened {
-    font-size: 16px;
-    line-height: 1.8;
+    font-size: 20px;
+    line-height: 1.4;
     color: #333;
     white-space: pre-wrap;
     word-wrap: break-word;
