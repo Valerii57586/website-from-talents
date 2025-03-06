@@ -1,6 +1,9 @@
 body {
     font-family: 'Arial', sans-serif;
-    background-color: #f4f4f9;
+    background-image: url('C:\My_working\working\website-from-talents\image\plane.jpg'); /* Надо указать ссылку */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,7 +17,7 @@ body {
     max-width: 800px;
     background-color: #ffffff;
     padding: 30px;
-    border-radius: 15px;
+    border-radius: 20px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
@@ -26,6 +29,7 @@ body {
 .publish-window{
     margin-bottom: 20px;
 }
+
 label {
     display: block;
     margin-bottom: 8px;
@@ -70,7 +74,7 @@ textarea {
 .publish-button {
     width: 100%;
     padding: 15px;
-    background-color: #b22222;
+    background-color: #931f1d;
     color: #fff;
     border: none;
     border-radius: 8px;

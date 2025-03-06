@@ -7,7 +7,7 @@
     <title>Knyazev ID - Логин</title>
     <style>        
         body {
-            background-image: url('"C:\Users\user\Pictures\Фоновые изображения рабочего стола\19. Самолеты.jpg"'); /* Укажите путь к изображению */
+            background-image: url('C:\My_working\working\website-from-talents\image\plane.jpg');; /* Укажите путь к изображению */
             background-size: cover; /* Растягивает изображение на весь экран */
             background-position: center; /* Центрирует изображение */
             background-repeat: no-repeat; /* Запрещает повторение изображения */
@@ -15,7 +15,7 @@
             height: 100vh; /* Занимает всю высоту экрана */
         }
     </style>
-</head>
+</head> 
 <body>
     <form method="post">
         <div class="container">
@@ -32,9 +32,10 @@
             </div>
             <div class="actions">
                 <button type="sumbit" class="login-button">Sign in</button>
-                <a href="{{ url_for('register') }}" class="create-id">Sign up</a>
             </div>
-            <label class="sumbit-message">{{ message }}</label>
+            <div class="sumbit-message">
+                <label>{{ message }}</label>
+            </div>
         </div>
     </form>
 </body>

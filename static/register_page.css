@@ -15,7 +15,7 @@ body {
     padding-right: 53px;
     padding-top: 30px;
     padding-bottom: 40px;
-    border-radius: 12px;
+    border-radius: 20px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
     width: 320px;
     text-align: center;
@@ -89,7 +89,7 @@ body {
     padding: 12px;
     text-align: center;
     text-decoration: none;
-    border-radius: 8px;
+    border-radius: 15px;
     font-size: 14px;
     cursor: pointer;
     width: 100%;
@@ -100,6 +100,7 @@ body {
 .actions .login-button {
     background-color: #e9ecef;
     color: #000;
+    text-decoration: none;
 }
 
 .actions .login-button:hover {
@@ -110,7 +111,7 @@ body {
 .actions .create-id {
     background: linear-gradient(135deg, #931f1d, #931f1d); /* Градиент для кнопки */
     color: #000;
-    font-weight: 600;
+    font-weight: 550;
     position: relative; top: 10px; left: 11px; right: 40px
 }
 
