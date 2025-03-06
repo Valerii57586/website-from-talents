@@ -11,10 +11,10 @@
     <title>Post</title>
 </head>
 <body>
-    <div class="post-card">
-        <a class="action-button" href="{{ url_for('delete', id=post[0]) }}">Delete</a>
-        <a class="action-button" href="{{ url_for('edit', id=post[0]) }}">Edit</a>
-        <a class="action-button" href="{{ url_for('main') }}">Back</a>
+    <div class="post-card-opened">
+        <a class="my-button" href="{{ url_for('delete', id=post[0]) }}">Delete</a>
+        <a class="my-button" href="{{ url_for('edit', id=post[0]) }}">Edit</a>
+        <a class="my-button" href="{{ url_for('main') }}">Back</a>
         <h2 class="post-title-opened">{{ post[1] }}</h2>
         <pre class="post-content-opened">{{ post[2]|safe }}</pre>
         <p class="post-author-opened">Author: {{ post[4] }}</p>
@@ -26,25 +26,52 @@
             <h3>Comments</h3>
             <div class="create-comment">
                 <form method="POST" class="comment-form">
-                    <input type="text" placeholder="Enter your comment" name="comment" class="comment-input">
+                    <textarea type="text" placeholder="Enter your comment" name="comment" class="comment-input"></textarea>
                     <button type="submit" class="comment-button">Send</button>
                 </form>
             </div>
             {% if comments %}
-            {% for comment in comments %}
-            <div class="comment">
-                <p class="comment-author">{{ comment[1] }}</p>
-                <pre class="comment-content">{{ comment[2] }}</pre>
-                <p class="comment-date">{{ comment[3] }}</p>
-            </div>
-            {% endfor %}
+                {% for comment in comments %}
+                    <div class="comment">
+                        <p class="comment-author">{{ comment[2] }}</p>
+                        <pre class="comment-content">{{ comment[1] }}</pre>
+                        <p class="comment-date">{{ comment[3] }}</p>
+                    </div>
+
+                    <button class="reply-toggle" onclick="toggleReplyForm('reply-form-{{ comment[0] }}')">Reply</button>
+                    <div id="reply-form-{{ comment[0] }}" class="reply-form" style="display:none;">
+                        <form method="POST" action="{{ url_for('reply', comment_id=comment[0], post_id=post[0]) }}">
+                            <textarea class="reply-textarea" type="text" name="reply" placeholder="Write your reply..."></textarea>
+                            <button class="reply-button" type="submit">Send Reply</button>
+                        </form>
+                    </div>
+
+                    <div class="replies">
+                        {% if replies %}
+                            {% for reply in replies %}
+                                {% if reply[3] == comment[0] %}
+                                    <div class="reply">
+                                        <p class="reply-author">{{ reply[2] }}</p>
+                                        <pre class="reply-content">{{ reply[1] }}</pre>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
+                    </div>
+                {% endfor %}
             {% else %}
-            <p>No comments yet.</p>
+                <p>No comments yet.</p>
             {% endif %}
         <div>
     </div>
     <script>
         hljs.highlightAll();
+    </script>
+    <script>
+        function toggleReplyForm(formId) {
+            const form = document.getElementById(formId);
+            form.style.display = form.style.display === 'none' ? 'block' : 'none';
+        }
     </script>
 </body>
 </html>

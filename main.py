@@ -41,10 +41,32 @@ sq.create_table(dbname="data.db", table_name="comments", columns=[
     ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
     ("username", "TEXT"),
     ("post_id", "INTEGER"),
+    ("content", "TEXT"),
+    ("date", "TEXT")])
+
+
+sq.create_table(dbname="data.db", table_name="replys", columns=[
+    ("id", "INTEGER PRIMARY KEY AUTOINCREMENT"),
+    ("username", "TEXT"),
+    ("comment_id", "INTEGER"),
     ("content", "TEXT")])
 
 
 active_users = set()
+
+
+@app.route("/add_reply/<int:comment_id>/<int:post_id>", methods=["GET", "POST"])
+def reply(comment_id, post_id):
+    email = session.get("email")
+    if email:
+        username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
+        reply_cntent = request.form["reply"]
+    if reply_cntent:
+        sq.add_record("replys", {"username": username,
+                                 "comment_id": comment_id,
+                                 "content": reply_cntent},
+                                 "data.db")
+    return redirect(url_for("post", id=post_id))
 
 
 @app.route("/profile/<username>")
@@ -110,25 +132,26 @@ def post(id):
     post = sq.get_column_value_by_name('posts', 'id, title, content, date, author_username, email, code_theme, tags', ('id', id), 'data.db')[0]
     post = list(post)
     post[2] = markdown(post[2], extras=['fenced-code-blocks', 'code-friendly'])
-    username = post[5]
-    comments = sq.get_column_value_by_name("comments", "id, content, username", ("post_id", id), "data.db")
+    username = post[4]
+    comments = sq.get_column_value_by_name("comments", "id, content, username, date", ("post_id", id), "data.db")
+    replies = sq.get_column_value_by_name("replys", "id, content, username, comment_id", (1, 1), "data.db")
     if request.method == "POST":
         comment = request.form["comment"]
         if comment:
-            sq.add_record("comments", {"username": username, "post_id": id, "content": comment}, "data.db")
+            date = datetime.now().strftime("%d-%m-%y %H:%M")
+            sq.add_record("comments", {"username": username, "post_id": id, "content": comment, "date": date}, "data.db")
             return redirect(url_for("post", id=id))
     if email:
         views_key = f"post:{id}:views"
         if not redis_client.sismember(views_key, email):
             redis_client.sadd(views_key, email)
             redis_client.incr(f"post:{id}:view_count")
-    return render_template('post.html', post=post, comments=comments, username=username, veiw_count=view_count)
+    return render_template('post.html', post=post, comments=comments, username=username, veiw_count=view_count, replies=replies)
 
 
 @app.route("/", methods=["GET", "POST"])
 def main():
     search_query = ""
-    category = 'all'
     email = session.get("email")
     username = ""
     current_online = len(active_users)
