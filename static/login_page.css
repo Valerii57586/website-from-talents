@@ -15,7 +15,7 @@ body {
     background-color: #ffffff;
     padding-left: 30px;
     padding-right: 53px;
-    padding-top: 15px;
+    padding-top: 3px;
     padding-bottom: 50px;
     border-radius: 50px;
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
@@ -29,11 +29,11 @@ body {
     font-size: 28px;
     color: #000;
     margin-bottom: 20px; /* Отступ снизу заголовка */
-    position: relative; top: 10px; left: 14px; right: 38px
+    position: relative; top: 20px; left: 14px; right: 38px
 }
 
 .form-group {
-    margin-bottom: 20px; /* Единый отступ между группами */
+    margin-bottom: 10px; /* Единый отступ между группами */
     text-align: left;
 }
 
@@ -83,11 +83,16 @@ body {
 .actions .login-button {
     background-color: #931f1d;
     color: #000;
-    position: relative; top: 12px; left: 5px; right: 40px;
+    position: relative; top: 5px; left: 5px; right: 40px;
 }
 
 .actions .login-button:hover {
     background-color: #931f1d;
     transform: translateY(-2px);
-    position: relative; top: 11px; left: 5px; right: 40px
+    position: relative; top: 4px; left: 5px; right: 40px
+}
+
+.submit-message {
+    margin-top: 20px; /* Отступ сверху для сообщения */
+    color: #000000; /* Цвет текста сообщения */
 }

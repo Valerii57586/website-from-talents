@@ -167,14 +167,13 @@ a {
     padding: 0px 30px;
     background-color: #ffffff80; /* Темно-красный цвет для шапки */
     color: #b22222; /* Белый текст */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
     height: 40px;
 }
 
 .site-logo {
     font-size: 15px;
     font-weight: bold;
-    color: #b22222; /* Белый текст */
+    color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
 }
@@ -189,7 +188,7 @@ a {
     color: #b22222; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 50px;
+    position: relative; left: 90px;
 }
 
 .online-status i {
@@ -242,6 +241,7 @@ a {
     border-radius: 5px;
     font-size: 14px;
     width: 200px; /* Можно изменить ширину */
+    position: relative; bottom:20px;
 }
 
 .search-bar button {
@@ -253,6 +253,7 @@ a {
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Чтобы текст не переносился */
+    position: relative; bottom:20px;
 }
 
 .search-bar button:hover {
@@ -265,7 +266,7 @@ a {
     display: flex;
     flex-grow: 1;
     padding: 20px;
-    background-color: #fff;
+    background-color: #f5f5f5;
     max-width: 1200px;
     margin: 0 auto;
     width: 100%;
@@ -277,36 +278,37 @@ a {
     width: 200px;
     min-width: 200px;
     padding: 20px 10px;
-    background-color: #fff;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
     border-radius: 12px;
 }
 
 .sidebar-button {
     display: flex;
     align-items: center;
-    width: 89%;
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     color: #8b0000;
     cursor: pointer;
-    font-size: 14px;
+    font-size: 17px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
+    position: relative; bottom:20px;
 }
 
 .sidebar-button:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
+    position: relative; bottom:20px;
 }
 
 .sidebar-button i {
-    margin-right: 10px;
+    margin-right: 15px;
     font-size: 16px;
     color: #8b0000;
 }
@@ -315,11 +317,10 @@ a {
 .post-feed {
     flex-grow: 1;
     padding: 20px;
-    background-color: #fff;
+    background-color: #f5f5f5;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     overflow-y: auto;
-    max-height: calc(100vh - 200px);
+    max-height: calc(100vh - 120px);
     position: relative;
     display: flex;
     flex-direction: column;
