@@ -18,7 +18,12 @@ sq.create_table(dbname="data.db", table_name="users", columns=[
     ("email", "TEXT"),
     ("name", "TEXT"),
     ("surname", "TEXT"),
-    ("profile_photo_url", "TEXT")])
+    ("avatar", "TEXT"),
+    ("header_photo", "TEXT"),
+    ("status", "TEXT"),
+    ("about", "TEXT"),
+    ("git_link", "TEXT"),
+    ("other_links", "TEXT")])
 
 
 sq.create_table(dbname="data.db", table_name="posts", columns=[
@@ -31,7 +36,8 @@ sq.create_table(dbname="data.db", table_name="posts", columns=[
     ("images", "TEXT"),
     ("author_username", "TEXT"),
     ("code_theme", "TEXT"),
-    ("tags", "TEXT")])
+    ("tags", "TEXT"),
+    ("veiwers", "TEXT")])
 
 
 sq.create_table(dbname="data.db", table_name="comments", columns=[
@@ -72,20 +78,19 @@ def reply(comment_id, post_id):
     return redirect(url_for("post", id=post_id))
 
 
-@app.route("/profile/<username>")
+@app.route('/profile/<username>')
 def profile(username):
-    name = sq.get_column_value_by_name("users", "name", ("username", username), "data.db")[0][0]
-    surname = sq.get_column_value_by_name("users", "surname", ("username", username), "data.db")[0][0]
-    return render_template("profile.html", username=username, name=name, surname=surname)
-
-
-@app.route('/myprofile')
-def my_profile():
+    current_online = len(active_users)
     email = session.get("email")
     username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
     name = sq.get_column_value_by_name("users", "name", ("email", email), "data.db")[0][0]
     surname = sq.get_column_value_by_name("users", "surname", ("email", email), "data.db")[0][0]
-    return render_template("profile.html", username=username, name=name, surname=surname)
+    avatar = sq.get_column_value_by_name("users", "avatar", ("email", email), "data.db")[0][0]
+    header_photo = sq.get_column_value_by_name("users", "header_photo", ("email", email), "data.db")[0][0]
+    about = sq.get_column_value_by_name("users", "about", ("email", email), "data.db")[0][0]
+    status = sq.get_column_value_by_name("users", "status", ("email", email), "data.db")[0][0]
+    posts = sq.get_column_value_by_name("posts", "id, title", ("author_username", username), "data.db")
+    return render_template("profile.html", username=username, name=name, surname=surname, avatar=avatar, header_photo=header_photo, current_online=current_online, about=about, status=status, posts=posts)
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
@@ -129,9 +134,17 @@ def delete(id):
 
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
-    views_key = ""
-    view_count = 0
     email = session.get("email")
+    current_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
+    viewers = sq.get_column_value_by_name("posts", "veiwers", ("id", id), "data.db")[0][0]
+    if viewers == None:
+        viewers = ""
+    if current_username not in viewers:
+        sq.update_column_value("posts", "veiwers", viewers + " " + current_username, ("id", id), "data.db")
+    else:
+        pass
+    viewers = sq.get_column_value_by_name("posts", "veiwers", ("id", id), "data.db")[0][0]
+    veiw_count = len(viewers.split())
     post = sq.get_column_value_by_name('posts', 'id, title, content, date, author_username, email, code_theme, tags', ('id', id), 'data.db')[0]
     post = list(post)
     post[2] = markdown(post[2], extras=['fenced-code-blocks', 'code-friendly'])
@@ -144,7 +157,7 @@ def post(id):
             date = datetime.now().strftime("%d-%m-%y %H:%M")
             sq.add_record("comments", {"username": username, "post_id": id, "content": comment, "date": date}, "data.db")
             return redirect(url_for("post", id=id))
-    return render_template('post.html', post=post, comments=comments, username=username, veiw_count=view_count, replies=replies)
+    return render_template('post.html', post=post, comments=comments, username=username, veiw_count=veiw_count, replies=replies)
 
 
 @app.route("/", methods=["GET", "POST"])

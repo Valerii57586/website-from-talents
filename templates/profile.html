@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User profile</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap"> 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         body {
     font-family: 'Roboto', sans-serif;
@@ -288,7 +288,7 @@ a {
                     <i class="fas fa-user"></i> Profile
                 </a>
                 <a href="{{ url_for('main') }}" class="sidebar-button">
-                    <i class="fas fa-post"></i> post feed
+                    <i class="fas fa-post"></i> Post feed
                 </a>
                 <a href="{{ url_for('create_post') }}" class="sidebar-button">
                     <i class="fas fa-plus"></i> Create post
@@ -297,10 +297,10 @@ a {
         <div class="profile-container">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <img src="https://via.placeholder.com/150" alt="Аватар">
+                    <img src="https://img.freepik.com/premium-vector/scorpion-logo-line-abstract-zodiac-sign-sharp-scorpio-tribal-tattoo-design-graphic-illustration_896322-443.jpg?w=2000" alt="">
                 </div>
-                <h1 class="profile-name">Князев Валерий</h1>
-                <p class="profile-bio">Веб-разработчик | ♠</p>
+                <h1 class="profile-name">{{ username }}</h1>
+                <p class="profile-bio">{{ status }}</p>
                 <div class="profile-social">
                     <a href="#" class="social-link"><i class="fab fa-github"></i></a>
                     <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
@@ -308,57 +308,23 @@ a {
             </div>
             <div class="profile-content">
                 <div class="profile-section">
-                    <h2>Обо мне</h2>
-                    <p>Талант</p>
+                    <h2>About me</h2>
+                    <p>{{ about }}</p>
                 </div>
                 <div class="profile-section">
-                    <h2>Посты</h2>
+                    <h2>Posts</h2>
                     <ul class="post-list">
-                        <li>Перечень постов</li>
-                        <li>Я сделал это чтобы показать,
-                            что кол-во постов влияет на размер
-                            карточки!
-                        <li>Я сделал это чтобы показать,
-                                что кол-во постов влияет на размер
-                                карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                                что кол-во постов влияет на размер
-                                карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                                что кол-во постов влияет на размер
-                                карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                                что кол-во постов влияет на размер
-                                карточки!
-                        </li>
-
-                         <li>Я сделал это чтобы показать,
-                            что кол-во постов влияет на размер
-                            карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                            что кол-во постов влияет на размер
-                            карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                            что кол-во постов влияет на размер
-                            карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                            что кол-во постов влияет на размер
-                            карточки!
-                        </li>
-                        <li>Я сделал это чтобы показать,
-                            что кол-во постов влияет на размер
-                            карточки!
-                        </li>
+                        {% if posts %}
+                            {% for post in posts %}
+                                <li onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">{{ post[1] }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <p>No posts yet.</p>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
         </div>
-    </div>    
+    </div>
     </body>
     </html>
