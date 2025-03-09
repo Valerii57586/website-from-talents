@@ -166,6 +166,7 @@ a {
     align-items: center;
     padding: 0px 30px;
     background-color: #ffffff80; /* Темно-красный цвет для шапки */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
     color: #b22222; /* Белый текст */
     height: 40px;
 }
@@ -188,7 +189,7 @@ a {
     color: #b22222; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 90px;
+    position: relative; left: 80px;
 }
 
 .online-status i {
@@ -268,7 +269,7 @@ a {
     padding: 20px;
     background-color: #f5f5f5;
     max-width: 1200px;
-    margin: 0 auto;
+    margin: 40px auto;
     width: 100%;
     gap: 30px; /* Увеличено расстояние между элементами */
 }
@@ -297,14 +298,14 @@ a {
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
-    position: relative; bottom:20px;
+    position: relative; bottom: 40px;
 }
 
 .sidebar-button:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
-    position: relative; bottom:20px;
+    position: relative; bottom: 40px;
 
 }
 
@@ -322,7 +323,7 @@ a {
     border-radius: 12px;
     overflow-y: auto;
     max-height: calc(100vh - 120px);
-    position: relative;
+    position: relative; bottom: 20px;
     display: flex;
     flex-direction: column;
     gap: 30px; /* Увеличено расстояние между постами */

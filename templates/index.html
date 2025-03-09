@@ -21,10 +21,8 @@
             </div>
             <div class="auth-buttons">
                 {% if username %}
-                    <h3>Welcome, {{ username }}</h3>
                     <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
                 {% else %}
-                    <h3>Welcome, Guest</h3>
                     <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
                     <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
                 {% endif %}

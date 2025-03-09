@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Arial', sans-serif;
     background: #f5f5f5;
     color: #333;
     margin: 0;
@@ -250,27 +250,28 @@ a {
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
     color: white; /* Белый текст */
-    font-size: 10px; /* Немного уменьшаем размер шрифта */
-    font-weight: bold; /* Делаем текст жирнее */
+    font-size: 11px; /* Немного уменьшаем размер шрифта */
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
     margin: 20px 0; /* Отступы сверху и снизу */
-    position: relative; right:10px
+    position: relative; right: 60px;
+    height: 16px;
 }
 
 .auth-buttons .action-button:hover {
     background-color: #8b0000; /* Темнее при наведении */
     transform: scale(1.05); /* Немного увеличивается */
     text-decoration: none;
-    position: relative; right:10px
+    position: relative; right: 60px;
 }
 
 .logout-button:active {
     transform: scale(0.95); /* Немного уменьшается при нажатии */
     text-decoration: none;
-    position: relative; right:10px
+    position: relative; right: 60px;
 }
+
     </style>
 </head>
 <body>
@@ -286,10 +287,8 @@ a {
             </div>
             <div class="auth-buttons">
                 {% if username %}
-                    <h3>Welcome, {{ username }}</h3>
                     <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
                 {% else %}
-                    <h3>Welcome, Guest</h3>
                     <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
                     <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
                 {% endif %}
