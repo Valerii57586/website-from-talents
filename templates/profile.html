@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        body {
+body {
     font-family: 'Roboto', sans-serif;
     background: #f5f5f5;
     color: #333;
@@ -18,6 +18,7 @@
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    font-weight: 100%;
 }
 
 a {
@@ -28,6 +29,9 @@ a {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
+    font-weight: 100%;
+    background-color: #f5f5f5;
+    width: 100%; /* Растягиваем контейнер на всю ширину */
 }
 
 .header {
@@ -35,11 +39,26 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
-    background-color: #ffffff80; /* Темно-красный цвет для шапки */
-    color: #b22222; /* Белый текст */
+    background-color: #ffffff80; /* Полупрозрачный белый фон */
+    color: #b22222; /* Темно-красный текст */
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
     height: 40px;
-    font-weight: 100%;
+    width: 100%; /* Шапка растягивается на всю ширину */
+    position: fixed; /* Фиксированная шапка */
+    top: 0; /* Прижимаем шапку к верху */
+    left: 0; /* Прижимаем шапку к левому краю */
+    z-index: 1000; /* Шапка поверх других элементов */
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    max-width: 1200px;
+    margin: 40px auto 0; /* Отступ сверху для фиксированной шапки */
+    width: 100%;
+    gap: 30px;
 }
 
 .profile-container {
@@ -50,6 +69,7 @@ a {
     width: 100%;
     max-width: 800px;
     margin: 20px;
+    position: relative; bottom: 20px;
 }
 
 .profile-header {
@@ -135,18 +155,6 @@ a {
     color: #fff;
 }
 
-/* Основной контент */
-.main-content {
-    display: flex;
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #f5f5f5;
-    max-width: 1200px;
-    margin: 0 auto;
-    width: 100%;
-    gap: 30px; /* Увеличено расстояние между элементами */
-}
-
 /* Боковая панель */
 .sidebar {
     width: 200px;
@@ -171,12 +179,14 @@ a {
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
+    position: relative; bottom: 20px;
 }
 
 .sidebar-button:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
+    position: relative; bottom: 20px;
 }
 
 .sidebar-button i {
@@ -246,17 +256,20 @@ a {
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
     margin: 20px 0; /* Отступы сверху и снизу */
+    position: relative; right:10px
 }
 
 .auth-buttons .action-button:hover {
     background-color: #8b0000; /* Темнее при наведении */
     transform: scale(1.05); /* Немного увеличивается */
     text-decoration: none;
+    position: relative; right:10px
 }
 
 .logout-button:active {
     transform: scale(0.95); /* Немного уменьшается при нажатии */
     text-decoration: none;
+    position: relative; right:10px
 }
     </style>
 </head>
