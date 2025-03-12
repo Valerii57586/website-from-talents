@@ -244,6 +244,22 @@
             resize: vertical;
             min-height: 10px;
             font-size: 30px;
+            text-align: center;
+        }
+        .my-input-white {
+            justify-content: center;
+            align-items: center;
+            color: #b22222;
+            placeholder-color: transparent;
+            width: 40%;
+            background-color: transparent;
+            padding: 10px;
+            border: 0px solid #ddd;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            resize: vertical;
+            min-height: 10px;
+            font-size: 20px;
         }
         .online-status i {
             margin-right: 8px;
@@ -321,6 +337,20 @@
             align-items: center;
             margin-bottom: 20px;
         }
+        .my-but {
+            margin-left: 80px;
+            width: 80%;
+            padding: 10px;
+            background-color: #b22222; /* Красивый насыщенный красный */
+            border: none; /* Убираем стандартные границы */
+            border-radius: 6px; /* Закругляем углы */
+            color: white; /* Белый текст */
+            font-size: 20px; /* Немного уменьшаем размер шрифта */
+            font-weight: bold; /* Делаем текст жирнее */
+            cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
+            transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
@@ -358,25 +388,29 @@
                 </a>
             </div>
         <div class="profile-container">
-            <div class="profile-header">
-                <div class="profile-avatar">
-                    <img src="https://img.freepik.com/premium-vector/scorpion-logo-line-abstract-zodiac-sign-sharp-scorpio-tribal-tattoo-design-graphic-illustration_896322-443.jpg?w=2000" alt="">
+            <form method="post" enctype="multipart/form-data">
+                <div class="profile-header">
+                    <div class="profile-avatar" onclick="document.getElementById('avatar-input').click()">
+                        <img src="{{ old_avatar }}" alt="" style="cursor: pointer;">
+                        <input id="avatar-input" type="file" style="display: none;" name="avatar" accept="image/*">
+                    </div>
+                    <div class="profile-info">
+                        <input class="my-input" type="text" name="username" placeholder="username" value="{{ old_username }}">
+                        <input class="my-input" type="text" name="status" placeholder="status" value="{{ old_status }}">
+                    </div>
+                    <div class="profile-social">
+                        <input class="my-input" type="text" name="git_link" placeholder="git-link" value="{{ old_git_link }}">
+                        <input class="my-input" type="text" name="other_links" placeholder="other-link" value="{{ old_other_links }}">
+                    </div>
                 </div>
-                <div class="profile-info">
-                    <input class="my-input" type="text" name="username" placeholder="username" value="{{ username }}">
-                    <input class="my-input" type="text" name="status" placeholder="status" value="{{ status }}">
+                <div class="profile-content">
+                    <div class="profile-section">
+                        <h2>About me</h2>
+                        <textarea class="my-input-white" name="about" placeholder="About me">{{ old_about }}</textarea>
+                    </div>
                 </div>
-                <div class="profile-social">
-                    <input class="my-input" type="text" name="git-link" placeholder="git-link" value="{{ git_link }}">
-                    <input class="my-input" type="text" name="other-link" placeholder="other-link" value="{{ other_link }}">
-                </div>
-            </div>
-            <div class="profile-content">
-                <div class="profile-section">
-                    <h2>About me</h2>
-                    <textarea class="my-input" name="status" placeholder="Status">{{ status }}</textarea>
-                </div>
-            </div>
+                <button type="submit" class="my-but">Save</button>
+             </form>
         </div>
     </div>
     </body>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ post[6] }}.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/{{ post[8] }}.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
     <meta charset="UTF-8">
@@ -15,10 +15,10 @@
         <a class="my-button" href="{{ url_for('delete', id=post[0]) }}">Delete</a>
         <a class="my-button" href="{{ url_for('edit', id=post[0]) }}">Edit</a>
         <a class="my-button" href="{{ url_for('main') }}">Back</a>
-        <h2 class="post-title-opened">{{ post[1] }}</h2>
-        <pre class="post-content-opened">{{ post[2]|safe }}</pre>
-        <p class="post-author-opened">Author: {{ post[4] }}</p>
-        <p class="post-date-opened">Date: {{ post[3] }}</p>
+        <h2 class="post-title-opened">{{ post[2] }}</h2>
+        <pre class="post-content-opened">{{ post[3]|safe }}</pre>
+        <p class="post-author-opened">Author: {{ post[7] }}</p>
+        <p class="post-date-opened">Date: {{ post[4] }}</p>
         <div class="post-stats">
             <span class="veiws"> {{ veiw_count }} veiws </span>
         </div>
@@ -33,9 +33,9 @@
             {% if comments %}
                 {% for comment in comments %}
                     <div class="comment">
-                        <p class="comment-author">{{ comment[2] }}</p>
-                        <pre class="comment-content">{{ comment[1] }}</pre>
-                        <p class="comment-date">{{ comment[3] }}</p>
+                        <p class="comment-author">{{ comment[1] }}</p>
+                        <pre class="comment-content">{{ comment[3] }}</pre>
+                        <p class="comment-date">{{ comment[4] }}</p>
                     </div>
 
                     <button class="reply-toggle" onclick="toggleReplyForm('reply-form-{{ comment[0] }}')">Reply</button>
@@ -49,10 +49,10 @@
                     <div class="replies">
                         {% if replies %}
                             {% for reply in replies %}
-                                {% if reply[3] == comment[0] %}
+                                {% if reply[2] == comment[0] %}
                                     <div class="reply">
-                                        <p class="reply-author">{{ reply[2] }}</p>
-                                        <pre class="reply-content">{{ reply[1] }}</pre>
+                                        <p class="reply-author">{{ reply[1] }}</p>
+                                        <pre class="reply-content">{{ reply[3] }}</pre>
                                     </div>
                                 {% endif %}
                             {% endfor %}
