@@ -58,10 +58,26 @@ sq.create_table(dbname="data.db", table_name="replys", columns=[
 active_users = set()
 
 
-@app.route("/add_image")
-def add_image():
-
-    return render_template("add_image.html")
+@app.route("/porfile_edit/<username>", methods=["GET", "POST"])
+def porfile_edit(username):
+    email = session.get("email")
+    if email is None:
+        return redirect(url_for("register"))
+    if username == sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]:
+        if request.method == "POST":
+            name = request.form["name"]
+            surname = request.form["surname"]
+            status = request.form["status"]
+            about = request.form["about"]
+            git_link = request.form["git_link"]
+            other_links = request.form["other_links"]
+            avatar = request.form["avatar"]
+            header_photo = request.form["header_photo"]
+            sq.update_record("users", {"name": name, "surname": surname, "status": status, "about": about, "git_link": git_link, "other_links": other_links, "avatar": avatar, "header_photo": header_photo}, ("username", username), "data.db")
+            return redirect(url_for("profile", username=username))
+        return render_template("profile_edit.html", username=username)
+    else:
+        return redirect(url_for("profile", username=username))
 
 
 @app.route("/add_reply/<int:comment_id>/<int:post_id>", methods=["GET", "POST"])
