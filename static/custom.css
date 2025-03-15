@@ -208,7 +208,7 @@ a {
     color: #b22222; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 80px;
+    position: relative; left: 55px;
 }
 
 .online-status i {
@@ -313,7 +313,7 @@ a {
     background-color: #ffffff;
     color: #8b0000;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
