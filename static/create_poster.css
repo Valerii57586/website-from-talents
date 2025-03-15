@@ -121,3 +121,20 @@ option:hover {
         padding: 12px;
     }
 }
+
+
+datalist {
+    background-color: #fff;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+option {
+    padding: 8px 12px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+option:hover {
+    background-color: white;
+}

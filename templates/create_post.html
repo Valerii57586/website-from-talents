@@ -41,11 +41,34 @@
                 <label>Tags</label>
                 <input type="text" class="form-control" name="tags" placeholder="Enter tags separated with spaces" required>
             </div>
+            <div>
+                <input type="text" class="form-control" name="contributors" placeholder="Enter contributors usernames splitted with spaces" required>
+            </div>
             <div class="publish-window">
                 <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}"></textarea>
                 <button type="submit" class="publish-button">Publish</button>
             </div>
         </form>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const contributorsInput = document.querySelector('input[name="contributors"]');
+            const datalist = document.createElement('datalist');
+            datalist.id = 'contributors-list';
+            contributorsInput.setAttribute('list', 'contributors-list');
+
+            fetch('/get_usernames')
+                .then(response => response.json())
+                .then(usernames => {
+                    usernames.forEach(username => {
+                        const option = document.createElement('option');
+                        option.value = username;
+                        datalist.appendChild(option);
+                    });
+                });
+
+            document.body.appendChild(datalist);
+        });
+    </script>
 </body>
 </html>
