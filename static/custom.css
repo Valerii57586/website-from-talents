@@ -73,7 +73,7 @@
 }
 
 .comment-input {
-    width: 100%;
+    width: 97%;
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 8px;
@@ -119,6 +119,25 @@
     padding: 10px;
     background: #f5f5f5;
     border-radius: 8px;
+}
+.reply-button {
+    background: #b22222;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.reply-textarea {
+    width: 98%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    resize: vertical;
+    min-height: 80px;
 }
 
 .reply-toggle {

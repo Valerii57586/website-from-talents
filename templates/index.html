@@ -51,23 +51,42 @@
                         <button type="submit" class="search-button">Search</button>
                     </form>
                 </div>
-
-                <!-- Посты -->
                 {% if posts %}
+                    {% if recommended_posts %}
+                        <div class="recommendations">
+                            <h3>Recommended posts</h3>
+                            {% for post in recommended_posts %}
+                                <div class="post" data-id="{{ post[0] }}" onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">
+                                    <div class="post-icon">
+                                        <i class="fas fa-user"></i>
+                                    </div>
+                                    <div class="post-content">
+                                        <h3 class="post-title">{{ post[2] }}</h3>
+                                        {% if post[9] %}
+                                            <p class="tags">{{ post[9] }}</p>
+                                        {% endif %}
+                                        <p class="post-content">{{ post[3][:300].replace("**", "").replace("#", "").replace("```", "").replace("*", "").replace("~~", "").replace(">", "").replace(">>", "") }}</p>
+                                        <p class="post-author">By <a class="post-author-a" href="{{ url_for('profile', username=post[7]) }}"> {{ post[7] }} </a></p>
+                                        <p class="date">{{ post[4] }}</p>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                     {% for post in posts %}
-                        {% if search_query.lower() in post[1].lower() or search_query.lower() in post[2].lower() or search_query.lower() in post[6].lower() or search_query.lower() in post[4].lower() %}
+                        {% if search_query.lower() in post[2].lower() or search_query.lower() in post[3].lower() or search_query.lower() in post[9].lower() or search_query.lower() in post[7].lower() %}
                             <div class="post" data-id="{{ post[0] }}" onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">
                                 <div class="post-icon">
                                     <i class="fas fa-user"></i>
                                 </div>
                                 <div class="post-content">
-                                    <h3 class="post-title">{{ post[1] }}</h3>
-                                    {% if post[6] %}
-                                        <p class="tags">{{ post[6] }}</p>
+                                    <h3 class="post-title">{{ post[2] }}</h3>
+                                    {% if post[9] %}
+                                        <p class="tags">{{ post[9] }}</p>
                                     {% endif %}
-                                    <p class="post-content">{{ post[2][:300].replace("**", "").replace("#", "").replace("```", "").replace("*", "").replace("~~", "").replace(">", "").replace(">>", "") }}</p>
-                                    <p class="post-author">By <a class="post-author-a" href="{{ url_for('profile', username=post[4]) }}"> {{ post[4] }} </a></p>
-                                    <p class="date">{{ post[3] }}</p>
+                                    <p class="post-content">{{ post[3][:300].replace("**", "").replace("#", "").replace("```", "").replace("*", "").replace("~~", "").replace(">", "").replace(">>", "") }}</p>
+                                    <p class="post-author">By <a class="post-author-a" href="{{ url_for('profile', username=post[7]) }}"> {{ post[7] }} </a></p>
+                                    <p class="date">{{ post[4] }}</p>
                                 </div>
                             </div>
                         {% endif %}

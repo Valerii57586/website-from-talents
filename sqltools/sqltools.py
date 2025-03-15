@@ -41,14 +41,15 @@ def get_column_value_by_name(table_name: str, column_to_get: str,
         return None
 
 
-def update_column_value(table_name: str, column_to_update: str,
-                        new_value,
+def update_column_value(table_name: str, columns_and_values: dict,
                         condition: tuple, dbname: str) -> None:
     connection = sqlite3.connect(dbname)
     cursor = connection.cursor()
-    cursor.execute(f'UPDATE {table_name} SET {column_to_update} = ?'
-                   f'WHERE {condition[0]} = ?',
-                   (new_value, condition[1]))
+    set_string = ', '.join([f"{col} = ?" for col in columns_and_values.keys()])
+    values = list(columns_and_values.values())
+    values.append(condition[1])
+    query = f'UPDATE {table_name} SET {set_string} WHERE {condition[0]} = ?'
+    cursor.execute(query, values)
     connection.commit()
 
 

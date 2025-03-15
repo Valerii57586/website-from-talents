@@ -346,13 +346,13 @@ a {
         <div class="profile-container">
             <div class="profile-header">
                 <div class="profile-avatar">
-                    <img src="https://img.freepik.com/premium-vector/scorpion-logo-line-abstract-zodiac-sign-sharp-scorpio-tribal-tattoo-design-graphic-illustration_896322-443.jpg?w=2000" alt="">
+                    <img src="{{ avatar }}" alt="">
                 </div>
                 <h1 class="profile-name">{{ username }}</h1>
                 <p class="profile-bio">{{ status }}</p>
                 <div class="profile-social">
-                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="{{ git_link }}" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="{{ other_links }}" class="social-link"><i class="fab fa-twitter"></i></a>
                 </div>
             </div>
             <div class="profile-content">

@@ -1,9 +1,9 @@
 body {
     font-family: 'Arial', sans-serif;
     background-image: url('C:\My_working\working\website-from-talents\image\plane.jpg'); /* Надо указать ссылку */
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
