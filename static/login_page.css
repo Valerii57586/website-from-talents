@@ -96,3 +96,8 @@ body {
     margin-top: 20px; /* Отступ сверху для сообщения */
     color: #000000; /* Цвет текста сообщения */
 }
+
+.K_and_D { 
+    font-size: 13px;
+    position: relative; top:366px; right:795px; 
+}

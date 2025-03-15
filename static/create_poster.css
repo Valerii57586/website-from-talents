@@ -1,6 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('C:\My_working\working\website-from-talents\image\plane.jpg'); /* Надо указать ссылку */
+    font-family: 'Arial', sans-serif; /* Надо указать ссылку */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -21,12 +20,25 @@ body {
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
-.title, .category, .tags{
+.title {
     margin-bottom: 20px;
     position: relative; right: 11.5px
 }
 
-.publish-window{
+.category {
+    margin-bottom: 20px;
+}
+
+.tags {
+    margin-bottom: 20px;
+    position: relative; right: 11.5px
+}
+
+.con{
+    position:relative;right: 11.5px;
+}
+
+.publish-window {
     margin-bottom: 20px;
 }
 

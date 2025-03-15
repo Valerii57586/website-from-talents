@@ -153,3 +153,8 @@ body {
         transform: translateY(-20px);
     }
 }
+
+.K_and_D { 
+    font-size: 13px; 
+    position: relative; top:104px;right:795px;
+}
