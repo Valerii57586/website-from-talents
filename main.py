@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, request, url_for, session
+from flask import Flask, render_template, redirect, request, url_for, session, jsonify
 from sqltools import sqltools as sq
 from werkzeug.middleware.proxy_fix import ProxyFix
 from datetime import datetime
@@ -6,7 +6,7 @@ from redis import Redis
 from markdown2 import markdown
 from werkzeug.utils import secure_filename
 import os
-
+from algorithm_tools import algorithm_tools as AlgorithmTools
 
 app = Flask(__name__)
 app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_host=1)
@@ -68,25 +68,10 @@ sq.create_table(dbname="data.db", table_name="replys", columns=[
 active_users = set()
 
 
-def get_recommendations(email):
-    favorites_result = sq.get_column_value_by_name("users", "favorites", ("email", email), "data.db")
-    if not favorites_result:
-        return []
-    user_favorites = favorites_result[0][0] or ""
-    favorite_tags = set(user_favorites.split())
-    all_posts = sq.get_column_value_by_name("posts", "*", (1, 1), "data.db")
-    recommended_posts = []
-    for post in all_posts:
-        post_tags = set(post[9].split()) if post[9] else set()
-        matching_tags = len(favorite_tags.intersection(post_tags))
-        if matching_tags > 0:
-            recommended_posts.append((matching_tags, post))
-    recommended_posts.sort(reverse=True)
-    return [post for score, post in recommended_posts]
-
-
-def allowed_file(filename):
-    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
+@app.route("/get_usernames")
+def get_usernames():
+    usernames = sq.get_column_value_by_name("users", "username", (1, 1), "data.db")
+    return jsonify([username[0] for username in usernames]) if usernames else jsonify([])
 
 
 @app.route("/porfile_edit/<username>", methods=["GET", "POST"])
@@ -113,7 +98,7 @@ def porfile_edit(username):
                 except:
                     pass
                 avatar_file = request.files["avatar"]
-                if avatar_file and allowed_file(avatar_file.filename):
+                if avatar_file and AlgorithmTools.allowed_file(avatar_file.filename, ALLOWED_EXTENSIONS):
                     filename = username + "." + avatar_file.filename.rsplit(".", 1)[1].lower()
                     avatar_file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
                     avatar = url_for("static", filename=f"images/{filename}")
@@ -179,7 +164,7 @@ def profile(username):
     last_seen = userdata[13]
     comments_on_wall = userdata[14]
     raiting = userdata[15]
-    return render_template("profile.html", username=username, name=name, surname=surname, avatar=avatar, header_photo=header_photo, current_online=current_online, about=about, status=status, posts=posts, git_link=git_link, other_links=other_links)
+    return render_template("profile.html", username=username, name=name, surname=surname, avatar=avatar, header_photo=header_photo, current_online=current_online, about=about, status=status, posts=posts, git_link=git_link, other_links=other_links, raiting=raiting)
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
@@ -196,6 +181,7 @@ def edit(id):
                 code_theme = request.form["code-theme"]
                 tags = request.form["tags"]
                 sq.update_column_value("posts", {"title": title, "content": content, "code_theme": code_theme, "tags": tags, "date": date}, ("id", id), "data.db")
+                sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
                 return redirect(url_for("post", id=id))
             return redirect(url_for("main"))
     except:
@@ -206,10 +192,12 @@ def edit(id):
 @app.route("/delete/<int:id>")
 def delete(id):
     email = session.get("email")
+    date = datetime.now().strftime("%d-%m-%y %H:%M")
     try:
         valid_email = sq.get_column_value_by_name("posts", "email", ("id", id), "data.db")[0][0]
         if email == valid_email:
             sq.delete_record("posts", ("id", id), "data.db")
+            sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
     except:
         pass
     return redirect(url_for("main"))
@@ -218,6 +206,9 @@ def delete(id):
 @app.route('/post/<int:id>', methods=['GET', 'POST'])
 def post(id):
     email = session.get("email")
+    if email:
+        date = datetime.now().strftime("%d-%m-%y %H:%M")
+        sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
     current_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
     post = sq.get_column_value_by_name('posts', '*', ('id', id), 'data.db')[0]
     post = list(post)
@@ -254,12 +245,14 @@ def main():
     favorites = ""
     username = ""
     email = session.get("email")
-    recommended_posts = get_recommendations(email)[:5]
+    if email:
+        date = datetime.now().strftime("%d-%m-%y %H:%M")
+        sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
+    recommended_posts = AlgorithmTools.get_recommendations(email)[:5]
     current_online = len(active_users)
-    posts = sq.get_column_value_by_name("posts", "*", (1, 1), "data.db")
     try:
+        posts = sq.get_column_value_by_name("posts", "*", (1, 1), "data.db")
         username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
-        favorites = sq.get_column_value_by_name("users", "favorites", ("username", username), "data.db")[0][0].split()
     except:
         pass
     if request.method == "POST":
@@ -312,6 +305,8 @@ def create_post():
     tags = ""
     if email is None:
         return redirect(url_for("register"))
+    date = datetime.now().strftime("%d-%m-%y %H:%M")
+    sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
     if request.method == "POST":
         if email is None:
             return redirect(url_for("register"))
@@ -321,6 +316,7 @@ def create_post():
         date = datetime.now().strftime("%d-%m-%y %H:%M")
         author_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
         tags = request.form["tags"]
+        contributors = request.form["contributors"]
         sq.add_record("posts", {"email": email, "title": title, "content": content, "date": date, "author_username": author_username, "code_theme": code_theme, "tags":tags}, "data.db")
         return redirect(url_for("main"))
     return render_template("create_post.html")

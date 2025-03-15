@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{ url_for('static', filename='login_page.css') }}">
     <title>Knyazev ID - Логин</title>
-    <style>        
+    <style>
         body {
             background-image: url('C:\My_working\working\website-from-talents\image\plane.jpg');; /* Укажите путь к изображению */
             background-size: cover; /* Растягивает изображение на весь экран */
@@ -15,7 +15,7 @@
             height: 100vh; /* Занимает всю высоту экрана */
         }
     </style>
-</head> 
+</head>
 <body>
     <form method="post">
         <div class="container">
@@ -32,9 +32,6 @@
             </div>
             <div class="actions">
                 <button type="sumbit" class="login-button">Sign in</button>
-            </div>
-            <div class="sumbit-message">
-                <label>{{ message }}</label>
             </div>
         </div>
     </form>

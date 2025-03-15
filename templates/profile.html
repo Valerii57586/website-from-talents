@@ -263,13 +263,8 @@ a {
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
     margin: 20px 0; /* Отступы сверху и снизу */
-<<<<<<< HEAD
-    position: relative; right: 60px;
-    height: 16px;
-=======
     position: relative; right:10px;
     margin-right: 30px;
->>>>>>> 364bbecc6bad0ae0facc7f6915d799ce7d122463
 }
 
 .auth-buttons .action-button:hover {
@@ -284,9 +279,7 @@ a {
     text-decoration: none;
     position: relative; right: 60px;
 }
-<<<<<<< HEAD
 
-=======
 .edit-button {
     padding: 10px 20px; /* Делаем кнопку компактнее */
     background-color: #b22222; /* Красивый насыщенный красный */
@@ -301,7 +294,6 @@ a {
     margin-top: 10px;
     position: relative; left:700px;
 }
->>>>>>> 364bbecc6bad0ae0facc7f6915d799ce7d122463
     </style>
 </head>
 <body>
@@ -317,15 +309,10 @@ a {
             </div>
             <div class="auth-buttons">
                 {% if username %}
-<<<<<<< HEAD
-                    <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
-                {% else %}
-=======
                     <h3 class="current-user">{{ username }}</h3>
                     <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
                 {% else %}
                     <h3>Guest</h3>
->>>>>>> 364bbecc6bad0ae0facc7f6915d799ce7d122463
                     <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
                     <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
                 {% endif %}
