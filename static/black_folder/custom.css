@@ -1,0 +1,469 @@
+/* Я добавил попробовать если не понравится удаляй */
+.my-button {
+    background: #b22222;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+
+.post-card-opened {
+    background: rgba(39, 39, 39, 0.849);
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    margin: 20px auto;
+    max-width: 1300px;
+    width: 90%;
+}
+
+.post-title-opened {
+    color: #8b0000;
+    font-size:54px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ffebee;
+    padding-bottom: 10px;
+}
+
+.post-content-opened {
+    font-size: 20px;
+    line-height: 1.4;
+    color: #333;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    margin: 20px 0;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 8px;
+}
+
+.post-author-opened, .post-date-opened {
+    color: #b22222;
+    font-size: 14px;
+    margin: 5px 0;
+}
+
+.post-stats {
+    margin: 15px 0;
+    padding: 10px;
+    background: #ffebee;
+    border-radius: 8px;
+    color: #8b0000;
+}
+
+.post-comments {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 2px solid #ffebee;
+}
+
+.comment {
+    background: #f9f9f9;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 10px 0;
+    border-left: 3px solid #b22222;
+}
+
+.comment-form {
+    margin: 20px 0;
+}
+
+.comment-input {
+    width: 97%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.comment-button {
+    background: #b22222;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.comment-button:hover {
+    background: #8b0000;
+}
+
+.comment-author {
+    color: #b22222;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.comment-content {
+    color: #333;
+    margin: 10px 0;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 12px;
+}
+
+.reply-form {
+    margin-left: 20px;
+    padding: 10px;
+    background: #f5f5f5;
+    border-radius: 8px;
+}
+.reply-button {
+    background: #b22222;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.reply-textarea {
+    width: 98%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    resize: vertical;
+    min-height: 80px;
+}
+
+.reply-toggle {
+    background: #ffebee;
+    color: #b22222;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin: 5px 0;
+    transition: background 0.3s;
+}
+
+.reply-toggle:hover {
+    background: #b22222;
+    color: white;
+}
+
+/* Основные стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #333030; /* Светлый фон */
+    color: #333; /* Основной цвет текста */
+    line-height: 1.6;
+    /* overflow: hidden; */
+}
+
+
+a {
+    text-decoration: none;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Шапка сайта */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    background-color: #ffffff80; /* Темно-красный цвет для шапки */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+    color: #b22222; /* Белый текст */
+    height: 40px;
+}
+
+.site-logo {
+    font-size: 15px;
+    font-weight: bold;
+    color: #8B0000; /* Белый текст */
+    display: flex;
+    align-items: center;
+}
+
+.site-logo i {
+    margin-right: 10px;
+    font-size: 17px;
+}
+
+.online-status {
+    font-size: 16px;
+    color: #b22222; /* Белый текст */
+    display: flex;
+    align-items: center;
+    position: relative; left: 55px;
+}
+
+.online-status i {
+    margin-right: 8px;
+    font-size: 14px;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Кнопки авторизации */
+.auth-buttons .action-button {
+    padding: 6px 16px; /* Делаем кнопку компактнее */
+    background-color: #b22222; /* Красивый насыщенный красный */
+    border: none; /* Убираем стандартные границы */
+    border-radius: 6px; /* Закругляем углы */
+    color: white; /* Белый текст */
+    font-size: 10px; /* Немного уменьшаем размер шрифта */
+    font-weight: bold; /* Делаем текст жирнее */
+    cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
+    transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
+    text-decoration: none;
+    margin: 20px 0; /* Отступы сверху и снизу */
+}
+
+.auth-buttons .action-button:hover {
+    background-color: #8b0000; /* Темнее при наведении */
+    transform: scale(1.05); /* Немного увеличивается */
+    text-decoration: none;
+}
+
+.logout-button:active {
+    transform: scale(0.95); /* Немного уменьшается при нажатии */
+    text-decoration: none;
+}
+
+.search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Добавляет расстояние между инпутом и кнопкой */
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    width: 200px; /* Можно изменить ширину */
+    position: relative; bottom:20px;
+}
+
+.search-bar button {
+    padding: 10px 15px;
+    background-color: #8b0000;
+    border: none;
+    color: #fff;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    white-space: nowrap; /* Чтобы текст не переносился */
+    position: relative; bottom:20px;
+}
+
+.search-bar button:hover {
+    background-color: #b22222;
+}
+
+
+/* Основной контент */
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    max-width: 1200px;
+    margin: 40px auto;
+    width: 100%;
+    gap: 30px; /* Увеличено расстояние между элементами */
+}
+
+/* Боковая панель */
+.sidebar {
+    width: 200px;
+    min-width: 200px;
+    padding: 20px 10px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+}
+
+.sidebar-button {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #ffffff;
+    color: #8b0000;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative; bottom: 40px;
+}
+
+.sidebar-button:hover {
+    background-color: #ffebee;
+    transform: translateX(5px);
+    text-decoration: none;
+    position: relative; bottom: 40px;
+
+}
+
+.sidebar-button i {
+    margin-right: 15px;
+    font-size: 16px;
+    color: #8b0000;
+}
+
+/* Лента постов */
+.post-feed {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f5f5f5;
+    border-radius: 12px;
+    overflow-y: auto;
+    max-height: calc(100vh - 120px);
+    position: relative; bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px; /* Увеличено расстояние между постами */
+}
+
+/* Посты */
+.post {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 94%; /* Установлена ширина на 100% */
+    cursor: pointer;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.post-icon {
+    width: 100%;
+    height: 200px; /* Уменьшена высота иконки */
+    margin-bottom: 15px;
+    border-radius: 12px;
+    background-color: #8b0000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 24px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.post-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Уменьшено расстояние между элементами */
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    max-width: 100%;
+}
+
+.post-title {
+    margin-top: 0;
+    color: #8b0000;
+    font-size: 16px; /* Увеличен размер заголовка */
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+.post-category,
+.post-author {
+    text-decoration: none;
+}
+
+.date {
+    color: #8b0000;
+    font-size: 12px; /* Уменьшен размер текста */
+    margin-bottom: 5px;
+}
+
+.tags {
+    color: #666;
+    font-size: 12px; /* Уменьшен размер текста */
+    margin-bottom: 5px;
+}
+
+/* Надпись "No posts found" */
+.no-posts {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-size: 16px;
+}
+
+/* Выбор категории (справа) */
+.category-sidebar {
+    width: 250px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.category-sidebar h4 {
+    margin-top: 0;
+    color: #8b0000;
+    font-size: 18px;
+    margin-bottom: 15px;
+}
+
+.category-sidebar select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background-color: #fff;
+    color: #8b0000;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.category-sidebar select:hover {
+    background-color: #8b0000;
+    color: #fff;
+}
+
+/* Футер */
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #8b0000;
+    color: #fff;
+    font-size: 12px;
+    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
