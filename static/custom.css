@@ -184,8 +184,7 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
-    background-color: #ffffff80; /* Темно-красный цвет для шапки */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+    background-color: #fff; /* Темно-красный цвет для шапки */
     color: #b22222; /* Белый текст */
     height: 40px;
 }
@@ -196,6 +195,7 @@ a {
     color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
+    position: relative; left: 350px;
 }
 
 .site-logo i {
@@ -252,28 +252,27 @@ a {
     align-items: center;
     justify-content: center;
     gap: 8px; /* Добавляет расстояние между инпутом и кнопкой */
+    position: relative; left:90px;
 }
 
 .search-bar input {
     flex: 1;
-    padding: 10px;
+    padding: 6px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 12px;
     width: 200px; /* Можно изменить ширину */
-    position: relative; bottom:20px;
 }
 
 .search-bar button {
-    padding: 10px 15px;
+    padding: 6px 11px;
     background-color: #8b0000;
     border: none;
     color: #fff;
-    font-size: 14px;
+    font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Чтобы текст не переносился */
-    position: relative; bottom:20px;
 }
 
 .search-bar button:hover {
@@ -285,12 +284,15 @@ a {
 .main-content {
     display: flex;
     flex-grow: 1;
-    padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #f5f5f588;
     max-width: 1200px;
-    margin: 40px auto;
+    height: 100vh;
+    padding: 20px;
+    margin: 30px auto;
     width: 100%;
-    gap: 30px; /* Увеличено расстояние между элементами */
+    gap: 20px; /* Увеличено расстояние между элементами */
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 /* Боковая панель */
@@ -310,21 +312,21 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     color: #8b0000;
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
-    position: relative; bottom: 40px;
+    position: relative; bottom: 51px; left:8px
 }
 
 .sidebar-button:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
-    position: relative; bottom: 40px;
+    position: relative; bottom: 51px; left:8px
 
 }
 
@@ -339,10 +341,9 @@ a {
     flex-grow: 1;
     padding: 20px;
     background-color: #f5f5f5;
-    border-radius: 12px;
     overflow-y: auto;
-    max-height: calc(100vh - 120px);
-    position: relative; bottom: 20px;
+    max-height:100vh;
+    position: relative; bottom: 40px;
     display: flex;
     flex-direction: column;
     gap: 30px; /* Увеличено расстояние между постами */
@@ -359,6 +360,7 @@ a {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 94%; /* Установлена ширина на 100% */
     cursor: pointer;
+    margin-top: 0;
 }
 
 .post:hover {

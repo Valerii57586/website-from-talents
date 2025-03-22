@@ -41,9 +41,8 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
-    background-color: #ffffff80; /* Полупрозрачный белый фон */
+    background-color: #ffffff; /* Полупрозрачный белый фон */
     color: #b22222; /* Темно-красный текст */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
     height: 40px;
     width: 100%; /* Шапка растягивается на всю ширину */
     position: fixed; /* Фиксированная шапка */
@@ -174,19 +173,22 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: #f5f5f5;
     color: #8b0000;
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
+    position: relative; bottom: 31px;
 }
 
 .sidebar-button:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
+    position: relative; bottom: 31px;
+
 }
 
 .sidebar-button i {
@@ -201,6 +203,7 @@ a {
     color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
+    position: relative; left: 350px;
 }
 
 .site-logo i {
