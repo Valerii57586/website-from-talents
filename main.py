@@ -248,6 +248,8 @@ def main():
     if email:
         date = datetime.now().strftime("%d-%m-%y %H:%M")
         sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
+    else:
+        return redirect(url_for("register"))
     recommended_posts = AlgorithmTools.get_recommendations(email)[:5]
     current_online = len(active_users)
     try:
