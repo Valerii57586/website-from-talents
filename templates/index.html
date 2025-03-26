@@ -48,8 +48,6 @@
                     <i class="fas fa-star"></i> Recomendation
                 </a>
             </div>
-
-            <!-- Лента постов -->
             <div class="post-feed">
                 {% if posts %}
                     {% for post in posts %}
@@ -68,10 +66,9 @@
                                         <p class="date">{{ post[4] }}</p>
                                     </div>
                                 </div>
-<<<<<<< HEAD
-                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
                         </div>
-                    {% endif %}
                     {% for post in posts %}
                         {% if search_query.lower() in post[2].lower() or search_query.lower() in post[3].lower() or search_query.lower() in post[9].lower() or search_query.lower() in post[7].lower() %}
                             <div class="post" data-id="{{ post[0] }}" onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">
@@ -90,12 +87,8 @@
                                     </div>
                                 </div>
                             </div>
-=======
->>>>>>> e740dd3af6cf7754fd76afc29db57a39ac49e996
                         {% endif %}
                     {% endfor %}
-                {% else %}
-                    <p class="no-posts">No posts found.</p>
                 {% endif %}
             </div>
         </main>
