@@ -303,7 +303,23 @@ a {
     background-color: #f5f5f5;
     border-radius: 12px;
 }
-
+.rec-button-active {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8b0000;
+    color: #f5f5f5;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative; bottom: 51px; left:8px
+}
 .sidebar-button {
     display: flex;
     align-items: center;
@@ -322,14 +338,22 @@ a {
     position: relative; bottom: 51px; left:8px
 }
 
-.sidebar-button:hover {
+.sidebar-button:hover, .rec-button-active:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
     position: relative; bottom: 51px; left:8px
 
 }
+.rec-button-active:hover {
+    color: #8b0000;
+}
 
+.rec-button-active {
+    margin-right: 15px;
+    font-size: 16px;
+    color: #f5f5f5;
+}
 .sidebar-button i {
     margin-right: 15px;
     font-size: 16px;

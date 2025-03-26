@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit {{ post[1] }}</title>
+    <title>Edit {{ post[2] }}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='create_poster.css') }}">
 </head>
 <body>
@@ -11,7 +11,7 @@
         <form method="post">
             <div class="form-group">
                 <label>Title</label>
-                <input type="text" class="form-control" name="title" value="{{ post[1] }}" required>
+                <input type="text" class="form-control" name="title" value="{{ post[2] }}" required>
             </div>
             <select name="code-theme" id="code-theme-select">
                 <option value="">Select theme for code</option>
@@ -36,11 +36,34 @@
             </select>
             <div class="form-group">
                 <label>Tags</label>
-                <input type="text" class="form-control" name="tags" value="{{ post[4] }}" required>
+                <input type="text" class="form-control" name="tags" value="{{ post[9] }}" required>
             </div>
-            <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}">{{ post[2] }}</textarea>
+            <div class="con">
+                <input type="text" class="form-control" name="contributors" placeholder="Enter contributors usernames splitted with spaces">
+            </div>
+            <textarea id="markdown-editor" name="content" onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}">{{ post[3] }}</textarea>
             <button type="submit" class="publish-button">Publish</button>
         </form>
     </div>
 </body>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const contributorsInput = document.querySelector('input[name="contributors"]');
+        const datalist = document.createElement('datalist');
+        datalist.id = 'contributors-list';
+        contributorsInput.setAttribute('list', 'contributors-list');
+
+        fetch('/get_usernames')
+            .then(response => response.json())
+            .then(usernames => {
+                usernames.forEach(username => {
+                    const option = document.createElement('option');
+                    option.value = username;
+                    datalist.appendChild(option);
+                });
+            });
+
+        document.body.appendChild(datalist);
+    });
+</script>
 </html>

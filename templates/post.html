@@ -18,6 +18,9 @@
         <h2 class="post-title-opened">{{ post[2] }}</h2>
         <pre class="post-content-opened">{{ post[3]|safe }}</pre>
         <p class="post-author-opened">Author: {{ post[7] }}</p>
+        {% if contributors != "" %}
+            <p class="post-author-opened">Contributors: {{ contributors }}</p>
+        {% endif%}
         <p class="post-date-opened">Date: {{ post[4] }}</p>
         <div class="post-stats">
             <span class="veiws"> {{ veiw_count }} veiws </span>
