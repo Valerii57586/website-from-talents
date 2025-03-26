@@ -1,6 +1,6 @@
 body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
-    background-image: url('...plane.jpg'); /* надо указать ссылку */
+    background-image: url('https://1.downloader.disk.yandex.ru/preview/9f85b0cdbaeba5b538a18ca6ad1e4892414ac94acad5163727bcb7c735ae6c75/inf/P1Uu3IBvn2J_059WhlC9XydbkJ2sC_KEk2e_VtbYAOfuuRRO_ACnqYduWLfxvvz5VgHzs7xBXDvk4Qqe7B86gQ%3D%3D?uid=1068720061&filename=Горы.jpg&disposition=inline&hash=&limit=0&content_type=image%2Fjpeg&owner_uid=1068720061&tknv=v2&size=1903x956'); /* надо указать ссылку */
     background-size: cover; 
     background-position: center; 
     background-repeat: no-repeat; 

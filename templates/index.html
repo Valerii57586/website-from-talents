@@ -82,8 +82,10 @@
                                         <p class="tags">{{ post[9] }}</p>
                                     {% endif %}
                                     <p class="post-content">{{ post[3][:300].replace("**", "").replace("#", "").replace("```", "").replace("*", "").replace("~~", "").replace(">", "").replace(">>", "") }}</p>
-                                    <p class="post-author">By <a class="post-author-a" href="{{ url_for('profile', username=post[7]) }}"> {{ post[7] }} </a></p>
-                                    <p class="date">{{ post[4] }}</p>
+                                    <div class="post-meta">
+                                        <p class="post-author">By <a class="post-author-a" href="{{ url_for('profile', username=post[7]) }}"> {{ post[7] }} </a></p>
+                                        <p class="date">{{ post[4] }}</p>
+                                    </div>
                                 </div>
                             </div>
                         {% endif %}

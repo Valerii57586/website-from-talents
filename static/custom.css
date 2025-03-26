@@ -195,7 +195,7 @@ a {
     color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 350px;
+    position: relative; left:10px;
 }
 
 .site-logo i {
@@ -350,73 +350,113 @@ a {
 }
 
 /* Посты */
+/* Обновленные стили для карточки поста */
 .post {
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 94%; /* Установлена ширина на 100% */
-    cursor: pointer;
-    margin-top: 0;
+    padding: 20px;
+    background-color: white;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    width: 94%;
 }
 
 .post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.post-icon {
-    width: 100%;
-    height: 200px; /* Уменьшена высота иконки */
-    margin-bottom: 15px;
-    border-radius: 12px;
-    background-color: #8b0000;
+/* Заголовок поста */
+.post-title {
+    color: #8b0000;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Контент поста */
+.post-content {
+    font-size: 16px;
+    line-height: 1;
+    color: #444;
+    margin: 10px 0;
+    padding: 0;
+    white-space: pre-wrap;
+}
+
+/* Мета-информация (автор и дата) */
+.post-meta {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #777;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+    margin-bottom: 2px;
 }
 
-.post-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Уменьшено расстояние между элементами */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    max-width: 100%;
-}
-
-.post-title {
-    margin-top: 0;
-    color: #8b0000;
-    font-size: 16px; /* Увеличен размер заголовка */
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.post-category,
 .post-author {
-    text-decoration: none;
+    color: #b22222;
+    font-weight: 500;
 }
 
-.date {
-    color: #8b0000;
-    font-size: 12px; /* Уменьшен размер текста */
-    margin-bottom: 5px;
+.post-date {
+    color: #999;
 }
 
-.tags {
-    color: #666;
-    font-size: 12px; /* Уменьшен размер текста */
-    margin-bottom: 5px;
+/* Статистика поста (лайки, просмотры) */
+/* .post-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
 }
 
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #777;
+}
+
+.stat-item i {
+    color: #b22222;
+    font-size: 14px;
+}
+
+/* Комментарии */
+/* .post-comments {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.comment-count {
+    font-size: 14px;
+    color: #b22222;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+} */ 
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .post {
+        padding: 15px;
+    }
+    
+    .post-title {
+        font-size: 19px;
+    }
+    
+    .post-content {
+        font-size: 15px;
+    }
+}
 /* Надпись "No posts found" */
 .no-posts {
     position: absolute;
