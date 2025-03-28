@@ -1,7 +1,7 @@
 /* Я добавил попробовать если не понравится удаляй */
 .my-button {
     background: #b22222;
-    color: white;
+    color: #E0E0E0;
     border: none;
     padding: 10px 20px;
     border-radius: 6px;
@@ -11,7 +11,7 @@
 
 
 .post-card-opened {
-    background: rgba(39, 39, 39, 0.849);
+    background: #E0E0E0;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -158,11 +158,12 @@
 
 /* Основные стили */
 body {
+    overflow: hidden;
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #333030; /* Светлый фон */
-    color: #333; /* Основной цвет текста */
+    background-color: #121212; /* Светлый фон */
+    color: #E0E0E0; /* Основной цвет текста */
     line-height: 1.6;
     /* overflow: hidden; */
 }
@@ -184,23 +185,23 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
-    background-color: #ffffff80; /* Темно-красный цвет для шапки */
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
+    background-color: #252525; /* Темно-красный цвет для шапки */
     color: #b22222; /* Белый текст */
     height: 40px;
 }
 
 .site-logo {
-    font-size: 15px;
+    font-size: 22px;
     font-weight: bold;
     color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
+    position: relative; left:10px;
 }
 
 .site-logo i {
     margin-right: 10px;
-    font-size: 17px;
+    font-size: 24px;
 }
 
 .online-status {
@@ -227,7 +228,7 @@ a {
     background-color: #b22222; /* Красивый насыщенный красный */
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
-    color: white; /* Белый текст */
+    color: #e0e0e0; /* Белый текст */
     font-size: 10px; /* Немного уменьшаем размер шрифта */
     font-weight: bold; /* Делаем текст жирнее */
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
@@ -252,28 +253,27 @@ a {
     align-items: center;
     justify-content: center;
     gap: 8px; /* Добавляет расстояние между инпутом и кнопкой */
+    position: relative; left:90px;
 }
 
 .search-bar input {
     flex: 1;
-    padding: 10px;
-    border: 1px solid #ccc;
+    padding: 6px;
+    border: 1px solid #E0E0E0;
     border-radius: 5px;
-    font-size: 14px;
+    font-size: 12px;
     width: 200px; /* Можно изменить ширину */
-    position: relative; bottom:20px;
 }
 
 .search-bar button {
-    padding: 10px 15px;
+    padding: 6px 11px;
     background-color: #8b0000;
     border: none;
-    color: #fff;
-    font-size: 14px;
+    color: #E0E0E0;
+    font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Чтобы текст не переносился */
-    position: relative; bottom:20px;
 }
 
 .search-bar button:hover {
@@ -285,12 +285,15 @@ a {
 .main-content {
     display: flex;
     flex-grow: 1;
-    padding: 20px;
-    background-color: #f5f5f5;
+    background-color: #121212;
     max-width: 1200px;
-    margin: 40px auto;
+    height: 100vh;
+    padding: 20px;
+    margin: 30px auto;
     width: 100%;
-    gap: 30px; /* Увеличено расстояние между элементами */
+    gap: 20px; /* Увеличено расстояние между элементами */
+    margin-top: 20px;
+    margin-bottom: 0;
 }
 
 /* Боковая панель */
@@ -298,10 +301,26 @@ a {
     width: 200px;
     min-width: 200px;
     padding: 20px 10px;
-    background-color: #f5f5f5;
+    background-color: #121212;
     border-radius: 12px;
 }
-
+.rec-button-active {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: #8b0000;
+    color: #E0E0E0;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    text-decoration: none;
+    color: inherit;
+    position: relative; bottom: 51px; left:8px
+}
 .sidebar-button {
     display: flex;
     align-items: center;
@@ -310,24 +329,32 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #ffffff;
+    background-color: #121212;
     color: #8b0000;
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
-    position: relative; bottom: 40px;
+    position: relative; bottom: 51px; left:8px
 }
 
-.sidebar-button:hover {
-    background-color: #ffebee;
+.sidebar-button:hover, .rec-button-active:hover {
+    background-color: #121212;
     transform: translateX(5px);
     text-decoration: none;
-    position: relative; bottom: 40px;
+    position: relative; bottom: 51px; left:8px
 
 }
+.rec-button-active:hover {
+    color: #8b0000;
+}
 
+.rec-button-active {
+    margin-right: 15px;
+    font-size: 16px;
+    color: #E0E0E0;
+}
 .sidebar-button i {
     margin-right: 15px;
     font-size: 16px;
@@ -335,135 +362,140 @@ a {
 }
 
 /* Лента постов */
+
+.post-feed::-webkit-scrollbar {
+    width: 0;
+  }
+
 .post-feed {
     flex-grow: 1;
     padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 12px;
-    overflow-y: auto;
-    max-height: calc(100vh - 120px);
-    position: relative; bottom: 20px;
+    background-color: #121212;
+    overflow: scroll;
+    max-height:100vh;
+    position: relative; bottom: 40px;
     display: flex;
     flex-direction: column;
     gap: 30px; /* Увеличено расстояние между постами */
 }
 
 /* Посты */
+/* Обновленные стили для карточки поста */
 .post {
     display: flex;
     flex-direction: column;
-    padding: 15px;
-    background-color: #f9f9f9;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    width: 94%; /* Установлена ширина на 100% */
-    cursor: pointer;
+    padding: 20px;
+    background-color: #252525;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    width: 94%;
 }
 
 .post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
-.post-icon {
-    width: 100%;
-    height: 200px; /* Уменьшена высота иконки */
-    margin-bottom: 15px;
-    border-radius: 12px;
-    background-color: #8b0000;
+/* Заголовок поста */
+.post-title {
+    color: #8b0000;
+    font-size: 22px;
+    margin: 0 0 10px 0;
+    font-weight: 600;
+    line-height: 1;
+}
+
+/* Контент поста */
+.post-content {
+    font-size: 16px;
+    line-height: 1;
+    color: #E0E0E0;
+    margin: 10px 0;
+    padding: 0;
+    white-space: pre-wrap;
+}
+
+/* Мета-информация (автор и дата) */
+.post-meta {
     display: flex;
     align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 24px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    justify-content: space-between;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #E0E0E0;
+    border-top: 1px solid #f0f0f0;
+    padding-top: 10px;
+    margin-bottom: 2px;
 }
 
-.post-content {
-    display: flex;
-    flex-direction: column;
-    gap: 10px; /* Уменьшено расстояние между элементами */
-    word-wrap: break-word;
-    overflow-wrap: break-word;
-    white-space: pre-wrap;
-    max-width: 100%;
-}
-
-.post-title {
-    margin-top: 0;
-    color: #8b0000;
-    font-size: 16px; /* Увеличен размер заголовка */
-    margin-bottom: 5px;
-    font-weight: bold;
-}
-
-.post-category,
 .post-author {
-    text-decoration: none;
+    color: #b22222;
+    font-weight: 500;
 }
 
-.date {
-    color: #8b0000;
-    font-size: 12px; /* Уменьшен размер текста */
-    margin-bottom: 5px;
+.post-date {
+    color: #b8b3b3;
 }
 
-.tags {
-    color: #666;
-    font-size: 12px; /* Уменьшен размер текста */
-    margin-bottom: 5px;
+.post:nth-child(even) { 
+    display: none; 
+  }
+/* Статистика поста (лайки, просмотры) */
+/* .post-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 10px;
 }
 
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 13px;
+    color: #777;
+}
+
+.stat-item i {
+    color: #b22222;
+    font-size: 14px;
+}
+
+/* Комментарии */
+/* .post-comments {
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #f0f0f0;
+}
+
+.comment-count {
+    font-size: 14px;
+    color: #b22222;
+    font-weight: 500;
+    margin-bottom: 10px;
+    display: block;
+} */ 
+
+/* Адаптация для мобильных */
+@media (max-width: 768px) {
+    .post {
+        padding: 15px;
+    }
+    
+    .post-title {
+        font-size: 19px;
+    }
+    
+    .post-content {
+        font-size: 15px;
+    }
+}
 /* Надпись "No posts found" */
 .no-posts {
     position: absolute;
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: #666;
+    color: #E0E0E0;
     font-size: 16px;
-}
-
-/* Выбор категории (справа) */
-.category-sidebar {
-    width: 250px;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.category-sidebar h4 {
-    margin-top: 0;
-    color: #8b0000;
-    font-size: 18px;
-    margin-bottom: 15px;
-}
-
-.category-sidebar select {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    background-color: #fff;
-    color: #8b0000;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-
-.category-sidebar select:hover {
-    background-color: #8b0000;
-    color: #fff;
-}
-
-/* Футер */
-.footer {
-    text-align: center;
-    padding: 10px;
-    background-color: #8b0000;
-    color: #fff;
-    font-size: 12px;
-    box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
