@@ -39,19 +39,23 @@
                     <i class="fas fa-user"></i> Profile
                 </a>
                 <a href="{{ url_for('main') }}" class="sidebar-button">
-                    <i class="fas fa-globe"></i> Posts
+                    <i class="fas fa-globe"></i> Post feed
                 </a>
                 <a href="{{ url_for('create_post') }}" class="sidebar-button">
                     <i class="fas fa-plus"></i> Create post
                 </a>
                 <a href="{{ url_for('recomendations') }}" class="sidebar-button">
-                    <i class="fas fa-star"></i> Recomendation
+                    <i class="fas fa-star"></i> My Subscriptions
                 </a>
             </div>
+
+            <!-- Лента постов -->
             <div class="post-feed">
                 {% if posts %}
-                    {% for post in posts %}
-                        {% if search_query.lower() in post[2].lower() or search_query.lower() in post[9].lower() or search_query.lower() in post[7].lower() %}
+                    {% if recommended_posts %}
+                        <div class="recommendations">
+                            <h3>Subscriptions</h3>
+                            {% for post in recommended_posts %}
                                 <div class="post" data-id="{{ post[0] }}" onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">
                                     <div class="post-icon">
                                         <i class="fas fa-user"></i>
@@ -66,9 +70,9 @@
                                         <p class="date">{{ post[4] }}</p>
                                     </div>
                                 </div>
-                        {% endif %}
-                    {% endfor %}
+                            {% endfor %}
                         </div>
+                    {% endif %}
                     {% for post in posts %}
                         {% if search_query.lower() in post[2].lower() or search_query.lower() in post[3].lower() or search_query.lower() in post[9].lower() or search_query.lower() in post[7].lower() %}
                             <div class="post" data-id="{{ post[0] }}" onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">
@@ -89,6 +93,8 @@
                             </div>
                         {% endif %}
                     {% endfor %}
+                {% else %}
+                    <p class="no-posts">No posts found.</p>
                 {% endif %}
             </div>
         </main>

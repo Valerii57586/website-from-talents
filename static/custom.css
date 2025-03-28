@@ -432,6 +432,9 @@ a {
     color: #999;
 }
 
+.post:nth-child(even) { 
+    display: none; 
+  }
 /* Статистика поста (лайки, просмотры) */
 /* .post-stats {
     display: flex;
