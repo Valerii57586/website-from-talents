@@ -285,7 +285,7 @@ a {
 }
 
 .edit-button {
-    padding: 10px 20px; /* Делаем кнопку компактнее */
+    padding: 10px 10px; /* Делаем кнопку компактнее */
     background-color: #b22222; /* Красивый насыщенный красный */
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
@@ -331,7 +331,7 @@ a {
                 <a href="{{ url_for('create_post') }}" class="sidebar-button">
                     <i class="fas fa-plus"></i> Create post
                 </a>
-                <a href="{{ url_for('recomendations') }}" class="sidebar-button">
+                <a href="{{ url_for('my_subscriptions') }}" class="sidebar-button">
                     <i class="fas fa-star"></i> My Subscriptions
                 </a>
             </div>
@@ -348,7 +348,11 @@ a {
                 </div>
             </div>
             <div class="profile-content">
-                <a href="{{ url_for('porfile_edit', username=username) }}" class="edit-button"><i class="fas fa-pen"></i></a>
+                {% if username == current_user[1] %}
+                    <a href="{{ url_for('porfile_edit', username=username) }}" class="edit-button"><i class="fas fa-pen"></i></a>
+                {% else %}
+                    <a href="{{ url_for('save_author', username=username) }}" class="edit-button"><i class="fas fa-check"></i></a>
+                {% endif %}
                 <div class="profile-section">
                     <h2>About me</h2>
                     <p>{{ about }}</p>

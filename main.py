@@ -33,7 +33,8 @@ sq.create_table(dbname="data.db", table_name="users", columns=[
     ("favorites", "TEXT DEFAULT ''"),
     ("last_seen", "TEXT DEFAULT ''"),
     ("comments_on_wall", "TEXT DEFAULT ''"),
-    ("raiting", "INTEGER DEFAULT 0")])
+    ("raiting", "INTEGER DEFAULT 0"),
+    ("saved_authors", "TEXT DEFAULT ''")])
 
 
 sq.create_table(dbname="data.db", table_name="posts", columns=[
@@ -68,6 +69,29 @@ sq.create_table(dbname="data.db", table_name="replys", columns=[
 
 active_users = set()
 
+
+@app.route("/my_subscriptions")
+def my_subscriptions():
+    email = session.get("email")
+    if email is None:
+        return redirect(url_for("register"))
+    userdata = sq.get_column_value_by_name("users", "*", ("email", email), "data.db")[0]
+    userdata = list(userdata)
+    subscriptions = userdata[16].split()
+    posts = sq.get_column_value_by_name("posts", "*", (1, 1), "data.db")
+    print(subscriptions)
+    return render_template("recomendations.html", userdata=userdata, posts=posts, subscriptions=subscriptions)
+
+
+
+@app.route("/save_author/<username>")
+def save_author(username):
+    email = session.get("email")
+    if email is None:
+        return redirect(url_for("register"))
+    if username not in sq.get_column_value_by_name("users", "saved_authors", ("email", email), "data.db")[0][0]:
+        sq.update_column_value("users", {"saved_authors": sq.get_column_value_by_name("users", "saved_authors", ("email", email), "data.db")[0][0] + " " + username}, ("email", email), "data.db")
+    return redirect(url_for("profile", username=username))
 
 @app.route("/recomendations")
 def recomendations():
@@ -155,6 +179,7 @@ def reply(comment_id, post_id):
 def profile(username):
     current_online = len(active_users)
     email = session.get("email")
+    current_user = sq.get_column_value_by_name("users", "*", ("email", email), "data.db")[0]
     userdata = sq.get_column_value_by_name("users", "*", ("username", username), "data.db")[0]
     username = userdata[1]
     password = userdata[2]
@@ -172,7 +197,7 @@ def profile(username):
     last_seen = userdata[13]
     comments_on_wall = userdata[14]
     raiting = userdata[15]
-    return render_template("profile.html", username=username, name=name, surname=surname, avatar=avatar, header_photo=header_photo, current_online=current_online, about=about, status=status, posts=posts, git_link=git_link, other_links=other_links, raiting=raiting)
+    return render_template("profile.html", current_user=current_user, username=username, name=name, surname=surname, avatar=avatar, header_photo=header_photo, current_online=current_online, about=about, status=status, posts=posts, git_link=git_link, other_links=other_links, raiting=raiting)
 
 
 @app.route("/edit/<int:id>", methods=["GET", "POST"])
