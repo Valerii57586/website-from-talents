@@ -22,6 +22,11 @@
                     <button type="submit" class="search-button">Search</button>
                 </form>
             </div>
+            <div class="theme-toggle">
+                <button id="theme-switch" class="theme-button">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
             <div class="auth-buttons">
                 {% if username %}
                     <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
@@ -99,5 +104,31 @@
             </div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+        const themeSwitch = document.getElementById('theme-switch');
+        const themeIcon = themeSwitch.querySelector('i');
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+        applyTheme(currentTheme);
+
+        themeSwitch.addEventListener('click', function() {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('theme', currentTheme);
+            applyTheme(currentTheme);
+        });
+
+        function applyTheme(theme) {
+            const cssLink = document.querySelector('link[rel="stylesheet"]');
+
+            if (theme === 'dark') {
+                cssLink.href = "{{ url_for('static', filename='dark_custom.css') }}";
+                themeIcon.className = 'fas fa-sun';
+            } else {
+                cssLink.href = "{{ url_for('static', filename='custom.css') }}";
+                themeIcon.className = 'fas fa-moon';
+            }
+        }
+    });
+    </script>
 </body>
 </html>
