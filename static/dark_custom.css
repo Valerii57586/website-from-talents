@@ -1,6 +1,6 @@
 /* Я добавил попробовать если не понравится удаляй */
 .my-button {
-    background: #b22222;
+    background: #C5A42A;
     color: #E0E0E0;
     border: none;
     padding: 10px 20px;
@@ -41,7 +41,7 @@
 }
 
 .post-author-opened, .post-date-opened {
-    color: #b22222;
+    color: #C5A42A;
     font-size: 14px;
     margin: 5px 0;
 }
@@ -51,7 +51,7 @@
     padding: 10px;
     background: #ffebee;
     border-radius: 8px;
-    color: #8b0000;
+    color: #C5A42A;
 }
 
 .post-comments {
@@ -65,7 +65,7 @@
     padding: 15px;
     border-radius: 8px;
     margin: 10px 0;
-    border-left: 3px solid #b22222;
+    border-left: 3px solid #C5A42A;
 }
 
 .comment-form {
@@ -83,7 +83,7 @@
 }
 
 .comment-button {
-    background: #b22222;
+    background: #C5A42A;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -93,11 +93,11 @@
 }
 
 .comment-button:hover {
-    background: #8b0000;
+    background: #C5A42A;
 }
 
 .comment-author {
-    color: #b22222;
+    color: #C5A42A;
     font-weight: bold;
     margin-bottom: 5px;
 }
@@ -121,7 +121,7 @@
     border-radius: 8px;
 }
 .reply-button {
-    background: #b22222;
+    background: #C5A42A;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -186,27 +186,50 @@ a {
     align-items: center;
     padding: 0px 30px;
     background-color: #252525; /* Темно-красный цвет для шапки */
-    color: #b22222; /* Белый текст */
+    color: #C5A42A; /* Белый текст */
     height: 40px;
 }
 
 .site-logo {
     font-size: 22px;
     font-weight: bold;
-    color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
     position: relative; left:10px;
+    background: linear-gradient(135deg, #D4AF37, #FFD700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
+
+/* .site-logo::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 30%;
+    background: linear-gradient(180deg, 
+        rgba(255, 255, 255, 0.7) 0%, 
+        rgba(255, 255, 255, 0) 100%
+    );
+    border-radius: 50% 50% 0 0;
+} */
 
 .site-logo i {
     margin-right: 10px;
     font-size: 24px;
+    background: linear-gradient(135deg, #D4AF37, #FFD700);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
 }
+
 
 .online-status {
     font-size: 16px;
-    color: #b22222; /* Белый текст */
+    color: #C5A42A; /* Белый текст */
     display: flex;
     align-items: center;
     position: relative; left: 55px;
@@ -224,22 +247,25 @@ a {
 
 /* Кнопки авторизации */
 .auth-buttons .action-button {
-    padding: 6px 16px; /* Делаем кнопку компактнее */
-    background-color: #b22222; /* Красивый насыщенный красный */
-    border: none; /* Убираем стандартные границы */
+    padding: 3.5px 12px; /* Делаем кнопку компактнее */
     border-radius: 6px; /* Закругляем углы */
     color: #e0e0e0; /* Белый текст */
-    font-size: 10px; /* Немного уменьшаем размер шрифта */
-    font-weight: bold; /* Делаем текст жирнее */
+    font-size: 12px; /* Немного уменьшаем размер шрифта */
+    font-weight: normal; /* Делаем текст жирнее */
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
     margin: 20px 0; /* Отступы сверху и снизу */
-}
-
+    background-color: #C5A42A;
+    color: #FFF;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #C5A42A
+    }
+    
+/* Эффект при наведении */
 .auth-buttons .action-button:hover {
-    background-color: #8b0000; /* Темнее при наведении */
-    transform: scale(1.05); /* Немного увеличивается */
+    transform: scale(1.01); /* Немного увеличивается */
     text-decoration: none;
 }
 
@@ -249,6 +275,7 @@ a {
 }
 
 .search-bar {
+    color: #121212;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -257,9 +284,10 @@ a {
 }
 
 .search-bar input {
+    background-color: #121212;
     flex: 1;
     padding: 6px;
-    border: 1px solid #E0E0E0;
+    border: 1px solid #121212;
     border-radius: 5px;
     font-size: 12px;
     width: 200px; /* Можно изменить ширину */
@@ -267,17 +295,21 @@ a {
 
 .search-bar button {
     padding: 6px 11px;
-    background-color: #8b0000;
-    border: none;
     color: #E0E0E0;
     font-size: 12px;
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Чтобы текст не переносился */
+    background-color:#C5A42A;
+    color: #FFF;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #C5A42A
 }
 
 .search-bar button:hover {
-    background-color: #b22222;
+    transform: scale(1.01); /* Немного увеличивается */
+    text-decoration: none;
 }
 
 
@@ -312,7 +344,7 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #8b0000;
+    background-color: #C5A42A;
     color: #E0E0E0;
     cursor: pointer;
     font-size: 18px;
@@ -330,7 +362,7 @@ a {
     border: none;
     border-radius: 8px;
     background-color: #121212;
-    color: #8b0000;
+    color: #C5A42A;
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -347,7 +379,7 @@ a {
 
 }
 .rec-button-active:hover {
-    color: #8b0000;
+    color: #C5A42A;
 }
 
 .rec-button-active {
@@ -358,7 +390,7 @@ a {
 .sidebar-button i {
     margin-right: 15px;
     font-size: 16px;
-    color: #8b0000;
+    color: #C5A42A;
 }
 
 /* Лента постов */
@@ -399,7 +431,7 @@ a {
 
 /* Заголовок поста */
 .post-title {
-    color: #8b0000;
+    color: #C5A42A;
     font-size: 22px;
     margin: 0 0 10px 0;
     font-weight: 600;
@@ -430,7 +462,7 @@ a {
 }
 
 .post-author {
-    color: #b22222;
+    color: #C5A42A;
     font-weight: 500;
 }
 
