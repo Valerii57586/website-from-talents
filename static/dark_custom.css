@@ -1,6 +1,6 @@
 /* Я добавил попробовать если не понравится удаляй */
 .my-button {
-    background: #8A2BE2;
+    background: #ff4d4d;
     color: #E0E0E0;
     border: none;
     padding: 10px 20px;
@@ -41,7 +41,7 @@
 }
 
 .post-author-opened, .post-date-opened {
-    color: #8A2BE2;
+    color: #ff4d4d;
     font-size: 14px;
     margin: 5px 0;
 }
@@ -51,7 +51,7 @@
     padding: 10px;
     background: #ffebee;
     border-radius: 8px;
-    color: #8A2BE2;
+    color: #ff4d4d;
 }
 
 .post-comments {
@@ -65,7 +65,7 @@
     padding: 15px;
     border-radius: 8px;
     margin: 10px 0;
-    border-left: 3px solid #8A2BE2;
+    border-left: 3px solid #ff4d4d;
 }
 
 .comment-form {
@@ -83,7 +83,7 @@
 }
 
 .comment-button {
-    background: #8A2BE2;
+    background: #ff4d4d;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -93,11 +93,11 @@
 }
 
 .comment-button:hover {
-    background: #8A2BE2;
+    background: #ff4d4d;
 }
 
 .comment-author {
-    color: #8A2BE2;
+    color: #ff4d4d;
     font-weight: bold;
     margin-bottom: 5px;
 }
@@ -121,7 +121,7 @@
     border-radius: 8px;
 }
 .reply-button {
-    background: #8A2BE2;
+    background: #ff4d4d;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -186,7 +186,7 @@ a {
     align-items: center;
     padding: 0px 30px;
     background-color: #252525; /* Темно-красный цвет для шапки */
-    color: #8A2BE2; /* Белый текст */
+    color: #ff4d4d; /* Белый текст */
     height: 40px;
 }
 
@@ -196,7 +196,7 @@ a {
     display: flex;
     align-items: center;
     position: relative; left:10px;
-    background-color: #8A2BE2;
+    background-color: #ff4d4d;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -219,7 +219,7 @@ a {
 .site-logo i {
     margin-right: 10px;
     font-size: 24px;
-    background-color: #8A2BE2;
+    background-color: #ff4d4d;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -229,7 +229,7 @@ a {
 
 .online-status {
     font-size: 16px;
-    color: #8A2BE2; /* Белый текст */
+    color: #ff4d4d; /* Белый текст */
     display: flex;
     align-items: center;
     position: relative; left: 55px;
@@ -256,11 +256,11 @@ a {
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
     margin: 20px 0; /* Отступы сверху и снизу */
-    background-color: #8A2BE2;
+    background-color: #ff4d4d;
     color: #FFF;
     position: relative;
     overflow: hidden;
-    border: 1px solid #8A2BE2
+    border: 1px solid #ff4d4d
     }
 
 /* Эффект при наведении */
@@ -301,11 +301,11 @@ a {
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Чтобы текст не переносился */
-    background-color:#8A2BE2;
+    background-color:#ff4d4d;
     color: #FFF;
     position: relative;
     overflow: hidden;
-    border: 1px solid #8A2BE2
+    border: 1px solid #ff4d4d
 }
 .theme-toggle {
     margin-left: 15px;
@@ -314,7 +314,7 @@ a {
 .theme-button {
     background: none;
     border: none;
-    color: #8A2BE2;
+    color: #ff4d4d;
     font-size: 18px;
     cursor: pointer;
     padding: 5px 10px;
@@ -410,7 +410,7 @@ a {
 .sidebar-button i {
     margin-right: 15px;
     font-size: 16px;
-    color: #8A2BE2;
+    color: #ff4d4d;
 }
 
 /* Лента постов */
@@ -451,7 +451,7 @@ a {
 
 /* Заголовок поста */
 .post-title {
-    color: #8A2BE2;
+    color: #ff4d4d;
     font-size: 22px;
     margin: 0 0 10px 0;
     font-weight: 600;

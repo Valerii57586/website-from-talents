@@ -1,5 +1,5 @@
 body {
-    font-family: 'Arial', sans-serif;
+    font-family: 'Roboto', sans-serif;
     background: #f5f5f5;
     color: #333;
     margin: 0;
@@ -30,8 +30,9 @@ a {
     justify-content: space-between;
     align-items: center;
     padding: 0px 30px;
-    background-color: #ffffff; /* Полупрозрачный белый фон */
+    background-color: #ffffff80; /* Полупрозрачный белый фон */
     color: #b22222; /* Темно-красный текст */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Тень для глубины */
     height: 40px;
     width: 100%; /* Шапка растягивается на всю ширину */
     position: fixed; /* Фиксированная шапка */
@@ -92,6 +93,9 @@ a {
 
 .profile-social {
     margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .social-link {
@@ -162,22 +166,21 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #f5f5f5;
+    background-color: #ffffff;
     color: #8b0000;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 17px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
-    position: relative; bottom: 31px;
+    position: relative; bottom: 20px;
 }
 
 .sidebar-button:hover {
     background-color: #ffebee;
     transform: translateX(5px);
     text-decoration: none;
-    position: relative; bottom: 31px;
-
+    position: relative; bottom: 20px;
 }
 
 .sidebar-button i {
@@ -187,17 +190,16 @@ a {
 }
 
 .site-logo {
-    font-size: 22px;
+    font-size: 15px;
     font-weight: bold;
     color: #8B0000; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 10px;
 }
 
 .site-logo i {
     margin-right: 10px;
-    font-size: 24px;
+    font-size: 17px;
 }
 
 .current-user {
@@ -205,7 +207,7 @@ a {
     color: #8B0000; /* Белый текст */
     align-items: center;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 20px;
 }
 
 .online-status {
@@ -213,9 +215,40 @@ a {
     color: #b22222; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 40px;
+    position: relative; left: 50px;
 }
-
+.my-input:focus {
+    outline: none;
+}
+.my-input {
+    justify-content: center;
+    align-items: center;
+    color: white;
+    width: 40%;
+    background-color: transparent;
+    padding: 10px;
+    border: 0px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    resize: vertical;
+    min-height: 10px;
+    font-size: 30px;
+    text-align: center;
+}
+.my-input-white {
+    justify-content: center;
+    align-items: center;
+    color: #b22222;
+    width: 40%;
+    background-color: transparent;
+    padding: 10px;
+    border: 0px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    resize: vertical;
+    min-height: 10px;
+    font-size: 20px;
+}
 .online-status i {
     margin-right: 8px;
     font-size: 14px;
@@ -251,12 +284,12 @@ a {
     border-radius: 6px; /* Закругляем углы */
     color: white; /* Белый текст */
     font-size: 10px; /* Немного уменьшаем размер шрифта */
-    font-weight: bold; /* Делаем так, чтобы было понятно, что это кнопка */
-    cursor: pointer;
+    font-weight: bold; /* Делаем текст жирнее */
+    cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
     margin: 20px 0; /* Отступы сверху и снизу */
-    position: relative; right:30px;
+    position: relative; right:10px;
     margin-right: 30px;
 }
 
@@ -264,17 +297,16 @@ a {
     background-color: #8b0000; /* Темнее при наведении */
     transform: scale(1.05); /* Немного увеличивается */
     text-decoration: none;
-    position: relative; right: 30px;
+    position: relative; right:10px
 }
 
 .logout-button:active {
     transform: scale(0.95); /* Немного уменьшается при нажатии */
     text-decoration: none;
-    position: relative; right: 30px;
+    position: relative; right:10px
 }
-
 .edit-button {
-    padding: 10px 10px; /* Делаем кнопку компактнее */
+    padding: 10px 20px; /* Делаем кнопку компактнее */
     background-color: #b22222; /* Красивый насыщенный красный */
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
@@ -286,4 +318,24 @@ a {
     text-decoration: none;
     margin-top: 10px;
     position: relative; left:700px;
+}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.my-but {
+    margin-left: 80px;
+    width: 80%;
+    padding: 10px;
+    background-color: #b22222; /* Красивый насыщенный красный */
+    border: none; /* Убираем стандартные границы */
+    border-radius: 6px; /* Закругляем углы */
+    color: white; /* Белый текст */
+    font-size: 20px; /* Немного уменьшаем размер шрифта */
+    font-weight: bold; /* Делаем текст жирнее */
+    cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
+    transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
+    text-decoration: none;
 }

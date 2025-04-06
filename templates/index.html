@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scorpio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='dark_custom.css') }}"> <!--надо еще допиливать чернуху, но основа есть -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark_custom.css') }}" id="theme-stylesheet"> <!--надо еще допиливать чернуху, но основа есть -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
@@ -106,29 +106,29 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-        const themeSwitch = document.getElementById('theme-switch');
-        const themeIcon = themeSwitch.querySelector('i');
-        let currentTheme = localStorage.getItem('theme') || 'dark';
-        applyTheme(currentTheme);
-
-        themeSwitch.addEventListener('click', function() {
-            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            localStorage.setItem('theme', currentTheme);
+            const themeSwitch = document.getElementById('theme-switch');
+            const themeIcon = themeSwitch.querySelector('i');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
             applyTheme(currentTheme);
-        });
 
-        function applyTheme(theme) {
-            const cssLink = document.querySelector('link[rel="stylesheet"]');
+            themeSwitch.addEventListener('click', function() {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+            });
 
-            if (theme === 'dark') {
-                cssLink.href = "{{ url_for('static', filename='dark_custom.css') }}";
-                themeIcon.className = 'fas fa-sun';
-            } else {
-                cssLink.href = "{{ url_for('static', filename='custom.css') }}";
-                themeIcon.className = 'fas fa-moon';
+            function applyTheme(theme) {
+                const cssLink = document.getElementById('theme-stylesheet');
+
+                if (theme === 'dark') {
+                    cssLink.href = "{{ url_for('static', filename='dark_custom.css') }}";
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    cssLink.href = "{{ url_for('static', filename='custom.css') }}";
+                    themeIcon.className = 'fas fa-moon';
+                }
             }
-        }
-    });
+        });
     </script>
 </body>
 </html>

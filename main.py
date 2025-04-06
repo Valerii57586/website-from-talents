@@ -83,7 +83,6 @@ def my_subscriptions():
     return render_template("recomendations.html", userdata=userdata, posts=posts, subscriptions=subscriptions)
 
 
-
 @app.route("/save_author/<username>")
 def save_author(username):
     email = session.get("email")
@@ -92,6 +91,7 @@ def save_author(username):
     if username not in sq.get_column_value_by_name("users", "saved_authors", ("email", email), "data.db")[0][0]:
         sq.update_column_value("users", {"saved_authors": sq.get_column_value_by_name("users", "saved_authors", ("email", email), "data.db")[0][0] + " " + username}, ("email", email), "data.db")
     return redirect(url_for("profile", username=username))
+
 
 @app.route("/recomendations")
 def recomendations():
