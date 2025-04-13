@@ -1,172 +1,358 @@
-body {
-    font-family: 'Arial', sans-serif; /* Надо указать ссылку */
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+:root {
+    --primary: #980000;
+    --primary-light: #d33f3f;
+    --secondary: #5d0404;
+    --dark: #1b263b;
+    --light: #f8f9fa;
+    --success: #f04c4c;
+    --danger: #f72585;
+    --border-radius: 18px;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    --specialy_shadow: 0 8px 20px rgba(0,0,0,0.1);
+    --transition: all 0.3s ease;
+}
+
+* {
     margin: 0;
-    color: #333;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #ffffff;
+    color: #000;
+    line-height: 1.6;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    background-color: #f7f6f6; /* Темно-красный цвет для шапки */
+    color: #8b0000; /* Белый текст */
+    height: 40px;
+}
+
+.site-logo {
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    position: relative; left:10px;
+    background-color:#8b0000 ;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+}
+
+.site-logo i {
+    margin-right: 10px;
+    font-size: 24px;
+    background-color:#8b0000;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Кнопки авторизации */
+.auth-buttons .action-button {
+    padding: 3.5px 12px; /* Делаем кнопку компактнее */
+    border-radius: 6px; /* Закругляем углы */
+    color: #e0e0e0; /* Белый текст */
+    font-size: 12px; /* Немного уменьшаем размер шрифта */
+    font-weight: normal; /* Делаем текст жирнее */
+    cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
+    transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
+    text-decoration: none;
+    margin: 20px 0; /* Отступы сверху и снизу */
+    background-color: #8b0000;
+    color: #FFF;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #8b0000
+    }
+
+/* Эффект при наведении */
+.auth-buttons .action-button:hover {
+    transform: scale(1.01); /* Немного увеличивается */
+    text-decoration: none;
+}
+
+.logout-button:active {
+    transform: scale(0.95); /* Немного уменьшается при нажатии */
+    text-decoration: none;
 }
 
 .container {
-    width: 90%;
     max-width: 800px;
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    margin: 40px auto;
+    padding: 0 20px;
+    border-radius: 13px;
+}
+
+form {
+    background: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--specialy_shadow);
+    padding: 32px;
+    transition: var(--transition);
 }
 
 .title {
-    margin-bottom: 20px;
-    position: relative; right: 11.5px
+    text-align: center;
+    margin-bottom: 32px;
 }
 
-.category {
-    margin-bottom: 20px;
+.title h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #5c5c5c;
+    margin-bottom: 8px;
 }
 
-.tags {
-    margin-bottom: 20px;
-    position: relative; right: 11.5px
+.title p {
+    color: #838383;
+    font-size: 15px;
+    margin-bottom: 16px;
 }
 
-.con{
-    position:relative;right: 11.5px;
+.category, .tags, .con, .image-upload-container {
+    margin-bottom: 24px;
 }
 
-.publish-window {
-    margin-bottom: 20px;
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #f8f7f7;
+    color: #5c5c5c;
+    margin-top: 8px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #f8f7f7;
+}
+
+#markdown-editor {
+    width: 100%;
+    min-height: 400px;
+    padding: 16px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    background-color: #f8f7f7;
+    color: #5c5c5c;
+    margin-bottom: 24px;
+}
+
+#markdown-editor:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #f8f7f7;
+}
+
+.publish-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    background-color: var(--primary);
+    color: #ffffff;
+    width: 100%;
+}
+
+.publish-button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.publish-button i {
+    margin-right: 8px;
 }
 
 label {
     display: block;
     margin-bottom: 8px;
-    font-weight: bold;
-    color: #555;
-    position: relative; left: 400px
-}
-
-.category-label {
-    position: relative; bottom:30px; left:67px
-}
-
-input[type="text"], select, textarea {
-    width: 100%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    font-size: 16px;
-    transition: border-color 0.3s ease;
-}
-
-input[type="text"]:focus, select:focus, textarea:focus {
-    border-color: #8b0000;
-    outline: none;
+    font-weight: 600;
+    color: #5c5c5c;
+    font-size: 15px;
 }
 
 select {
-    appearance: none;
-    background-color: #fff;
-    cursor: pointer;
-}
-
-textarea {
-    resize: none;
-    height: 300px;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: 14px;
-    line-height: 1.5;
-}
-
-.publish-button {
     width: 100%;
-    padding: 15px;
-    background-color: #931f1d;
-    color: #fff;
-    border: none;
+    padding: 14px 16px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #f8f7f7;
+    color: #5c5c5c;
+    margin-top: 8px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #f8f7f7;
+}
+
+.character-counter {
+    text-align: right;
+    font-size: 13px;
+    color: #878787;
+    margin-top: 4px;
+}
+
+.image-uploader {
+    border: 2px dashed #555;
+    border-radius: var(--border-radius);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 16px;
+    background-color: #f8f7f7;
+}
+
+.image-uploader:hover {
+    border-color: var(--primary-light);
+    background-color: #f8f7f7;
+}
+
+.image-uploader i {
+    font-size: 40px;
+    color: var(--primary-light);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.image-uploader p {
+    color: #5c5c5c;
+    margin-bottom: 8px;
+}
+
+.image-uploader small {
+    color: #777;
+    font-size: 13px;
+}
+
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.preview-item {
+    position: relative;
+    width: 100px;
+    height: 100px;
     border-radius: 8px;
-    font-size: 18px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
 }
 
-.publish-button:hover {
-    background-color: #8b0000;
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-/* Стили для выпадающих списков */
-
-option:hover {
-    background-color: #8b0000; /* Темно-красный цвет */
-    color: white; /* Цвет текста при наведении */
-}
-
-.theme-toggle {
-    margin-left: 15px;
-}
-
-.theme-button {
-    background: none;
-    border: none;
-    color: #8b0000;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 5px 10px;
+.remove-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background: var(--danger);
+    color: white;
     border-radius: 50%;
-    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: var(--transition);
 }
 
-.theme-button:hover {
-    background-color: #f5f5f5;
-    transform: scale(1.1);
+.preview-item:hover .remove-image {
+    opacity: 1;
 }
 
-/* Улучшение внешнего вида текстового поля */
-#markdown-editor {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 15px;
-    border-radius: 8px;
-    font-size: 16px;
-    line-height: 1.6;
-    position: relative; right: 16px
+.tags-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    min-height: 52px;
+    background-color: #f8f7f7;
+    margin-top: 8px;
 }
 
-/* Адаптивность */
+.tag {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.tag-remove {
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.tags-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px;
+    background: transparent;
+    min-width: 100px;
+    color: #e0e0e0;
+}
+
 @media (max-width: 768px) {
     .container {
-        width: 95%;
-        padding: 20px;
+        margin: 20px auto;
+        padding: 0 16px;
     }
-
-    .category {
-        flex-direction: column;
+    
+    form {
+        padding: 24px;
     }
-
-    .publish-button {
-        font-size: 16px;
-        padding: 12px;
-    }
-}
-
-
-datalist {
-    background-color: #fff;
-    border-radius: 0 0 8px 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-option:hover {
-    background-color: white;
 }

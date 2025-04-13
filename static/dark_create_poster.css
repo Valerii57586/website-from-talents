@@ -1,5 +1,5 @@
-body {
-    font-family: 'Arial', sans-serif; /* Надо указать ссылку */
+/* body {
+    font-family: 'Arial', sans-serif; 
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -126,14 +126,13 @@ textarea {
     background-color: #ff4d4d;
 }
 
-/* Стили для выпадающих списков */
+
 
 option:hover {
-    background-color: #ff4d4d; /* Темно-красный цвет */
-    color: white; /* Цвет текста при наведении */
+    background-color: #ff4d4d;
+    color: white; 
 }
 
-/* Улучшение внешнего вида текстового поля */
 #markdown-editor {
     background-color: #121212;
     border: 1px solid #121212;
@@ -144,7 +143,6 @@ option:hover {
     position: relative; right: 16px
 }
 
-/* Адаптивность */
 @media (max-width: 768px) {
     .container {
         width: 95%;
@@ -176,4 +174,371 @@ option {
 
 option:hover {
     background-color: white;
+} */
+
+
+:root {
+    --primary: #ff4d4d;
+    --primary-light: #ef485b;
+    --secondary: #962020;
+    --dark: #1b263b;
+    --light: #f8f9fa;
+    --success: #4cc9f0;
+    --danger: #f72585;
+    --border-radius: 18px;
+    --shadow: 0 8px 20px rgba(0,0,0,0.08);
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+    line-height: 1.6;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 30px;
+    background-color: #252525; /* Темно-красный цвет для шапки */
+    color: #ff4d4d; /* Белый текст */
+    height: 40px;
+}
+
+.site-logo {
+    font-size: 22px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    position: relative; left:10px;
+    background-color: #ff4d4d;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-decoration: none;
+}
+
+.site-logo i {
+    margin-right: 10px;
+    font-size: 24px;
+    background-color: #ff4d4d;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+}
+
+.auth-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+/* Кнопки авторизации */
+.auth-buttons .action-button {
+    padding: 3.5px 12px; /* Делаем кнопку компактнее */
+    border-radius: 6px; /* Закругляем углы */
+    color: #e0e0e0; /* Белый текст */
+    font-size: 12px; /* Немного уменьшаем размер шрифта */
+    font-weight: normal; /* Делаем текст жирнее */
+    cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
+    transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
+    text-decoration: none;
+    margin: 20px 0; /* Отступы сверху и снизу */
+    background-color: #ff4d4d;
+    color: #FFF;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid #ff4d4d
+    }
+
+/* Эффект при наведении */
+.auth-buttons .action-button:hover {
+    transform: scale(1.01); /* Немного увеличивается */
+    text-decoration: none;
+}
+
+.logout-button:active {
+    transform: scale(0.95); /* Немного уменьшается при нажатии */
+    text-decoration: none;
+}
+
+.container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+}
+
+form {
+    background: #2d2d2d;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 32px;
+    transition: var(--transition);
+}
+
+.title {
+    text-align: center;
+    margin-bottom: 32px;
+}
+
+.title h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+}
+
+.title p {
+    color: #a0a0a0;
+    font-size: 15px;
+    margin-bottom: 16px;
+}
+
+.category, .tags, .con, .image-upload-container {
+    margin-bottom: 24px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    margin-top: 8px;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #444;
+}
+
+#markdown-editor {
+    width: 100%;
+    min-height: 400px;
+    padding: 16px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    line-height: 1.5;
+    resize: vertical;
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    margin-bottom: 24px;
+}
+
+#markdown-editor:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #444;
+}
+
+.publish-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: var(--transition);
+    border: none;
+    background-color: var(--primary);
+    color: white;
+    width: 100%;
+}
+
+.publish-button:hover {
+    background-color: var(--secondary);
+    transform: translateY(-1px);
+}
+
+.publish-button i {
+    margin-right: 8px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #ffffff;
+    font-size: 15px;
+}
+
+select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    font-size: 15px;
+    transition: var(--transition);
+    background-color: #3a3a3a;
+    color: #e0e0e0;
+    margin-top: 8px;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1em;
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #444;
+}
+
+.character-counter {
+    text-align: right;
+    font-size: 13px;
+    color: #a0a0a0;
+    margin-top: 4px;
+}
+
+/* Стили для загрузки изображений */
+.image-uploader {
+    border: 2px dashed #555;
+    border-radius: var(--border-radius);
+    padding: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition);
+    margin-bottom: 16px;
+    background-color: #3a3a3a;
+}
+
+.image-uploader:hover {
+    border-color: var(--primary-light);
+    background-color: #444;
+}
+
+.image-uploader i {
+    font-size: 40px;
+    color: var(--primary-light);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.image-uploader p {
+    color: #a0a0a0;
+    margin-bottom: 8px;
+}
+
+.image-uploader small {
+    color: #777;
+    font-size: 13px;
+}
+
+.image-preview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.preview-item {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.remove-image {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 24px;
+    height: 24px;
+    background: var(--danger);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 12px;
+    opacity: 0;
+    transition: var(--transition);
+}
+
+.preview-item:hover .remove-image {
+    opacity: 1;
+}
+
+/* Стили для тегов */
+.tags-input-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    border: 1px solid #444;
+    border-radius: var(--border-radius);
+    min-height: 52px;
+    background-color: #3a3a3a;
+    margin-top: 8px;
+}
+
+.tag {
+    background-color: var(--primary-light);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+}
+
+.tag-remove {
+    margin-left: 6px;
+    cursor: pointer;
+}
+
+.tags-input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 8px;
+    background: transparent;
+    min-width: 100px;
+    color: #e0e0e0;
+}
+
+.tag :focus {    
+    outline: none;
+    border-color: var(--primary-light);
+    background-color: #444;
+}
+
+
+@media (max-width: 768px) {
+    .container {
+        margin: 20px auto;
+        padding: 0 16px;
+    }
+    
+    form {
+        padding: 24px;
+    }
 }
