@@ -323,7 +323,7 @@ a {
 }
 
 .theme-button:hover {
-    background-color: #f5f5f5;
+    background-color: black;
     transform: scale(1.1);
 }
 

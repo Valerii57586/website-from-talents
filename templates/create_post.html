@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create new post</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='dark_create_poster.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark_create_poster.css') }}" id="theme-stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
@@ -31,7 +31,6 @@
                 <input type="text" class="form-control" name="title" placeholder="Thought headline" required>
                 <div class="character-counter"><span id="titleCounter">0</span>/100</div>
             </div>
-
             <div class="image-upload-container">
                 <label>Image</label>
                 <div class="image-uploader" id="imageUploader">
@@ -90,7 +89,35 @@
     </div>
 
     <script>
-        // Обработчики для счетчиков символов
+        document.addEventListener('DOMContentLoaded', function() {
+            const contributorsInput = document.querySelector('input[name="contributors"]');
+            const datalist = document.createElement('datalist');
+            datalist.id = 'contributors-list';
+            contributorsInput.setAttribute('list', 'contributors-list');
+
+            fetch('/get_usernames')
+                .then(response => response.json())
+                .then(usernames => {
+                    usernames.forEach(username => {
+                        const option = document.createElement('option');
+                        option.value = username;
+                        datalist.appendChild(option);
+                    });
+                })
+
+            document.body.appendChild(datalist);
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+            const cssLink = document.getElementById('theme-stylesheet');
+            applyTheme(currentTheme);
+            function applyTheme(theme) {
+            if (theme === 'dark') {
+                cssLink.href = "{{ url_for('static', filename='dark_create_poster.css') }}";
+            } else {
+                cssLink.href = "{{ url_for('static', filename='create_poster.css') }}";
+            }
+        }
+        });
+
         document.querySelector('input[name="title"]').addEventListener('input', function() {
             document.getElementById('titleCounter').textContent = this.value.length;
         });
@@ -98,8 +125,6 @@
         document.getElementById('markdown-editor').addEventListener('input', function() {
             document.getElementById('contentCounter').textContent = this.value.length;
         });
-
-        // Загрузка изображений
         const imageUploader = document.getElementById('imageUploader');
         const fileInput = document.getElementById('fileInput');
         const imagePreview = document.getElementById('imagePreview');
@@ -160,8 +185,6 @@
                 reader.readAsDataURL(file);
             }
         }
-
-        // Обработчик для тегов
         const tagsInputContainer = document.getElementById('tagsInputContainer');
         const tagInput = document.getElementById('tagInput');
         const tagsHiddenInput = document.getElementById('tagsHiddenInput');
@@ -202,33 +225,6 @@
         function updateHiddenTags() {
             tagsHiddenInput.value = tags.join(' ');
         }
-
-        // Загрузка списка пользователей для автодополнения
-        document.addEventListener('DOMContentLoaded', function() {
-            const contributorsInput = document.querySelector('input[name="contributors"]');
-            const datalist = document.createElement('datalist');
-            datalist.id = 'contributors-list';
-            contributorsInput.setAttribute('list', 'contributors-list');
-
-            fetch('/get_usernames')
-                .then(response => response.json())
-                .then(usernames => {
-                    usernames.forEach(username => {
-                        const option = document.createElement('option');
-                        option.value = username;
-                        datalist.appendChild(option);
-                    });
-                })
-
-           document.body.appendChild(datalist);
-           let currentTheme = localStorage.getItem('theme') || 'dark';
-           const cssLink = document.getElementById('theme-stylesheet');
-           if (currentTheme === 'dark') {
-               cssLink.href = "{{ url_for('static', filename='dark_create_poster.css') }}";
-           } else {
-               cssLink.href = "{{ url_for('static', filename='create_poster.css') }}";
-           }
-        });
     </script>
 </body>
 </html>
