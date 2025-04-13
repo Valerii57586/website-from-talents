@@ -291,7 +291,7 @@ a {
     border-radius: 5px;
     font-size: 12px;
     width: 200px;
-    color: white;
+    color: rgb(0, 0, 0);
 }
 
 .search-bar button {
