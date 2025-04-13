@@ -367,7 +367,7 @@ a {
     background-color: #8b0000;
     color: #E0E0E0;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 20px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;

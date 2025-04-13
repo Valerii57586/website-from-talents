@@ -352,7 +352,7 @@ def create_post():
         contributors = request.form["contributors"]
         sq.add_record("posts", {"email": email, "title": title, "content": content, "date": date, "author_username": author_username, "code_theme": code_theme, "tags":tags, "contributors": contributors}, "data.db")
         return redirect(url_for("main"))
-    return render_template("create_post.html")
+    return render_template("create_post.html", username=email)
 
 
 @app.route("/logout")

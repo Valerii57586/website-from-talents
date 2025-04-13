@@ -1,5 +1,5 @@
 /* body {
-    font-family: 'Arial', sans-serif; 
+    font-family: 'Arial', sans-serif;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -130,7 +130,7 @@ textarea {
 
 option:hover {
     background-color: #ff4d4d;
-    color: white; 
+    color: white;
 }
 
 #markdown-editor {
@@ -214,6 +214,7 @@ body {
 }
 
 .site-logo {
+    text-decoration:none !important;
     font-size: 22px;
     font-weight: bold;
     display: flex;
@@ -223,7 +224,6 @@ body {
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    text-decoration: none;
 }
 
 .site-logo i {
@@ -234,6 +234,7 @@ body {
     background-clip: text;
     color: transparent;
     position: relative;
+    text-decoration: none;
 }
 
 .auth-buttons {
@@ -525,7 +526,7 @@ select:focus {
     color: #e0e0e0;
 }
 
-.tag :focus {    
+.tag :focus {
     outline: none;
     border-color: var(--primary-light);
     background-color: #444;
@@ -537,7 +538,7 @@ select:focus {
         margin: 20px auto;
         padding: 0 16px;
     }
-    
+
     form {
         padding: 24px;
     }

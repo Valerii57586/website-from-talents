@@ -31,6 +31,22 @@
                 <input type="text" class="form-control" name="title" placeholder="Thought headline" required>
                 <div class="character-counter"><span id="titleCounter">0</span>/100</div>
             </div>
+
+            <div class="image-upload-container">
+                <label>Image</label>
+                <div class="image-uploader" id="imageUploader">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <p>Перетащите сюда изображения или кликните для выбора</p>
+                    <small>Поддерживаются JPG, PNG, GIF (макс. 5MB)</small>
+                    <input type="file" id="fileInput" name="images" accept="image/*" multiple style="display: none;">
+                </div>
+                <div class="image-preview" id="imagePreview"></div>
+            </div>
+            <div class="publish-window">
+                <label for="markdown-editor">Content</label>
+                <textarea id="markdown-editor" name="content" placeholder="Text something interesting." onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}"></textarea>
+                <div class="character-counter"><span id="contentCounter">0</span>/5000</div>
+            </div>
             <div class="category">
                 <label for="code-theme-select">Themes for text</label>
                 <select name="code-theme" id="code-theme-select" class="form-control">
@@ -55,18 +71,6 @@
                     <option value="idea">Idea</option>
                 </select>
             </div>
-            
-            <div class="image-upload-container">
-                <label>Image</label>
-                <div class="image-uploader" id="imageUploader">
-                    <i class="fas fa-cloud-upload-alt"></i>
-                    <p>Перетащите сюда изображения или кликните для выбора</p>
-                    <small>Поддерживаются JPG, PNG, GIF (макс. 5MB)</small>
-                    <input type="file" id="fileInput" name="images" accept="image/*" multiple style="display: none;">
-                </div>
-                <div class="image-preview" id="imagePreview"></div>
-            </div>
-            
             <div class="tags">
                 <label>Tags</label>
                 <div class="tags-input-container" id="tagsInputContainer">
@@ -74,19 +78,11 @@
                 </div>
                 <input type="hidden" name="tags" id="tagsHiddenInput">
             </div>
-            
             <div class="con">
                 <label for="contributors">Cooperators</label>
                 <input type="text" class="form-control" id="contributors" name="contributors" placeholder="Enter the user names separated by a space" list="contributors-list">
                 <datalist id="contributors-list"></datalist>
             </div>
-            
-            <div class="publish-window">
-                <label for="markdown-editor">Information</label>
-                <textarea id="markdown-editor" name="content" placeholder="Text something interesting." onkeydown="if(event.keyCode===9){var v=this.value,s=this.selectionStart,e=this.selectionEnd;this.value=v.substring(0, s)+'    '+v.substring(e);this.selectionStart=this.selectionEnd=s+3;return false}"></textarea>
-                <div class="character-counter"><span id="contentCounter">0</span>/5000</div>
-            </div>
-            
             <button type="submit" class="publish-button">
                 <i class="fas fa-paper-plane"></i> Publish
             </button>
@@ -98,29 +94,29 @@
         document.querySelector('input[name="title"]').addEventListener('input', function() {
             document.getElementById('titleCounter').textContent = this.value.length;
         });
-        
+
         document.getElementById('markdown-editor').addEventListener('input', function() {
             document.getElementById('contentCounter').textContent = this.value.length;
         });
-        
+
         // Загрузка изображений
         const imageUploader = document.getElementById('imageUploader');
         const fileInput = document.getElementById('fileInput');
         const imagePreview = document.getElementById('imagePreview');
-        
+
         imageUploader.addEventListener('click', () => fileInput.click());
-        
+
         imageUploader.addEventListener('dragover', (e) => {
             e.preventDefault();
             imageUploader.style.borderColor = '#4895ef';
             imageUploader.style.backgroundColor = '#444';
         });
-        
+
         imageUploader.addEventListener('dragleave', () => {
             imageUploader.style.borderColor = '#555';
             imageUploader.style.backgroundColor = '#3a3a3a';
         });
-        
+
         imageUploader.addEventListener('drop', (e) => {
             e.preventDefault();
             imageUploader.style.borderColor = '#555';
@@ -129,26 +125,26 @@
                 handleFiles(e.dataTransfer.files);
             }
         });
-        
+
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length) {
                 handleFiles(fileInput.files);
             }
         });
-        
+
         function handleFiles(files) {
             for (let i = 0; i < files.length; i++) {
                 const file = files[i];
                 if (!file.type.match('image.*')) continue;
-                
+
                 const reader = new FileReader();
                 reader.onload = function(e) {
                     const previewItem = document.createElement('div');
                     previewItem.className = 'preview-item';
-                    
+
                     const img = document.createElement('img');
                     img.src = e.target.result;
-                    
+
                     const removeBtn = document.createElement('span');
                     removeBtn.className = 'remove-image';
                     removeBtn.innerHTML = '&times;';
@@ -156,7 +152,7 @@
                         e.stopPropagation();
                         previewItem.remove();
                     });
-                    
+
                     previewItem.appendChild(img);
                     previewItem.appendChild(removeBtn);
                     imagePreview.appendChild(previewItem);
@@ -164,13 +160,13 @@
                 reader.readAsDataURL(file);
             }
         }
-        
+
         // Обработчик для тегов
         const tagsInputContainer = document.getElementById('tagsInputContainer');
         const tagInput = document.getElementById('tagInput');
         const tagsHiddenInput = document.getElementById('tagsHiddenInput');
         let tags = [];
-        
+
         tagInput.addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ',') {
                 e.preventDefault();
@@ -181,32 +177,32 @@
                 }
             }
         });
-        
+
         function addTag(text) {
             if (text === '' || tags.includes(text)) return;
-            
+
             const tag = document.createElement('div');
             tag.className = 'tag';
             tag.innerHTML = `
                 ${text}
                 <span class="tag-remove">&times;</span>
             `;
-            
+
             tag.querySelector('.tag-remove').addEventListener('click', () => {
                 tag.remove();
                 tags = tags.filter(t => t !== text);
                 updateHiddenTags();
             });
-            
+
             tagsInputContainer.insertBefore(tag, tagInput);
             tags.push(text);
             updateHiddenTags();
         }
-        
+
         function updateHiddenTags() {
             tagsHiddenInput.value = tags.join(' ');
         }
-        
+
         // Загрузка списка пользователей для автодополнения
         document.addEventListener('DOMContentLoaded', function() {
             const contributorsInput = document.querySelector('input[name="contributors"]');
@@ -223,7 +219,7 @@
                         datalist.appendChild(option);
                     });
                 })
-            
+
            document.body.appendChild(datalist);
            let currentTheme = localStorage.getItem('theme') || 'dark';
            const cssLink = document.getElementById('theme-stylesheet');
