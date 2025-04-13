@@ -30,7 +30,7 @@
         <!-- Основной контент -->
         <main class="main-content">
             <div class="sidebar">
-                <a href="{{ url_for('profile', username=userdata[1]) if username else '#' }}" class="sidebar-button">
+                <a href="{{ url_for('profile', username=userdata[1]) if userdata[1] else '#' }}" class="sidebar-button">
                     <i class="fas fa-user"></i> Profile
                 </a>
                 <a href="{{ url_for('main') }}" class="sidebar-button">
