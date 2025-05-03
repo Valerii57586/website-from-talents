@@ -398,9 +398,6 @@ a {
     position: relative; bottom: 51px; left:8px
 
 }
-.rec-button-active:hover {
-    color: #ffff;
-}
 
 .rec-button-active {
     margin-right: 15px;
