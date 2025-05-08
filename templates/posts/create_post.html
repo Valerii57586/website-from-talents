@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}Create post{% endblock %}
+{% block content %}
+<div class="create-post">
+    <div class="create-post-container">
+        <h2>
+            <i class="gg-add"></i>
+            New Post
+        </h2>
+        <form method="POST">
+            <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+            <div class="form-group">
+                <label>Title:</label>
+                <input type="text" name="title" class="create_title" placeholder="Enter post title..." required>
+
+                <label>Content:</label>
+                <textarea name="content" class="create_content" placeholder="Write your content here..." required></textarea>
+            </div>
+            <button type="submit" class="submit-button">
+                <i class="gg-check"></i>
+                Publish
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}

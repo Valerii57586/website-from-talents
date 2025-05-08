@@ -1,165 +1,24 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
-</head>
-<body>
-    <header>
-        <div class="online-indicator">
-            <span>{{ current_online }} Online</span>
+{% extends "base.html" %}
+{% block title %}MAIN{% endblock %}
+{% block content %}
+{% if posts %}
+<div class="posts-container">
+    {% for post in posts %}
+    <div class="post">
+        <a href="{{ url_for('post', post_id=post.id) }}" class="post-link"></a>
+        <div class="post-avatar">
+            {{ post.author[0]|upper }}
         </div>
-        <div class="user-info">
-            {% if username != "" %}
-                <h3>Welcome, {{ username }}</h3>
-            {% else %}
-                <h3>Welcome, Guest</h3>
-            {% endif %}
+        <div class="post-author">
+            <i class="gg-user"></i>
+            {{ post.author }}
         </div>
-    </header>
-    <main>
-        <form method="POST" class="search-form">
-            <input type="text" placeholder="Enter post name" name="search-query" class="search-input" value="{{ search_query }}">
-            <button type="submit" class="search-button">Search</button>
-            <label for="category-select" class="category-label">Select category</label>
-            <select name="category-select" id="category-select" onchange="this.form.submit()" class="category-select">
-                <option value="all">Categories</option>
-                <option value="all">All</option>
-                <option value="rest">Rest</option>
-                <option value="science">Science</option>
-                <option value="games">Games</option>
-                <option value="trips">Trips</option>
-                <option value="food">Food</option>
-            </select>
-        </form>
-
-        <div class="actions">
-            <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
-            <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
-            <a href="{{ url_for('create_post') }}" class="action-button">Create post</a>
-            <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
-        </div>
-
-        <div class="posts-grid">
-            {% if posts %}
-                {% for post in posts %}
-                    {% if (search_query.lower() in post[1].lower() or search_query.lower() in post[2] or search_query.lower() in post[7]) and post[3] != "all" %}
-                        {% if category == post[3] and search_query.lower() in post[1].lower() %}
-                            <div class="post-card">
-                                <h3 class="post-title">{{ post[1] }}</h3>
-                                <p class="post-category">#{{ post[3] }}</p>
-                                {% if post[7] %}
-                                    <p class="tags">{{ post[7] }}</p>
-                                {% endif %}
-                                <pre class="post-content">{{ post[2][:300]|safe }}</pre>
-                                <p class="post-author">By <a href="{{ url_for('profile', username=post[5]) }}"> {{ post[5] }} </a></p>
-                                <p class="date">{{ post[4] }}</p>
-                                <a href="{{ url_for('post', id=post[0]) }}" class="btn btn-primary">Read</a>
-                            </div>
-                        {% endif %}
-                    {% endif %}
-                    {% if category == "all" and (search_query.lower() in post[1].lower() or search_query.lower() in post[2] or search_query.lower() in post[7]) %}
-                            <div class="post-card">
-                                <h3 class="post-title">{{ post[1] }}</h3>
-                                <p class="post-category">#{{ post[3] }}</p>
-                                {% if post[7] %}
-                                    <p class="tags">{{ post[7] }}</p>
-                                {% endif %}
-                                <pre class="post-content">{{ post[2][:200] }}</pre>
-                                <p class="post-author">By <a href="{{ url_for('profile', username=post[5]) }}"> {{ post[5] }} </a></p>
-                                <p class="date">{{ post[4] }}</p>
-                                </br>
-                                <a href="{{ url_for('post', id=post[0]) }}" class="action-button">Read</a>
-                            </div>
-                    {% endif %}
-                {% endfor %}
-            {% endif %}
-        </div>
-    </main>
-</body>
-</html> -->
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scorpio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
-<body>
-    <div class="container">
-        <!-- Шапка сайта -->
-        <header class="header">
-            <a href="{{ url_for('main') }}">
-                <div class="site-logo">
-                    <i class="fas fa-globe"></i>Scorpio
-                </div>
-            </a>
-            <div class="online-status">
-                <i class="fas fa-users"></i> Online: {{ current_online }}
-            </div>
-            <div class="auth-buttons">
-                {% if username %}
-                    <h3>Welcome, {{ username }}</h3>
-                    <a href="{{ url_for('logout') }}" class="action-button">Logout</a>
-                {% else %}
-                    <h3>Welcome, Guest</h3>
-                    <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
-                    <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
-                {% endif %}
-            </div>
-        </header>
-
-        <!-- Основной контент -->
-        <main class="main-content">
-            <div class="sidebar">
-                <a href="{{ url_for('profile', username=username) if username else '#' }}" class="sidebar-button">
-                    <i class="fas fa-user"></i> Profile
-                </a>
-                <a href="{{ url_for('create_post') }}" class="sidebar-button">
-                    <i class="fas fa-plus"></i> Create post
-                </a>
-            </div>
-
-            <!-- Лента постов -->
-            <div class="post-feed">
-                <div class="search-bar">
-                    <form method="post">
-                        <input type="text" placeholder="Enter post name" name="search-query" class="search-input" value="{{ search_query }}">
-                        <button type="submit" class="search-button">Search</button>
-                    </form>
-                </div>
-
-                <!-- Посты -->
-                {% if posts %}
-                    {% for post in posts %}
-                        {% if search_query.lower() in post[1].lower() or search_query.lower() in post[2].lower() or search_query.lower() in post[6].lower() or search_query.lower() in post[4].lower() %}
-                            <div class="post" data-id="{{ post[0] }}" onclick="window.location.href='{{ url_for('post', id=post[0]) }}'">
-                                <div class="post-icon">
-                                    <i class="fas fa-user"></i>
-                                </div>
-                                <div class="post-content">
-                                    <h3 class="post-title">{{ post[1] }}</h3>
-                                    {% if post[6] %}
-                                        <p class="tags">{{ post[6] }}</p>
-                                    {% endif %}
-                                    <p class="post-content">{{ post[2][:300].replace("**", "").replace("#", "").replace("```", "").replace("*", "").replace("~~", "").replace(">", "").replace(">>", "") }}</p>
-                                    <p class="post-author">By <a class="post-author-a" href="{{ url_for('profile', username=post[4]) }}"> {{ post[4] }} </a></p>
-                                    <p class="date">{{ post[3] }}</p>
-                                </div>
-                            </div>
-                        {% endif %}
-                    {% endfor %}
-                {% else %}
-                    <p class="no-posts">No posts found.</p>
-                {% endif %}
-            </div>
-        </main>
+        <h2 class="post-title">
+            {{ post.title }}
+        </h2>
+        <p class="post-content">{{ post.content[:200]|safe }}{% if post.content|length > 300 %}...{% endif %}</p>
     </div>
-</body>
-</html>
+    {% endfor %}
+</div>
+{% endif %}
+{% endblock %}

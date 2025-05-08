@@ -3,9 +3,49 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
-    <title>Main</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %} | SORP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/css.gg/icons/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
 </head>
 <body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="nav-logo">
+            <i class="gg-pen"></i>
+            SORP
+        </a>
+        <div class="nav-links">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('profile') }}" class="nav-link">
+                    <i class="gg-user"></i>
+                    Profile
+                </a>
+                <a href="{{ url_for('create_post') }}" class="nav-link">
+                    <i class="gg-add"></i>
+                    Create Post
+                </a>
+                <a href="{{ url_for('logout') }}" class="nav-link">
+                    <i class="gg-log-out"></i>
+                    Logout
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="nav-link">
+                    <i class="gg-user-add"></i>
+                    Register
+                </a>
+                <a href="{{ url_for('login') }}" class="nav-link">
+                    <i class="gg-log-in"></i>
+                    Login
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
 </body>
 </html>
