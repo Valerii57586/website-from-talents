@@ -303,6 +303,7 @@ main {
     width: 20px;
     height: 20px;
     fill: currentColor;
+    color: var(--on-surface-color);
 }
 
 /* Utility Classes */
@@ -416,6 +417,7 @@ main {
     flex: 1;
     display: flex;
     flex-direction: column;
+    overflow-wrap: break-word;
 }
 
 .create-post h2, .edit-post h2 {

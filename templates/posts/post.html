@@ -6,14 +6,14 @@
         {{ post.author[0]|upper }}
     </div>
     <div class="post-author">
-        <i class="gg-user"></i>
+        <i class="fas fa-user"></i>
         {{ post.author }}
     </div>
     <h2>{{ post.title }}</h2>
     <pre class="post-content">{{ post.content|safe }}</pre>
     {% if current_user.username == post.author and current_user.is_authenticated %}
     <a href="{{ url_for('edit_post', post_id=post.id) }}" class="action-button">
-        <i class="gg-pen"></i>
+        <i class="fas fa-pen"></i>
         Edit
     </a>
     {% endif %}

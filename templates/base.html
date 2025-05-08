@@ -10,34 +10,34 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
     <nav class="navbar">
         <a href="{{ url_for('home') }}" class="nav-logo">
-            <i class="gg-pen"></i>
+            <i class="fas fa-pen"></i>
             SORP
         </a>
         <div class="nav-links">
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('profile') }}" class="nav-link">
-                    <i class="gg-user"></i>
+                    <i class="fas fa-user"></i>
                     Profile
                 </a>
                 <a href="{{ url_for('create_post') }}" class="nav-link">
-                    <i class="gg-add"></i>
+                    <i class="fas fa-add"></i>
                     Create Post
                 </a>
                 <a href="{{ url_for('logout') }}" class="nav-link">
-                    <i class="gg-log-out"></i>
                     Logout
                 </a>
             {% else %}
                 <a href="{{ url_for('register') }}" class="nav-link">
-                    <i class="gg-user-add"></i>
+                    <i class="fas fa-user"></i>
                     Register
                 </a>
                 <a href="{{ url_for('login') }}" class="nav-link">
-                    <i class="gg-log-in"></i>
+                    <i class="fas fa-user"></i>
                     Login
                 </a>
             {% endif %}

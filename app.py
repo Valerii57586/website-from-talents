@@ -87,6 +87,7 @@ def edit_post(post_id):
     if request.method == 'POST':
         post.title = request.form['title']
         post.content = request.form['content']
+        post.content = markdown(post.content, extras=['fenced-code-blocks', 'code-friendly'])
         db.session.commit()
         return redirect(url_for('post', post_id=post.id))
     return render_template('posts/edit_post.html', post=post)
