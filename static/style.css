@@ -109,13 +109,10 @@ main {
 /* Posts */
 .post {
     background-color: var(--surface-color);
-    border-radius: 12px;
     padding: 2rem;
     margin-bottom: 2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: var(--transition-medium);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    animation: fadeInUp 0.5s ease-out;
+    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
+    height: 100%;
 }
 
 @keyframes fadeInUp {
@@ -129,17 +126,11 @@ main {
     }
 }
 
-.post:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    border-color: rgba(139, 0, 0, 0.3); /* Красный с прозрачностью */
-}
-
 .post-title {
     color: var(--on-surface-color);
     margin-bottom: 1rem;
     font-size: 1.8rem;
-    transition: var(--transition-fast);
+    /* transition: var(--transition-fast); */
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -152,7 +143,12 @@ main {
 .post-content {
     margin-bottom: 1.5rem;
     color: var(--on-bg-color);
-    line-height: 1.7;
+    line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-line;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .post-meta {
@@ -173,7 +169,6 @@ main {
     background-color: var(--primary-color);
     color: var(--on-primary-color);
     padding: 0.7rem 1.4rem;
-    border-radius: 8px;
     border: none;
     cursor: pointer;
     transition: var(--transition-medium);
@@ -290,7 +285,7 @@ main {
 
 .profile-username {
     font-size: 2rem;
-    color: var(--primary-color);
+    color: var(--on-surface-color);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -342,14 +337,59 @@ main {
 /* Post specific styles */
 .post {
     cursor: pointer;
-    transition: var(--transition-medium);
     position: relative;
     padding-left: 80px; /* Space for avatar */
 }
 
 .post:hover {
-    transform: translateY(-3px);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.avatar-image{
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
+.profile-avatar {
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: bold;
+    font-size: 4rem;
+}
+
+.mini-profile-avatar {
+    margin: 0 auto;
+    margin-bottom: 1rem;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-weight: bold;
+    font-size: 2rem;
+}
+
+.role {
+    font-size: 0.9rem;
+    color: var(--on-surface-color);
+    margin-bottom: 0.5rem;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.post-avatar-image{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
 }
 
 .post-avatar {

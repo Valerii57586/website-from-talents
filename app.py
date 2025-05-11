@@ -4,6 +4,8 @@ from flask_login import login_user, login_required, logout_user, current_user
 from extensions.extensions import db, login_manager
 from models.models import Users, Post
 from markdown2 import markdown
+import os
+from werkzeug.utils import secure_filename
 
 
 app = Flask(__name__)
@@ -15,6 +17,17 @@ db.init_app(app)
 login_manager.init_app(app)
 csrf = CSRFProtect(app)
 login_manager.login_view = 'login'
+
+
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
+UPLOAD_FOLDER = "images/"
+
+
+def allowed_file(filename):
+    if '.' in filename:
+        extension = filename.rsplit('.', 1)[1].lower()
+        return extension in ALLOWED_EXTENSIONS
+    return False
 
 
 @app.route('/')
@@ -67,7 +80,7 @@ def create_post():
         title = request.form['title']
         content = request.form['content']
         content = markdown(content, extras=['fenced-code-blocks', 'code-friendly'])
-        post = Post(author=current_user.username, title=title, content=content)
+        post = Post(author=current_user.username, title=title, content=content, author_avatar=current_user.avatar)
         db.session.add(post)
         db.session.commit()
         return redirect(url_for('home'))
@@ -92,11 +105,40 @@ def edit_post(post_id):
         return redirect(url_for('post', post_id=post.id))
     return render_template('posts/edit_post.html', post=post)
 
+
 @app.route("/profile")
 @login_required
 def profile():
     return render_template('auth/profile.html')
 
+
+@app.route('/delete_post/<int:post_id>')
+@login_required
+def delete_post(post_id):
+    post = Post.query.get(post_id)
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('home'))
+
+
+@app.route("/edit_profile", methods=['GET', 'POST'])
+@login_required
+def edit_profile():
+    if request.method == 'POST':
+        current_user.username = request.form['username']
+        current_user.email = request.form['email']
+        current_user.role = request.form['role']
+        file = request.files['avatar']
+        if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+            current_user.avatar = UPLOAD_FOLDER+filename
+        posts = Post.query.filter_by(author=current_user.username).all()
+        for post in posts:
+            post.author_avatar = current_user.avatar
+        db.session.commit()
+        return redirect(url_for('profile'))
+    return render_template('auth/edit_profile.html', user=current_user)
 
 if __name__ == '__main__':
     with app.app_context():

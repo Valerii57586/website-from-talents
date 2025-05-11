@@ -8,6 +8,7 @@ class Post(db.Model):
     author = db.Column(db.String(100))
     title = db.Column(db.String(100))
     content = db.Column(db.Text)
+    author_avatar = db.Column(db.String(100))
 
 
 class Users(db.Model):
@@ -15,6 +16,9 @@ class Users(db.Model):
     username = db.Column(db.String(50), unique=True)
     password_hash = db.Column(db.String(128))
     email = db.Column(db.String(100), unique=True)
+    avatar = db.Column(db.String(100))
+    role = db.Column(db.String(100))
+    visible = db.Column(db.Boolean, default=True)
 
     is_active = db.Column(db.Boolean, default=True)
     is_authenticated = db.Column(db.Boolean, default=False)

@@ -7,7 +7,7 @@
     <div class="post">
         <a href="{{ url_for('post', post_id=post.id) }}" class="post-link"></a>
         <div class="post-avatar">
-            {{ post.author[0]|upper }}
+            <img class="post-avatar-image" src="{{ url_for('static', filename=post.author_avatar.replace('static/', '')) }}" alt="">
         </div>
         <div class="post-author">
             <i class="fas fa-user"></i>
