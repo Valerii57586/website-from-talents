@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>{% block title %}{% endblock %} | SORP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/css.gg/icons/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{{ url_for('home') }}" class="nav-logo">
+            <i class="fa-solid fa-atom"></i>
+            SORP
+        </a>
+        <div class="nav-search">
+            <form action="{{ url_for('home') }}" method="get">
+                <input name="search" class="search_query" type="text" placeholder="Search...">
+                <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
+        <div class="nav-links">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('profile') }}" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Profile
+                </a>
+                <a href="{{ url_for('create_post') }}" class="nav-link">
+                    <i class="fas fa-add"></i>
+                    Create Post
+                </a>
+                <a href="{{ url_for('users') }}" class="nav-link">
+                    <i class="fa-solid fa-users"></i>
+                    Users
+                </a>
+                <a href="{{ url_for('logout') }}" class="nav-link">
+                    <i class="fas fa-sign-out"></i>
+                    Logout
+                </a>
+            {% else %}
+                <a href="{{ url_for('register') }}" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Register
+                </a>
+                <a href="{{ url_for('login') }}" class="nav-link">
+                    <i class="fas fa-user"></i>
+                    Login
+                </a>
+            {% endif %}
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>

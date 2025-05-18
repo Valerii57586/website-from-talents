@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="profile">
+    <div class="profile-avatar">
+        <img class="avatar-image" src="{{ current_user.avatar }}" alt="{{ current_user.username[0]|upper }}">
+    </div>
+    <h4 class="profile-username">{{ current_user.username }}</h4>
+    <p class="role">{{ current_user.role }}</p>
+    <a href="{{ url_for('edit_profile') }}" class="action-button">
+        <i class="fas fa-pen"></i>
+        Edit Profile
+    </a>
+</div>
+{% endblock %}

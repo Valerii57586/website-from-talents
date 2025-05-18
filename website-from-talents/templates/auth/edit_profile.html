@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block title %}Edit Profile{% endblock %}
+{% block content %}
+<div class="form-container">
+    <form method="post" class="form" enctype="multipart/form-data">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+        <div class="form-group">
+            <div class="profile-avatar" onclick="document.getElementById('avatar-input').click()">
+                <img class="avatar-image" src="{{ user.avatar }}" alt="{{user.username[0]|upper}}" style="cursor: pointer;">
+                <input id="avatar-input" type="file" style="display: none;" name="avatar">
+            </div>
+            <input type="text", name="username", value="{{ user.username }}" placeholder="Username">
+            <input type="email", name="email", value="{{ user.email }}" placeholder="Email">
+            <input type="text", name="role", value="{{ user.role }}" placeholder="Role">
+        </div>
+        <button type="submit" class="submit-button"><i class="fas fa-check"></i>Save</button>
+    </form>
+</div>
+{% endblock %}
