@@ -3,4 +3,4 @@ flask-sqlalchemy
 flask-wtf
 flask-login
 werkzeug
-markdown2
+markdown

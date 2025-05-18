@@ -145,6 +145,7 @@ def edit_profile():
         return redirect(url_for('profile'))
     return render_template('auth/edit_profile.html', user=current_user)
 
+
 @app.route('/users')
 def users():
     users = Users.query.all()
