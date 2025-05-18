@@ -4,6 +4,7 @@
 {% if posts %}
 <div class="posts-container">
     {% for post in posts %}
+    {% if search_query in post.title.lower() or search_query in post.content.lower() or search_query in post.author.lower() %}
     <div class="post">
         <a href="{{ url_for('post', post_id=post.id) }}" class="post-link"></a>
         <div class="post-avatar">
@@ -18,6 +19,7 @@
         </h2>
         <p class="post-content">{{ post.content[:200]|safe }}{% if post.content|length > 300 %}...{% endif %}</p>
     </div>
+    {% endif %}
     {% endfor %}
 </div>
 {% endif %}

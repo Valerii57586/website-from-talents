@@ -28,7 +28,7 @@ body {
     color: var(--on-bg-color);
     line-height: 1.6;
     min-height: 100vh;
-    animation: fadeIn 0.8s ease-out;
+    /* animation: fadeIn 0.8s ease-out; */
 }
 
 @keyframes fadeIn {
@@ -92,7 +92,7 @@ main {
     max-width: 1200px;
     margin: 2rem auto;
     padding: 0 2rem;
-    animation: slideUp 0.6s ease-out;
+    /* animation: slideUp 0.6s ease-out; */
 }
 
 @keyframes slideUp {
@@ -128,8 +128,7 @@ main {
 
 .post-title {
     color: var(--on-surface-color);
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
+    font-size: 2.5rem;
     /* transition: var(--transition-fast); */
     display: flex;
     align-items: center;
@@ -205,7 +204,7 @@ main {
     padding: 2.5rem;
     border-radius: 12px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.8s ease-out;
+    /* animation: fadeIn 0.8s ease-out; */
     border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
@@ -280,7 +279,7 @@ main {
     margin: 2rem auto;
     text-align: center;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-    animation: fadeIn 0.8s ease-out;
+    /* animation: fadeIn 0.8s ease-out; */
 }
 
 .profile-username {
@@ -515,4 +514,82 @@ main {
     outline: none;
     border-color: var(--primary-color);
     box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.2); /* Красный с прозрачностью */
+}
+
+pre code {
+    border-radius: 10px;
+    padding: 1em;
+    width: 970px;
+}
+
+.post-title-h1 {
+    font-size: 4rem;
+    color: white;
+    text-align: center;
+}
+.nav-search {
+    display: flex;
+    align-items: center;
+    width: 400px;
+    height: 40px;
+    background-color: var(--surface-color);
+    border-radius: 10px;
+    padding: 0 5px; /* Уменьшаем боковые отступы */
+    box-shadow: none;
+    position: relative; /* Для позиционирования кнопки */
+}
+
+.nav-search input {
+    flex: 1;
+    border: none;
+    background: transparent;
+    padding: 8px;
+    outline: none;
+    color: var(--text-color);
+    padding-right: 40px; /* Чтобы текст не заходил под кнопку */
+}
+
+.search-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.search-button:hover {
+    background: var(--primary-hover-color);
+}
+
+.user {
+    background-color: var(--surface-color);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    padding: 2rem;
+    border-radius: 10px;
+    text-decoration: none;
+}
+
+.user-avatar-image {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    text-decoration: none;
+}
+
+.user-name {
+    font-size: 1.5rem;
+    color: var(--on-surface-color);
+    text-decoration: none;
 }

@@ -9,8 +9,10 @@
         <i class="fas fa-user"></i>
         {{ post.author }}
     </div>
-    <h2>{{ post.title }}</h2>
-    <div class="post-content">{{ post.content|safe }}</div>
+    <div class="post-title-h1-c">
+        <h1 class="post-title-h1">{{ post.title }}</h1>
+    </div>
+    <div class="post-content" id="code-editor" >{{ post.content|md|safe }}</div>
     {% if current_user.username == post.author and current_user.is_authenticated %}
     <a href="{{ url_for('edit_post', post_id=post.id) }}" class="action-button">
         <i class="fas fa-pen"></i>

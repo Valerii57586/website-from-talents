@@ -3,9 +3,9 @@ from flask_wtf.csrf import CSRFProtect
 from flask_login import login_user, login_required, logout_user, current_user
 from extensions.extensions import db, login_manager
 from models.models import Users, Post
-from markdown2 import markdown
 import os
 from werkzeug.utils import secure_filename
+import markdown
 
 
 app = Flask(__name__)
@@ -23,6 +23,12 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 UPLOAD_FOLDER = "images/"
 
 
+@app.template_filter('md')
+def markdown_to_html(text):
+    extensions = ['fenced_code']
+    return markdown.markdown(text, extensions=extensions)
+
+
 def allowed_file(filename):
     if '.' in filename:
         extension = filename.rsplit('.', 1)[1].lower()
@@ -32,8 +38,9 @@ def allowed_file(filename):
 
 @app.route('/')
 def home():
+    search_query = request.args.get('search', "").lower()
     posts = Post.query.all()
-    return render_template('index.html', posts=posts)
+    return render_template('index.html', posts=posts, search_query=search_query)
 
 
 @app.route('/reg', methods=['GET', 'POST'])
@@ -79,7 +86,6 @@ def create_post():
     if request.method == 'POST':
         title = request.form['title']
         content = request.form['content']
-        content = markdown(content, extras=['fenced-code-blocks', 'code-friendly'])
         post = Post(author=current_user.username, title=title, content=content, author_avatar=current_user.avatar)
         db.session.add(post)
         db.session.commit()
@@ -100,7 +106,6 @@ def edit_post(post_id):
     if request.method == 'POST':
         post.title = request.form['title']
         post.content = request.form['content']
-        post.content = markdown(post.content, extras=['fenced-code-blocks', 'code-friendly'])
         db.session.commit()
         return redirect(url_for('post', post_id=post.id))
     return render_template('posts/edit_post.html', post=post)
@@ -139,6 +144,12 @@ def edit_profile():
         db.session.commit()
         return redirect(url_for('profile'))
     return render_template('auth/edit_profile.html', user=current_user)
+
+@app.route('/users')
+def users():
+    users = Users.query.all()
+    return render_template('auth/users.html', users=users)
+
 
 if __name__ == '__main__':
     with app.app_context():

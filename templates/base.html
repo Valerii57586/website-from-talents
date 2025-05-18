@@ -7,17 +7,23 @@
     <title>{% block title %}{% endblock %} | SORP</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/css.gg/icons/all.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/monokai-sublime.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>hljs.highlightAll();</script>
 </head>
 <body>
     <nav class="navbar">
         <a href="{{ url_for('home') }}" class="nav-logo">
-            <i class="fas fa-pen"></i>
+            <i class="fa-solid fa-atom"></i>
             SORP
         </a>
+        <div class="nav-search">
+            <form action="{{ url_for('home') }}" method="get">
+                <input name="search" class="search_query" type="text" placeholder="Search...">
+                <button class="search-button" type="submit"><i class="fas fa-search"></i></button>
+            </form>
+        </div>
         <div class="nav-links">
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('profile') }}" class="nav-link">
@@ -28,7 +34,12 @@
                     <i class="fas fa-add"></i>
                     Create Post
                 </a>
+                <a href="{{ url_for('users') }}" class="nav-link">
+                    <i class="fa-solid fa-users"></i>
+                    Users
+                </a>
                 <a href="{{ url_for('logout') }}" class="nav-link">
+                    <i class="fas fa-sign-out"></i>
                     Logout
                 </a>
             {% else %}
