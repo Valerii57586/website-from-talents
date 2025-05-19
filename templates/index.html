@@ -4,11 +4,11 @@
 {% if posts %}
 <div class="posts-container">
     {% for post in posts %}
-    {% if search_query in post.title.lower() or search_query in post.content.lower() or search_query in post.author.lower() %}
+    {% if search_query in post.title.lower() or search_query in post.content.lower() %}
     <div class="post">
         <a href="{{ url_for('post', post_id=post.id) }}" class="post-link"></a>
         <div class="post-avatar">
-            <img class="post-avatar-image" src="{{ url_for('static', filename=post.author_avatar.replace('static/', '')) }}" alt="">
+            <img class="post-avatar-image" src="{{ post.author_avatar }}" alt="">
         </div>
         <div class="post-author">
             <i class="fas fa-user"></i>
@@ -22,5 +22,19 @@
     {% endif %}
     {% endfor %}
 </div>
+{% endif %}
+{% if search_query != "" and users %}
+    {% for user in users %}
+    {% if search_query in user.username.lower() %}
+    <a href="{{ url_for('profile', user_id=user.id) }}" class="user-link">
+        <div class="user">
+            <img class="user-avatar-image" src="{{ user.avatar }}" alt="{{ user.username[0].upper() }}">
+            <div class="user-name">
+                {{ user.username }}
+            </div>
+        </div>
+    </a>
+    {% endif %}
+    {% endfor %}
 {% endif %}
 {% endblock %}

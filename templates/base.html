@@ -26,17 +26,13 @@
         </div>
         <div class="nav-links">
             {% if current_user.is_authenticated %}
-                <a href="{{ url_for('profile') }}" class="nav-link">
+                <a href="{{ url_for('profile', user_id=current_user.id) }}" class="nav-link">
                     <i class="fas fa-user"></i>
                     Profile
                 </a>
                 <a href="{{ url_for('create_post') }}" class="nav-link">
                     <i class="fas fa-add"></i>
                     Create Post
-                </a>
-                <a href="{{ url_for('users') }}" class="nav-link">
-                    <i class="fa-solid fa-users"></i>
-                    Users
                 </a>
                 <a href="{{ url_for('logout') }}" class="nav-link">
                     <i class="fas fa-sign-out"></i>

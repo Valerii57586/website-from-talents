@@ -20,7 +20,7 @@ login_manager.login_view = 'login'
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-UPLOAD_FOLDER = "images/"
+UPLOAD_FOLDER = "/home/dff/Documents/work/website-from-talents/static/images/"
 
 
 @app.template_filter('md')
@@ -40,7 +40,8 @@ def allowed_file(filename):
 def home():
     search_query = request.args.get('search', "").lower()
     posts = Post.query.all()
-    return render_template('index.html', posts=posts, search_query=search_query)
+    users = Users.query.all()
+    return render_template('index.html', posts=posts, search_query=search_query, users=users)
 
 
 @app.route('/reg', methods=['GET', 'POST'])
@@ -111,10 +112,11 @@ def edit_post(post_id):
     return render_template('posts/edit_post.html', post=post)
 
 
-@app.route("/profile")
+@app.route("/profile/<int:user_id>")
 @login_required
-def profile():
-    return render_template('auth/profile.html')
+def profile(user_id):
+    user = Users.query.get(user_id)
+    return render_template('auth/profile.html', user=user)
 
 
 @app.route('/delete_post/<int:post_id>')
@@ -136,20 +138,14 @@ def edit_profile():
         file = request.files['avatar']
         if file and allowed_file(file.filename):
             filename = secure_filename(file.filename)
-            file.save(os.path.join(UPLOAD_FOLDER, filename))
-            current_user.avatar = UPLOAD_FOLDER+filename
+            file.save(UPLOAD_FOLDER+filename)
+            current_user.avatar = "/static/images/"+filename
         posts = Post.query.filter_by(author=current_user.username).all()
         for post in posts:
             post.author_avatar = current_user.avatar
         db.session.commit()
-        return redirect(url_for('profile'))
+        return redirect(url_for('profile', user_id=current_user.id))
     return render_template('auth/edit_profile.html', user=current_user)
-
-
-@app.route('/users')
-def users():
-    users = Users.query.all()
-    return render_template('auth/users.html', users=users)
 
 
 if __name__ == '__main__':
