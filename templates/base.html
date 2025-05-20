@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link id="theme-style" rel="stylesheet" href="{{ url_for('static', filename='light_style.css') }}">
     <title>{% block title %}{% endblock %} | SORP</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/css.gg/icons/all.css" rel="stylesheet">
@@ -25,18 +25,21 @@
             </form>
         </div>
         <div class="nav-links">
+            <a href="#" id="theme-toggle" class="nav-link">
+                <i class="fas fa-moon"></i>
+            </a>
             {% if current_user.is_authenticated %}
                 <a href="{{ url_for('profile', user_id=current_user.id) }}" class="nav-link">
                     <i class="fas fa-user"></i>
-                    Profile
+                    <!-- Profile -->
                 </a>
                 <a href="{{ url_for('create_post') }}" class="nav-link">
                     <i class="fas fa-add"></i>
-                    Create Post
+                    <!-- Create Post -->
                 </a>
                 <a href="{{ url_for('logout') }}" class="nav-link">
                     <i class="fas fa-sign-out"></i>
-                    Logout
+                    <!-- Logout -->
                 </a>
             {% else %}
                 <a href="{{ url_for('register') }}" class="nav-link">
@@ -54,5 +57,47 @@
     <main>
         {% block content %}{% endblock %}
     </main>
+    <script>
+        // Функция для переключения темы
+        function toggleTheme() {
+            const themeStyle = document.getElementById('theme-style');
+            // const themeText = document.getElementById('theme-text');
+            const themeIcon = document.querySelector('#theme-toggle i');
+
+            if (themeStyle.getAttribute('href').includes('light_style.css')) {
+                // Переключаем на тёмную тему
+                themeStyle.setAttribute('href', "{{ url_for('static', filename='style.css') }}");
+                // themeText.textContent = 'Light Mode';
+                themeIcon.className = 'fas fa-sun';
+                localStorage.setItem('theme', 'dark');
+            } else {
+                // Переключаем на светлую тему
+                themeStyle.setAttribute('href', "{{ url_for('static', filename='light_style.css') }}");
+                // themeText.textContent = 'Dark Mode';
+                themeIcon.className = 'fas fa-moon';
+                localStorage.setItem('theme', 'light');
+            }
+        }
+
+        // Проверяем сохранённую тему при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedTheme = localStorage.getItem('theme');
+            const themeStyle = document.getElementById('theme-style');
+            // const themeText = document.getElementById('theme-text');
+            const themeIcon = document.querySelector('#theme-toggle i');
+
+            if (savedTheme === 'dark') {
+                themeStyle.setAttribute('href', "{{ url_for('static', filename='style.css') }}");
+                // themeText.textContent = 'Light Mode';
+                themeIcon.className = 'fas fa-sun';
+            }
+
+            // Добавляем обработчик события для кнопки переключения темы
+            document.getElementById('theme-toggle').addEventListener('click', function(e) {
+                e.preventDefault();
+                toggleTheme();
+            });
+        });
+    </script>
 </body>
 </html>

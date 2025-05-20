@@ -1,13 +1,13 @@
 /* style.css */
 :root {
-    --bg-color: #121212;
-    --surface-color: #1e1e1e;
+    --bg-color: #f8f9fa;
+    --surface-color: #ffffff;
     --primary-color: #8b0000;
     --primary-variant: #b22222;
     --secondary-color: #d33f3f;
     --error-color: #e74c3c;
-    --on-bg-color: #ecf0f1;
-    --on-surface-color: #ffffff;
+    --on-bg-color: #212529;
+    --on-surface-color: #343a40;
     --on-primary-color: #ffffff;
     --on-secondary-color: #ffffff;
 
@@ -447,7 +447,7 @@ main {
     background-color: var(--surface-color);
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height:100%; /* Почти на всю высоту страницы */
+    height: 100%;
     display: flex;
     flex-direction: column;
 }
@@ -524,7 +524,7 @@ pre code {
 
 .post-title-h1 {
     font-size: 4rem;
-    color: white;
+    color: var(--on-surface-color);
     text-align: center;
 }
 .nav-search {
@@ -592,4 +592,16 @@ pre code {
     font-size: 1.5rem;
     color: var(--on-surface-color);
     text-decoration: none;
+}
+
+.default-image-post{
+    width: 100%;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-radius: 10px;
+    background-color: var(--surface-color);
+    border: 3px dashed var(--primary-color);
+    margin-bottom: 1rem;
 }

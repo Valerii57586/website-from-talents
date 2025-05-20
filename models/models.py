@@ -9,6 +9,7 @@ class Post(db.Model):
     title = db.Column(db.String(100))
     content = db.Column(db.Text)
     author_avatar = db.Column(db.String(100))
+    image = db.Column(db.String(100))
 
 
 class Users(db.Model):

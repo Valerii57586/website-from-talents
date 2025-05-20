@@ -3,17 +3,21 @@
 {% block content %}
 <div class="create-post">
     <div class="create-post-container">
-        <h2>
-            <i class="fas fa-add"></i>
+        <h2 id="dynamic-title">
             New Post
         </h2>
         <form method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
             <div class="form-group">
-                <label>Title:</label>
-                <input type="text" name="title" class="create_title" placeholder="Enter post title..." required>
+                <div class="post-image" onclick="document.getElementById('image-input').click()">
+                    <div class="default-image-post">
+                        <i class="fas fa-image" style="font-size: 50px; color: #8b0000;"></i>
+                    </div>
+                    <input id="image-input" type="file" style="display: none;" name="avatar">
+                </div>
 
-                <label>Content:</label>
+                <input type="text" name="title" id="post-title" class="create_title" placeholder="Enter post title..." required>
+
                 <textarea name="content" class="create_content" placeholder="Write your content here..." required></textarea>
             </div>
             <button type="submit" class="submit-button">
@@ -23,4 +27,23 @@
         </form>
     </div>
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const titleInput = document.getElementById('post-title');
+        const dynamicTitle = document.getElementById('dynamic-title');
+
+        titleInput.addEventListener('input', function() {
+            if (this.value.trim() === '') {
+                dynamicTitle.textContent = 'New Post';
+            } else {
+                dynamicTitle.textContent = this.value;
+            }
+        });
+
+        if (titleInput.value.trim() !== '') {
+            dynamicTitle.textContent = titleInput.value;
+        }
+    });
+</script>
 {% endblock %}
