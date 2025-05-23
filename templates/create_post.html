@@ -70,13 +70,6 @@
                     <option value="idea">Idea</option>
                 </select>
             </div>
-            <div class="tags">
-                <label>Tags</label>
-                <div class="tags-input-container" id="tagsInputContainer">
-                    <input type="text" class="tags-input" id="tagInput" placeholder="Add some tags...">
-                </div>
-                <input type="hidden" name="tags" id="tagsHiddenInput">
-            </div>
             <div class="con">
                 <label for="contributors">Cooperators</label>
                 <input type="text" class="form-control" id="contributors" name="contributors" placeholder="Enter the user names separated by a space" list="contributors-list">
@@ -184,46 +177,6 @@
                 }
                 reader.readAsDataURL(file);
             }
-        }
-        const tagsInputContainer = document.getElementById('tagsInputContainer');
-        const tagInput = document.getElementById('tagInput');
-        const tagsHiddenInput = document.getElementById('tagsHiddenInput');
-        let tags = [];
-
-        tagInput.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ',') {
-                e.preventDefault();
-                const tagText = tagInput.value.trim();
-                if (tagText) {
-                    addTag(tagText);
-                    tagInput.value = '';
-                }
-            }
-        });
-
-        function addTag(text) {
-            if (text === '' || tags.includes(text)) return;
-
-            const tag = document.createElement('div');
-            tag.className = 'tag';
-            tag.innerHTML = `
-                ${text}
-                <span class="tag-remove">&times;</span>
-            `;
-
-            tag.querySelector('.tag-remove').addEventListener('click', () => {
-                tag.remove();
-                tags = tags.filter(t => t !== text);
-                updateHiddenTags();
-            });
-
-            tagsInputContainer.insertBefore(tag, tagInput);
-            tags.push(text);
-            updateHiddenTags();
-        }
-
-        function updateHiddenTags() {
-            tagsHiddenInput.value = tags.join(' ');
         }
     </script>
 </body>

@@ -47,7 +47,6 @@ sq.create_table(dbname="data.db", table_name="posts", columns=[
     ("images", "TEXT DEFAULT ''"),
     ("author_username", "TEXT"),
     ("code_theme", "TEXT"),
-    ("tags", "TEXT"),
     ("veiwers", "TEXT DEFAULT ''"),
     ("contributors", "TEXT DEFAULT ''")])
 
@@ -213,9 +212,8 @@ def edit(id):
                 title = request.form["title"]
                 content = request.form["content"]
                 code_theme = request.form["code-theme"]
-                tags = request.form["tags"]
                 contributors = request.form["contributors"]
-                sq.update_column_value("posts", {"title": title, "content": content, "code_theme": code_theme, "tags": tags, "date": date, "contributors": contributors}, ("id", id), "data.db")
+                sq.update_column_value("posts", {"title": title, "content": content, "code_theme": code_theme, "date": date, "contributors": contributors}, ("id", id), "data.db")
                 sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
                 return redirect(url_for("post", id=id))
             return redirect(url_for("main"))
@@ -348,9 +346,8 @@ def create_post():
         code_theme = request.form["code-theme"]
         date = datetime.now().strftime("%d-%m-%y %H:%M")
         author_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
-        tags = request.form["tags"]
         contributors = request.form["contributors"]
-        sq.add_record("posts", {"email": email, "title": title, "content": content, "date": date, "author_username": author_username, "code_theme": code_theme, "tags":tags, "contributors": contributors}, "data.db")
+        sq.add_record("posts", {"email": email, "title": title, "content": content, "date": date, "author_username": author_username, "code_theme": code_theme,  "contributors": contributors}, "data.db")
         return redirect(url_for("main"))
     return render_template("create_post.html", username=email)
 

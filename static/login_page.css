@@ -99,5 +99,5 @@ body {
 
 .K_and_D { 
     font-size: 13px;
-    position: relative; top:366px; right:795px; 
+    position: fixed; bottom: 10px; left:20px;
 }

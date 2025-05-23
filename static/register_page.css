@@ -156,5 +156,5 @@ body {
 
 .K_and_D { 
     font-size: 13px; 
-    position: relative; top:104px;right:795px;
+    position: fixed; bottom: 10px; left:30px;
 }
