@@ -5,7 +5,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/languages/python.min.js"></script>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark_custom.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Post</title>
@@ -75,6 +75,32 @@
             const form = document.getElementById(formId);
             form.style.display = form.style.display === 'none' ? 'block' : 'none';
         }
+    </script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitch = document.getElementById('theme-switch');
+            const themeIcon = themeSwitch.querySelector('i');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(currentTheme);
+
+            themeSwitch.addEventListener('click', function() {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+            });
+
+            function applyTheme(theme) {
+                const cssLink = document.getElementById('theme-stylesheet');
+
+                if (theme === 'dark') {
+                    cssLink.href = "{{ url_for('static', filename='dark_custom.css') }}";
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    cssLink.href = "{{ url_for('static', filename='custom.css') }}";
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+        });
     </script>
 </body>
 </html>
