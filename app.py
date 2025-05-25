@@ -20,7 +20,8 @@ login_manager.login_view = 'login'
 
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
-UPLOAD_FOLDER = "/home/dff/Documents/work/website-from-talents/static/images/"
+UPLOAD_FOLDER = os.path.dirname(os.path.abspath(__file__))+"/static/images/"
+
 
 
 @app.template_filter('md')

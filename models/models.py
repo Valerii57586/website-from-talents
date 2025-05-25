@@ -18,7 +18,7 @@ class Users(db.Model):
     password_hash = db.Column(db.String(128))
     email = db.Column(db.String(100), unique=True)
     avatar = db.Column(db.String(100))
-    role = db.Column(db.String(100))
+    role = db.Column(db.String(100), default="")
     visible = db.Column(db.Boolean, default=True)
 
     is_active = db.Column(db.Boolean, default=True)
