@@ -48,6 +48,26 @@ a {
     gap: 30px;
 }
 
+.theme-toggle {
+    margin-left: 15px;
+}
+
+.theme-button {
+    background: none;
+    border: none;
+    color: #8b0000;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.theme-button:hover {
+    background-color: black;
+    transform: scale(1.1);
+}
+
 .profile-container {
     background: #fff;
     border-radius: 20px;
@@ -256,11 +276,10 @@ a {
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
-    margin: 20px 0; /* Отступы сверху и снизу */
     background-color: #8b0000;
     color: #FFF;
-    position: relative; right: 60px;
     overflow: hidden;
+    position: fixed; right: 30px; top: 6px;
     border: 1px solid #8b0000
     }
 
@@ -271,7 +290,7 @@ a {
 }
 
 .logout-button:active {
-    transform: scale(0.95); /* Немного уменьшается при нажатии */
+    transform: scale(1.5); /* Немного уменьшается при нажатии */
     text-decoration: none;
 }
 
@@ -288,4 +307,9 @@ a {
     text-decoration: none;
     margin-top: 10px;
     position: relative; left:700px;
+}
+
+.edit-button:active {
+    transform: scale(1.5); /* Немного уменьшается при нажатии */
+    text-decoration: none;
 }

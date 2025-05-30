@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scorpio</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='dark_custom.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark_recomendation.css') }}" id="theme-stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" id="theme-stylesheet">
 </head>
 <body>
     <div class="container">
@@ -24,6 +24,11 @@
                     <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
                     <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
                 {% endif %}
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-switch" class="theme-button">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </header>
 
@@ -69,5 +74,31 @@
             </div>
         </main>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitch = document.getElementById('theme-switch');
+            const themeIcon = themeSwitch.querySelector('i');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(currentTheme);
+
+            themeSwitch.addEventListener('click', function() {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+            });
+
+            function applyTheme(theme) {
+                const cssLink = document.getElementById('theme-stylesheet');
+
+                if (theme === 'dark') {
+                    cssLink.href = "{{ url_for('static', filename='dark_recomendation.css') }}";
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    cssLink.href = "{{ url_for('static', filename='recomendation.css') }}";
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+        });
+    </script>
 </body>
 </html>

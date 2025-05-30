@@ -7,7 +7,7 @@
     <title>User profile</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="{{ url_for('static', filename='dark_profile.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='dark_profile.css') }}" id="theme-stylesheet">
 </head>
 <body>
     <div class="container">
@@ -27,6 +27,11 @@
                     <a href="{{ url_for('login') }}" class="action-button">Sign in</a>
                     <a href="{{ url_for('register') }}" class="action-button">Sign up</a>
                 {% endif %}
+            </div>
+            <div class="theme-toggle">
+                <button id="theme-switch" class="theme-button">
+                    <i class="fas fa-moon"></i>
+                </button>
             </div>
         </header>
         <main class="main-content">

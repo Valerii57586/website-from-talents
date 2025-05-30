@@ -3,9 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}">
-    <title>Main</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='custom.css') }}" id="theme-stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+    {% block content %}{% endblock %}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitch = document.getElementById('theme-switch');
+            if (themeSwitch) {
+                const themeIcon = themeSwitch.querySelector('i');
+                let currentTheme = localStorage.getItem('theme') || 'dark';
+                applyTheme(currentTheme);
+
+                themeSwitch.addEventListener('click', function() {
+                    currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                    localStorage.setItem('theme', currentTheme);
+                    applyTheme(currentTheme);
+                });
+
+                function applyTheme(theme) {
+                    const cssLink = document.getElementById('theme-stylesheet');
+                    if (cssLink) {
+                        if (theme === 'dark') {
+                            cssLink.href = "{{ url_for('static', filename='dark_custom.css') }}";
+                            if (themeIcon) themeIcon.className = 'fas fa-sun';
+                        } else {
+                            cssLink.href = "{{ url_for('static', filename='custom.css') }}";
+                            if (themeIcon) themeIcon.className = 'fas fa-moon';
+                        }
+                    }
+                }
+            }
+        });
+    </script>
 </body>
 </html>

@@ -333,22 +333,35 @@ def login():
 @app.route("/create_post", methods=["GET", "POST"])
 def create_post():
     email = session.get("email")
-    tags = ""
     if email is None:
         return redirect(url_for("register"))
+    
     date = datetime.now().strftime("%d-%m-%y %H:%M")
     sq.update_column_value("users", {"last_seen": date}, ("email", email), "data.db")
+    
     if request.method == "POST":
-        if email is None:
-            return redirect(url_for("register"))
         title = request.form["title"]
         content = request.form["content"]
         code_theme = request.form["code-theme"]
         date = datetime.now().strftime("%d-%m-%y %H:%M")
         author_username = sq.get_column_value_by_name("users", "username", ("email", email), "data.db")[0][0]
         contributors = request.form["contributors"]
-        sq.add_record("posts", {"email": email, "title": title, "content": content, "date": date, "author_username": author_username, "code_theme": code_theme,  "contributors": contributors}, "data.db")
-        return redirect(url_for("main"))
+        
+        # Add the post and ensure it's committed
+        sq.add_record("posts", {
+            "email": email, 
+            "title": title, 
+            "content": content, 
+            "date": date, 
+            "author_username": author_username, 
+            "code_theme": code_theme,  
+            "contributors": contributors
+        }, "data.db")
+        
+        # Force a refresh of the main page data
+        posts = sq.get_column_value_by_name("posts", "*", (1, 1), "data.db")
+        return redirect(url_for("main", _anchor="top"))
+    
     return render_template("create_post.html", username=email)
 
 
