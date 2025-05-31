@@ -98,10 +98,10 @@
                 const cssLink = document.getElementById('theme-stylesheet');
 
                 if (theme === 'dark') {
-                    cssLink.href = "{{ url_for('static', filename='dark_custom.css') }}";
+                    cssLink.href = "{{ url_for('static', filename='dark_post.css') }}";
                     themeIcon.className = 'fas fa-sun';
                 } else {
-                    cssLink.href = "{{ url_for('static', filename='custom.css') }}";
+                    cssLink.href = "{{ url_for('static', filename='post.css') }}";
                     themeIcon.className = 'fas fa-moon';
                 }
             }

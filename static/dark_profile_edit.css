@@ -119,7 +119,7 @@ a {
 .profile-section h2 {
     font-size: 1.8rem;
     margin-bottom: 15px;
-    color: #8B0000; /* Темно-красный цвет */
+    color: #ff4d4d; /* Темно-красный цвет */
 }
 
 .profile-section p {
@@ -168,7 +168,7 @@ a {
     background-color: #121212;
     color: #e6e6fa;
     cursor: pointer;
-    font-size: 17px;
+    font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
@@ -185,7 +185,7 @@ a {
 .sidebar-button i {
     margin-right: 15px;
     font-size: 16px;
-    color: #8b0000;
+    color: #ff4d4d;
 }
 
 .site-logo {
@@ -204,7 +204,7 @@ a {
 
 .current-user {
     font-size: 18px;
-    color: #8B0000; /* Белый текст */
+    color: #ff4d4d; /* Белый текст */
     align-items: center;
     margin-top: 20px;
     margin-right: 20px;
@@ -212,7 +212,7 @@ a {
 
 .online-status {
     font-size: 16px;
-    color: #b22222; /* Белый текст */
+    color: #ff4d4d; /* Белый текст */
     display: flex;
     align-items: center;
     position: relative; left: 50px;
@@ -307,7 +307,7 @@ a {
 
 .edit-button {
     padding: 10px 10px; /* Делаем кнопку компактнее */
-    background-color: #b22222; /* Красивый насыщенный красный */
+    background-color: #ff4d4d; /* Красивый насыщенный красный */
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
     color: white; /* Белый текст */
@@ -330,7 +330,7 @@ a {
     margin-left: 80px;
     width: 80%;
     padding: 10px;
-    background-color: #b22222; /* Красивый насыщенный красный */
+    background-color: #ff4d4d; /* Красивый насыщенный красный */
     border: none; /* Убираем стандартные границы */
     border-radius: 6px; /* Закругляем углы */
     color: white; /* Белый текст */
@@ -339,4 +339,24 @@ a {
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
+}
+
+.theme-toggle {
+    position: fixed; right: 540px;
+}
+
+.theme-button {
+    background: none;
+    border: none;
+    color: #ff4d4d;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.theme-button:hover {
+    background-color: black;
+    transform: scale(1.1);
 }

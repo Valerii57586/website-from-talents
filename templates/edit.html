@@ -4,9 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit {{ post[2] }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='create_poster.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='create_poster.css') }}" id="theme-stylesheet">
 </head>
 <body>
+    <div class="theme-toggle">
+        <button id="theme-switch" class="theme-button">
+            <i class="fas fa-moon"></i>
+        </button>
+    </div>
     <div class="container">
         <form method="post">
             <div class="form-group">
@@ -34,10 +39,6 @@
                 <option value="docco">Docco</option>
                 <option value="idea">Idea</option>
             </select>
-            <div class="form-group">
-                <label>Tags</label>
-                <input type="text" class="form-control" name="tags" value="{{ post[9] }}" required>
-            </div>
             <div class="con">
                 <input type="text" class="form-control" name="contributors" placeholder="Enter contributors usernames splitted with spaces">
             </div>
@@ -64,6 +65,30 @@
             });
 
         document.body.appendChild(datalist);
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeSwitch = document.getElementById('theme-switch');
+            const themeIcon = themeSwitch.querySelector('i');
+            let currentTheme = localStorage.getItem('theme') || 'dark';
+            applyTheme(currentTheme);
+
+            themeSwitch.addEventListener('click', function() {
+                currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                localStorage.setItem('theme', currentTheme);
+                applyTheme(currentTheme);
+            });
+
+            function applyTheme(theme) {
+                const cssLink = document.getElementById('theme-stylesheet');
+
+                if (theme === 'dark') {
+                    cssLink.href = "{{ url_for('static', filename='dark_create_poster.css') }}";
+                    themeIcon.className = 'fas fa-sun';
+                } else {
+                    cssLink.href = "{{ url_for('static', filename='create_poster.css') }}";
+                    themeIcon.className = 'fas fa-moon';
+                }
+            }
+        });
 </script>
 </html>
+

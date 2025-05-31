@@ -1,6 +1,6 @@
 /* Я добавил попробовать если не понравится удаляй */
 .my-button {
-    background: #8b0000;
+    background: #ff4d4d;
     color: #E0E0E0;
     border: none;
     padding: 10px 20px;
@@ -11,7 +11,7 @@
 
 
 .post-card-opened {
-    background: #E0E0E0;
+    background: #252525;
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 30px;
@@ -31,17 +31,17 @@
 .post-content-opened {
     font-size: 20px;
     line-height: 1.4;
-    color: #333;
+    color: #ffffff;
     white-space: pre-wrap;
     word-wrap: break-word;
     margin: 20px 0;
     padding: 15px;
-    background: #f9f9f9;
+    background: #121212;
     border-radius: 8px;
 }
 
 .post-author-opened, .post-date-opened {
-    color: #8b0000;
+    color: #ff4d4d;
     font-size: 14px;
     margin: 5px 0;
 }
@@ -49,9 +49,9 @@
 .post-stats {
     margin: 15px 0;
     padding: 10px;
-    background: #ffebee;
+    background: #ffff;
     border-radius: 8px;
-    color: #8b0000;
+    color: #ff4d4d;
 }
 
 .post-comments {
@@ -61,11 +61,11 @@
 }
 
 .comment {
-    background: #f9f9f9;
+    background: #121212;
     padding: 15px;
     border-radius: 8px;
     margin: 10px 0;
-    border-left: 3px solid #8b0000;
+    border-left: 3px solid #ffff;
 }
 
 .comment-form {
@@ -75,15 +75,16 @@
 .comment-input {
     width: 97%;
     padding: 12px;
-    border: 1px solid #ddd;
+    border: 1px solid #ffff;
     border-radius: 8px;
     margin-bottom: 10px;
     resize: vertical;
     min-height: 80px;
+    background-color: #ffff;
 }
 
 .comment-button {
-    background: #8b0000;
+    background: #ff4d4d;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -93,24 +94,24 @@
 }
 
 .comment-button:hover {
-    background: #8b0000;
+    background: #ff4d4d;
 }
 
 .comment-author {
-    color: #8b0000;
+    color: #ff4d4d;
     font-weight: bold;
     margin-bottom: 5px;
 }
 
 .comment-content {
-    color: #333;
+    color: #fff;
     margin: 10px 0;
     white-space: pre-wrap;
     word-wrap: break-word;
 }
 
 .comment-date {
-    color: #666;
+    color: #fff;
     font-size: 12px;
 }
 
@@ -121,7 +122,7 @@
     border-radius: 8px;
 }
 .reply-button {
-    background: #8b0000;
+    background: #ff4d4d;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -156,40 +157,6 @@
     color: white;
 }
 
-/* Основные стили */
-body {
-    overflow: hidden;
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    background-color: #ffffff; /* Светлый фон */
-    color: #000000; /* Основной цвет текста */
-    line-height: 1.6;
-    /* overflow: hidden; */
-}
-
-
-a {
-    text-decoration: none;
-}
-
-.container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-}
-
-/* Шапка сайта */
-.header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 30px;
-    background-color: #f7f6f6; /* Темно-красный цвет для шапки */
-    color: #8b0000; /* Белый текст */
-    height: 40px;
-}
-
 
 .site-logo {
     font-size: 22px;
@@ -197,7 +164,7 @@ a {
     display: flex;
     align-items: center;
     position: relative; left:10px;
-    background-color:#8b0000 ;
+    background-color: #ff4d4d;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -220,7 +187,7 @@ a {
 .site-logo i {
     margin-right: 10px;
     font-size: 24px;
-    background-color:#8b0000;
+    background-color: #ff4d4d;
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -230,7 +197,7 @@ a {
 
 .online-status {
     font-size: 16px;
-    color: #8b0000; /* Белый текст */
+    color: #ff4d4d; /* Белый текст */
     display: flex;
     align-items: center;
     position: relative; left: 55px;
@@ -256,11 +223,12 @@ a {
     cursor: pointer; /* Делаем так, чтобы было понятно, что это кнопка */
     transition: background-color 0.3s, transform 0.2s; /* Анимация при наведении */
     text-decoration: none;
-    background-color: #8b0000;
+    margin: 20px 0; /* Отступы сверху и снизу */
+    background-color: #ff4d4d;
     color: #FFF;
+    position: relative;
     overflow: hidden;
-    position: fixed; right: 30px; top: 6px;
-    border: 1px solid #8b0000
+    border: 1px solid #ff4d4d
     }
 
 /* Эффект при наведении */
@@ -275,7 +243,7 @@ a {
 }
 
 .search-bar {
-    color: #ffff;
+    color: #121212;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -284,14 +252,14 @@ a {
 }
 
 .search-bar input {
-    background-color: #ffff;
+    background-color: #121212;
     flex: 1;
     padding: 6px;
-    border: 1px solid #ffff;
+    border: 1px solid #121212;
     border-radius: 5px;
     font-size: 12px;
     width: 200px;
-    color: rgb(0, 0, 0);
+    color: white;
 }
 
 .search-bar button {
@@ -301,20 +269,20 @@ a {
     border-radius: 5px;
     cursor: pointer;
     white-space: nowrap; /* Чтобы текст не переносился */
-    background-color:#8b0000;
+    background-color:#ff4d4d;
     color: #FFF;
     position: relative;
     overflow: hidden;
-    border: 1px solid #8b0000
+    border: 1px solid #ff4d4d
 }
 .theme-toggle {
-    position: fixed; right: 540px;
+    margin-left: 15px;
 }
 
 .theme-button {
     background: none;
     border: none;
-    color: #8b0000;
+    color: #ff4d4d;
     font-size: 18px;
     cursor: pointer;
     padding: 5px 10px;
@@ -323,7 +291,7 @@ a {
 }
 
 .theme-button:hover {
-    background-color: black;
+    background-color: #f5f5f5;
     transform: scale(1.1);
 }
 
@@ -333,19 +301,60 @@ a {
 }
 
 
-/* Основной контент */
+/* Основные стили */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #121212;
+    color: #ffff;
+    line-height: 1.6;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Шапка сайта */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 30px;
+    background-color: #252525;
+    color: #ff4d4d;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+a {
+    text-decoration: none;
+}
+
 .main-content {
     display: flex;
     flex-grow: 1;
-    background-color: #ffff;
-    max-width: 1200px;
-    height: 100vh;
     padding: 20px;
-    margin: 30px auto;
+    max-width: 1200px;
+    margin: 0 auto;
     width: 100%;
-    gap: 20px; /* Увеличено расстояние между элементами */
-    margin-top: 20px;
-    margin-bottom: 0;
+    gap: 20px;
+}
+
+/* Отдельный пост */
+.post {
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    background-color: #252525;
+    border-radius: 15px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+    transition: transform 0.3s ease;
+    width: 94%;
 }
 
 /* Боковая панель */
@@ -353,7 +362,7 @@ a {
     width: 200px;
     min-width: 200px;
     padding: 20px 10px;
-    background-color: #ffff;
+    background-color: #121212;
     border-radius: 12px;
 }
 .rec-button-active {
@@ -364,10 +373,10 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #8b0000;
+    background-color: #ffff;
     color: #E0E0E0;
     cursor: pointer;
-    font-size: 20px;
+    font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
     text-decoration: none;
     color: inherit;
@@ -381,8 +390,8 @@ a {
     margin-bottom: 10px;
     border: none;
     border-radius: 8px;
-    background-color: #ffff;
-    color: #8b0000;
+    background-color: #121212;
+    color: #E6E6FA;
     cursor: pointer;
     font-size: 18px;
     transition: background-color 0.3s ease, transform 0.3s ease;
@@ -392,14 +401,11 @@ a {
 }
 
 .sidebar-button:hover, .rec-button-active:hover {
-    background-color: #ffff;
+    background-color: #121212;
     transform: translateX(5px);
     text-decoration: none;
     position: relative; bottom: 51px; left:8px
 
-}
-.rec-button-active:hover {
-    color: #8b0000;
 }
 
 .rec-button-active {
@@ -410,7 +416,7 @@ a {
 .sidebar-button i {
     margin-right: 15px;
     font-size: 16px;
-    color: #8b0000;
+    color: #ff4d4d;
 }
 
 /* Лента постов */
@@ -422,7 +428,7 @@ a {
 .post-feed {
     flex-grow: 1;
     padding: 20px;
-    background-color: #ffff;
+    background-color: #121212;
     overflow: scroll;
     max-height:100vh;
     position: relative; bottom: 40px;
@@ -433,17 +439,6 @@ a {
 
 /* Посты */
 /* Обновленные стили для карточки поста */
-.post {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: #ffff;
-    border-radius: 15px;
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
-    width: 94%;
-}
-
 .post:hover {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -451,7 +446,7 @@ a {
 
 /* Заголовок поста */
 .post-title {
-    color: #8b0000;
+    color: #ff4d4d;
     font-size: 22px;
     margin: 0 0 10px 0;
     font-weight: 600;
@@ -462,7 +457,7 @@ a {
 .post-content {
     font-size: 16px;
     line-height: 1;
-    color: #000000;
+    color: #E0E0E0;
     margin: 10px 0;
     padding: 0;
     white-space: pre-wrap;
@@ -475,19 +470,19 @@ a {
     justify-content: space-between;
     margin-top: 15px;
     font-size: 13px;
-    color: #000000;
-    border-top: 1px solid #000000;
+    color: #E0E0E0;
+    border-top: 1px solid #f0f0f0;
     padding-top: 10px;
     margin-bottom: 2px;
 }
 
 .post-author {
-    color: #000000;
+    color: #ffff;
     font-weight: 500;
 }
 
 .post-date {
-    color: #000000;
+    color: #ffff;
 }
 
 .post:nth-child(even) {
@@ -548,6 +543,6 @@ a {
     bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
-    color: #000000;
+    color: #E0E0E0;
     font-size: 16px;
 }

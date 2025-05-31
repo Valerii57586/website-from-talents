@@ -1,50 +1,63 @@
 body {
-    overflow: hidden;
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
-    background-color: #121212; /* Светлый фон */
-    color: #ffff; /* Основной цвет текста */
+    background-color: #121212;
+    color: #ffff;
     line-height: 1.6;
-    /* overflow: hidden; */
-}
-
-a {
-    text-decoration: none;
+    /* Убрано overflow: hidden */
 }
 
 .container {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-    font-weight: 100%;
     background-color: #121212;
-    width: 100%; /* Растягиваем контейнер на всю ширину */
+    width: 100%;
+    /* Добавлено для компенсации фиксированного header */
+    padding-top: 20px; /* Чуть больше высоты header */
 }
 
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0px 30px;
-    background-color: #252525; /* Полупрозрачный белый фон */
-    color: #b22222; /* Темно-красный текст */
-    height: 40px;
-    width: 100%; /* Шапка растягивается на всю ширину */
-    position: fixed; /* Фиксированная шапка */
-    top: 0; /* Прижимаем шапку к верху */
-    left: 0; /* Прижимаем шапку к левому краю */
-    z-index: 1000; /* Шапка поверх других элементов */
+    padding: 10px 30px;
+    background-color: #252525;
+    color: #b22222;
+    height: 20px; /* Увеличена высота */
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+}
+
+.main-content {
+    display: flex;
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #ffffff;
+    max-width: 1200px;
+    margin: 0 auto; /* Изменено с margin-top */
+    width: 100%;
+    gap: 30px;
+    /* Добавлено для прокрутки */
+    overflow-y: auto; /* Разрешить прокрутку при необходимости */
+}
+
+a {
+    text-decoration: none;
 }
 
 .theme-toggle {
-    margin-left: 15px;
+    position: fixed; right: 540px;
 }
 
 .theme-button {
     background: none;
     border: none;
-    color: #8b0000;
+    color: #ff4d4d;
     font-size: 18px;
     cursor: pointer;
     padding: 5px 10px;
@@ -228,10 +241,10 @@ a {
 
 .online-status {
     font-size: 16px;
-    color: #b22222; /* Белый текст */
+    color: #ff4d4d; /* Белый текст */
     display: flex;
     align-items: center;
-    position: relative; left: 40px;
+    position: relative; right: 100px;
 }
 
 .online-status i {

@@ -91,10 +91,10 @@
                     const cssLink = document.getElementById('theme-stylesheet');
 
                     if (theme === 'dark') {
-                        cssLink.href = "{{ url_for('static', filename='dark_profile.css') }}";
+                        cssLink.href = "{{ url_for('static', filename='dark_profile_edit.css') }}";
                         themeIcon.className = 'fas fa-sun';
                     } else {
-                        cssLink.href = "{{ url_for('static', filename='profile.css') }}";
+                        cssLink.href = "{{ url_for('static', filename='profile_edit.css') }}";
                         themeIcon.className = 'fas fa-moon';
                     }
                 }

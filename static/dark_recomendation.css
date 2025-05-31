@@ -308,7 +308,7 @@ a {
     border: 1px solid #ff4d4d
 }
 .theme-toggle {
-    margin-left: 15px;
+    position: fixed; right: 540px;
 }
 
 .theme-button {
@@ -323,7 +323,7 @@ a {
 }
 
 .theme-button:hover {
-    background-color: #f5f5f5;
+    background-color: black;
     transform: scale(1.1);
 }
 

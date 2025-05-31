@@ -176,7 +176,6 @@ option:hover {
     background-color: white;
 } */
 
-
 :root {
     --primary: #ff4d4d;
     --primary-light: #ef485b;
@@ -188,6 +187,10 @@ option:hover {
     --border-radius: 18px;
     --shadow: 0 8px 20px rgba(0,0,0,0.08);
     --transition: all 0.3s ease;
+}
+
+a {
+    text-decoration: none;
 }
 
 * {
